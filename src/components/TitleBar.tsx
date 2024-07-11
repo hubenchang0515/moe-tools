@@ -25,7 +25,7 @@ export default function TitleBar(props:TitleBarProps) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{ minWidth: '12em', mr: 2, whiteSpace:"nowrap"}}>
+                    <Typography variant="h6" component="div" sx={{ minWidth: '5em', mr: 2, whiteSpace:"nowrap"}}>
                         {props.title}
                     </Typography>
 
