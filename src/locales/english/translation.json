@@ -1,0 +1,55 @@
+{
+    "title": "Moe Tools",
+
+    "menu": {
+        "home": "Home",
+        "apps": "Applications",
+        "settings": "Settings"
+    },
+
+    "settings": {
+        "theme": "Theme",
+        "language": "Language",
+        "advance": "Advance"
+    },
+    
+    "theme": {
+        "light": "Light",
+        "system": "System",
+        "dark": "Dark"
+    },
+
+    "menu-bottom": {
+        "sync": "Sync",
+        "feedback": "Feedback",
+        "close": "Close"
+    },
+
+    "apps": {
+        "gis-tile-download": "GIS Tile Download"
+    },
+
+    "gis-tile-download": {
+        "google-map": "Google Map",
+        "auto-navi": "AutoNavi",
+        "arc-gis": "ArcGIS",
+        "osm": "Open Street Map",
+        "google-satellite": "Google Satellite Image",
+        "auto-navi-satellite": "AutoNavi Satellite Image",
+        "arc-gis-satellite": "ArcGIS Satellite Image",
+        "z-range": "Z Range",
+        "concurrency": "Concurrency",
+        "locate": "Locate",
+        "select-all": "Select All",
+        "clear": "Clear",
+        "download": "Download",
+        "message": {
+            "please-select": "Please select the area in map to download."
+        }
+    },
+
+    "components": {
+        "progress": "Progress",
+        "cancel": "Cancel"
+    }
+}

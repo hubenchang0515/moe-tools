@@ -1,0 +1,55 @@
+{
+    "title": "萌萌工具箱",
+
+    "menu": {
+        "home": "主页",
+        "apps": "应用",
+        "settings": "设置"
+    },
+
+    "settings": {
+        "theme": "主题",
+        "language": "语言",
+        "advance": "高级设置"
+    },
+    
+    "theme": {
+        "light": "明亮",
+        "system": "系统",
+        "dark": "黑暗"
+    },
+
+    "menu-bottom": {
+        "sync": "同步",
+        "feedback": "反馈",
+        "close": "关闭"
+    },
+
+    "apps": {
+        "gis-tile-download": "GIS 图块下载"
+    },
+
+    "gis-tile-download": {
+        "google-map": "谷歌地图",
+        "auto-navi": "高德地图",
+        "arc-gis": "ArcGIS",
+        "osm": "Open Street Map",
+        "google-satellite": "谷歌卫星影像",
+        "auto-navi-satellite": "高德卫星影像",
+        "arc-gis-satellite": "ArcGIS 卫星影像",
+        "z-range": "Z 范围",
+        "concurrency": "并发数",
+        "locate": "定位",
+        "select-all": "全选",
+        "clear": "清空",
+        "download": "下载",
+        "message": {
+            "please-select": "请在地图上选择下载范围."
+        }
+    },
+
+    "components": {
+        "progress": "进度",
+        "cancel": "取消"
+    }
+}
