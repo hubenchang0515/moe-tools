@@ -13,7 +13,7 @@ export interface TitleBarProps {
 export default function TitleBar(props:TitleBarProps) {
     return (
         <Box>
-            <AppBar component="nav" color="primary">
+            <AppBar component="nav" color="primary" elevation={24}>
                 <Toolbar>
                     <IconButton
                         size="large"

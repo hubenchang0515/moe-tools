@@ -74,6 +74,7 @@ export default function SlideMenu(props:SlideMenuProps) {
                 sx={{ 
                     minWidth:width, 
                     position: "fixed", 
+                    borderRadius: 0,
                     top:0, 
                     bottom:0, 
                     zIndex:99, 
@@ -81,8 +82,10 @@ export default function SlideMenu(props:SlideMenuProps) {
                     flexDirection:"column", 
                     justifyContent: "flex-start", 
                     overflowY:"auto", 
-                    '&::-webkit-scrollbar': {display: "none"}
+                    '&::-webkit-scrollbar': {display: "none"} // 隐藏滚动条
                 }}
+                elevation={12}
+                square
             >
                 {props.head}
                 <List sx={{width: "100%"}}>
