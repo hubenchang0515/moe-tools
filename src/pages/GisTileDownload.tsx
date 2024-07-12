@@ -22,6 +22,9 @@ import { Feature } from 'ol';
 import { Geometry } from 'ol/geom';
 import { useTranslation } from 'react-i18next';
 
+
+type DownloadHandler = (x:number, y:number, z:number, response:Response)=>void;
+type ErrorHandler = (x:number, y:number, z:number, error:any)=>void;
 class XYZDownloader {
     url: string;
     max: number;
@@ -64,7 +67,7 @@ class XYZDownloader {
     }
 
     // Promise 表示任务添加成功，而不是下载完毕
-    addTask(x:number, y:number, z:number, callback:(response:Response)=>void, error:(err:any)=>void): Promise<void> {
+    addTask(x:number, y:number, z:number, callback:DownloadHandler, error:ErrorHandler): Promise<void> {
         return new Promise(async resolve => {
             await this.available();
             this.current++;
@@ -72,9 +75,9 @@ class XYZDownloader {
             const url = this.url.replace('{z}', `${z}`).replace('{x}', `${x}`).replace('{y}', `${y}`);
             try {
                 const response = await fetch(url);
-                callback(response);
+                callback(x, y, z, response);
             } catch (err) {
-                error(err);
+                error(x, y, z, err);
             }
             this.current--;
         });
@@ -172,7 +175,6 @@ export default function GisTileDownload() {
         setShowAlert(false);
     }
 
-    
     // 选取范围
     const area = useRef<[Coordinate, Coordinate]>([[NaN, NaN],[NaN,NaN]]);
     const [zoomRange, setZoomRange] = useState<number[]>([0, 16]);
@@ -184,6 +186,8 @@ export default function GisTileDownload() {
     const [concurrency, setConcurrency] = useState(10);
     const downloading = useRef(false);
     const download = async () => {
+        const FOLDER_NAME = "maps";
+        const PART_SIZE = 1000000;
         if (isNaN(area.current[0][0])) {
             setAlertMessage(t("gis-tile-download.message.please-select"));
             setShowAlert(true);
@@ -192,7 +196,6 @@ export default function GisTileDownload() {
         downloading.current = true;
         setProgressValue(0);
         setShowProgress(true);
-        let zip = new JSZip();
 
         let total = 0;
         for (let z = zoomRange[0]; z <= zoomRange[1]; z++) {
@@ -201,33 +204,42 @@ export default function GisTileDownload() {
         setProgressMax(total);
 
         let downloader = new XYZDownloader(servers[choice].url, concurrency);
+        let zip = new JSZip();
         let done = 0;
-        const addProgress = () => {
+
+        const downloadHandler: DownloadHandler = async (x, y, z, response) => {
             done++;
             setProgressValue(done);
+            zip.folder(FOLDER_NAME)?.file(`${z}/${x}/${y}.png`, response.blob());
+            if (done % PART_SIZE === 0) {
+                let part = Math.floor(done / PART_SIZE).toString();
+                let partZip = zip;
+                zip = new JSZip();
+                let data = await partZip.generateAsync({type: "blob"}); // 异步生成时仍能添加文件，所以必须提前创建新的zip添加后续文件
+                let url = window.URL.createObjectURL(data);
+                let a = document.createElement("a");
+                a.href = url;
+                a.download = `gis-tile-${part}.zip`;
+                a.click();
+            }
         }
+
+        const errorHandler: ErrorHandler = async (x, y, z, err) => {
+            setAlertMessage(`${err}`);
+            setShowAlert(true);
+            await downloader.addTask(x, y, z, downloadHandler, errorHandler); // 重试
+        }
+
         for (let z = zoomRange[0]; z <= zoomRange[1]; z++) {
             for (let x = Proj.longitudeToX(area.current[0][0], z); x <= Proj.longitudeToX(area.current[1][0], z); x++) {
                 for (let y = Proj.latitudeToY(area.current[1][1], z); y <= Proj.latitudeToY(area.current[0][1], z); y++) {
                     if (!downloading.current) {
                         setShowProgress(false);
-                        zip.remove("/")
+                        zip.remove(FOLDER_NAME)
                         return;
                     }
 
-                    const handler = async (response:Response) => {
-                        addProgress();
-                        
-                        const tile = await response.blob();
-                        zip.file(`${z}/${x}/${y}.png`, tile);
-                    }
-
-                    const error = (err:any) => {
-                        setAlertMessage(`${err}`);
-                        setShowAlert(true);
-                    }
-
-                    await downloader.addTask(x, y, z, handler, error);
+                    await downloader.addTask(x, y, z, downloadHandler, errorHandler);
                 }
             }
         }
@@ -240,7 +252,7 @@ export default function GisTileDownload() {
         a.download = "gis-tile.zip";
         a.click();
         setShowProgress(false);
-        zip.remove("/");
+        zip.remove(FOLDER_NAME);
     }
 
     const mapDivRef = useRef<HTMLDivElement>(null);
@@ -409,7 +421,7 @@ export default function GisTileDownload() {
                 </Stack>
             </Box>
 
-            <ProgressDialog open={showProgress} value={progressValue} max={progressMax} onCancel={() => {downloading.current=false;}}/>
+            <ProgressDialog open={showProgress} value={progressValue} max={progressMax} message={t('gis-tile-download.message.please-keep')} onCancel={() => {downloading.current=false;}}/>
             
             <Slide in={showAlert} direction="up">
                 <Snackbar open={showAlert}  autoHideDuration={2000} onClose={closeSnakebar}>

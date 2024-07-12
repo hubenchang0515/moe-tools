@@ -44,7 +44,8 @@
         "clear": "Clear",
         "download": "Download",
         "message": {
-            "please-select": "Please select the area in map to download."
+            "please-select": "Please select the area in map to download.",
+            "please-keep": "Please keep this page visible to avoid being paused by the browser."
         }
     },
 
