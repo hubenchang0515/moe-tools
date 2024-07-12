@@ -70,7 +70,7 @@ export default function App() {
                             </Tooltip>
 
                             <Tooltip title={t('menu-bottom.feedback')} placement="top" arrow>
-                                <Button variant="text" >
+                                <Button variant="text" href="https://github.com/hubenchang0515/moe-tools/issues" target='_blank'>
                                     <BugReportIcon />
                                 </Button>
                             </Tooltip>
