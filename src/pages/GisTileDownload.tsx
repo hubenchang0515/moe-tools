@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useTheme } from '@mui/material/styles';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
@@ -87,6 +88,7 @@ class XYZDownloader {
 interface TileServerProps {
     name: string,
     url: string,
+    filter: string,
 }
 
 // WGS84(EPSG:3857)
@@ -113,42 +115,52 @@ export default function GisTileDownload() {
     const servers = useMemo<TileServerProps[]>(() => [
         {
             name: t("gis-tile-download.google-map"),
-            url: "https://mt1.google.com/vt/x={x}&y={y}&z={z}"
+            url: "https://mt1.google.com/vt/x={x}&y={y}&z={z}",
+            filter: 'grayscale(98%) invert(100%) sepia(20%) hue-rotate(180deg) saturate(1600%) brightness(80%) contrast(90%)',
         },
 
         {
             name: t("gis-tile-download.auto-navi"),
-            url: "https://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}"
+            url: "https://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
+            filter: 'grayscale(98%) invert(100%) sepia(20%) hue-rotate(180deg) saturate(1600%) brightness(80%) contrast(90%)',
         },
 
         {
             name: t("gis-tile-download.arc-gis"),
-            url: "https://server.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png"
+            url: "https://server.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png",
+            filter: 'grayscale(98%) invert(100%) sepia(20%) hue-rotate(180deg) saturate(1600%) brightness(80%) contrast(90%)',
         },
 
         {
             name: t("gis-tile-download.osm"),
-            url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+            url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+            filter: 'grayscale(98%) invert(100%) sepia(20%) hue-rotate(180deg) saturate(1600%) brightness(80%) contrast(90%)',
         },
 
         {
             name: t("gis-tile-download.google-satellite"),
-            url: "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+            url: "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+            filter: 'none',
         },
 
         {
             name: t("gis-tile-download.auto-navi-satellite"),
-            url: "https://webst01.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}"
+            url: "https://webst01.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
+            filter: 'none',
         },
 
         {
             name: t("gis-tile-download.arc-gis-satellite"),
-            url: "https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png"
+            url: "https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png",
+            filter: 'none',
         },
     ], [t]);
 
     // 选择哪个地图
     const [choice, setChoice] = useState(0);
+
+    // 风格
+    const theme = useTheme();
 
     const mapStyle = {
         height: "100%",
@@ -260,6 +272,16 @@ export default function GisTileDownload() {
     const tileLayer = useRef<TileLayer<XYZ>|null>(null);
     const vectorSource = useRef<VectorSource<Feature<Geometry>>|null>(null);
     const vectorLayer = useRef<VectorLayer<Feature<Geometry>>|null>(null);
+    const mode = useRef<'light'|'dark'>(theme.palette.mode);
+
+    // 切换明暗模式
+    useEffect(() => {
+        mode.current = theme.palette.mode;
+        mapRef.current?.render();
+    }, [theme.palette.mode]);
+
+
+    // 切换地图服务器选项
     useEffect(() => {
         // 首次初始化
         if (mapDivRef.current && !mapRef.current) {
@@ -269,6 +291,22 @@ export default function GisTileDownload() {
                     url: servers[choice].url,       
                     wrapX: true,
                 }),
+            });
+
+            // 渲染前设置黑暗滤镜
+            tileLayer.current?.on('prerender', (ev) => {
+                if (ev.context) {
+                    const ctx = ev.context as CanvasRenderingContext2D;
+                    ctx.filter = mode.current === 'dark' ? servers[choice].filter : 'none';
+                }
+            });
+
+            // 渲染后删除滤镜，避免影响其他图层
+            tileLayer.current?.on('postrender', (ev) => {
+                if (ev.context) {
+                    const ctx = ev.context as CanvasRenderingContext2D;
+                    ctx.filter = 'none';
+                }
             });
 
             // 矢量源-用于绘图
@@ -331,9 +369,7 @@ export default function GisTileDownload() {
         } else {
             // 地图选项变化，切换url
             tileLayer.current?.getSource()?.setUrl(servers[choice].url);
-            
         }
-
     }, [servers, choice]);
 
     // 清除框选
