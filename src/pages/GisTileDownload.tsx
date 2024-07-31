@@ -272,13 +272,13 @@ export default function GisTileDownload() {
     const tileLayer = useRef<TileLayer<XYZ>|null>(null);
     const vectorSource = useRef<VectorSource<Feature<Geometry>>|null>(null);
     const vectorLayer = useRef<VectorLayer<Feature<Geometry>>|null>(null);
-    const mode = useRef<'light'|'dark'>(theme.palette.mode);
+    const filter = useRef('none');
 
     // 切换明暗模式
     useEffect(() => {
-        mode.current = theme.palette.mode;
+        filter.current = theme.palette.mode === 'dark' ? servers[choice].filter : 'none';
         mapRef.current?.render();
-    }, [theme.palette.mode]);
+    }, [theme.palette.mode, servers, choice]);
 
 
     // 切换地图服务器选项
@@ -297,7 +297,7 @@ export default function GisTileDownload() {
             tileLayer.current?.on('prerender', (ev) => {
                 if (ev.context) {
                     const ctx = ev.context as CanvasRenderingContext2D;
-                    ctx.filter = mode.current === 'dark' ? servers[choice].filter : 'none';
+                    ctx.filter = filter.current;
                 }
             });
 
