@@ -32,6 +32,7 @@
     "gis-tile-download": {
         "google-map": "Google Map",
         "auto-navi": "AutoNavi",
+        "auto-navi-no-label": "AutoNavi (No Label)",
         "arc-gis": "ArcGIS",
         "osm": "Open Street Map",
         "google-satellite": "Google Satellite Image",

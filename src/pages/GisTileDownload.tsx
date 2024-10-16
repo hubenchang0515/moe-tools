@@ -125,6 +125,12 @@ export default function GisTileDownload() {
         },
 
         {
+            name: t("gis-tile-download.auto-navi-no-label"),
+            url: "https://webst02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&ltype=3&x={x}&y={y}&z={z}",
+            filter: 'grayscale(98%) invert(100%) sepia(20%) hue-rotate(180deg) saturate(1600%) brightness(80%) contrast(90%)',
+        },
+
+        {
             name: t("gis-tile-download.arc-gis"),
             url: "https://server.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png",
             filter: 'grayscale(98%) invert(100%) sepia(20%) hue-rotate(180deg) saturate(1600%) brightness(80%) contrast(90%)',

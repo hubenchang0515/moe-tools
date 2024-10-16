@@ -32,6 +32,7 @@
     "gis-tile-download": {
         "google-map": "谷歌地图",
         "auto-navi": "高德地图",
+        "auto-navi-no-label": "高德地图（无标注）",
         "arc-gis": "ArcGIS",
         "osm": "Open Street Map",
         "google-satellite": "谷歌卫星影像",
