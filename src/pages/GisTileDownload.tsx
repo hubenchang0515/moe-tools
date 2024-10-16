@@ -354,20 +354,31 @@ export default function GisTileDownload() {
                 source: vectorSource.current,
                 type: "Circle", 
                 geometryFunction: createBox(),
+                condition: (e) => e.originalEvent.buttons === 1,
             });
 
             // 清除绘制的图形
             draw.on('drawstart', () => {
                 cleanDraw();
-            })
+            });
+
+            draw.on('drawabort', () => {
+                cleanDraw();
+            });
 
             draw.on('drawend', (ev) => {
                 const geometry = ev.feature.getGeometry() as Polygon;
                 const extent = geometry.getExtent();
                 area.current = [toLonLat([extent[0], extent[1]]), toLonLat([extent[2], extent[3]])];
-            })
+            });
 
             map.addInteraction(draw);
+
+            // 右键取消绘图选取
+            map.getViewport().addEventListener('contextmenu', function (evt) {
+                evt.preventDefault(); // 阻止浏览器的默认右键菜单
+                draw.abortDrawing();  // 取消当前的绘图
+            });
 
             mapRef.current = map;
             locate();
