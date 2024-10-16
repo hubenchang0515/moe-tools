@@ -20,7 +20,6 @@ import Polygon, { fromExtent } from 'ol/geom/Polygon';
 import { Coordinate } from 'ol/coordinate';
 import ProgressDialog from '../components/ProgressDialog';
 import { Feature } from 'ol';
-import { Geometry } from 'ol/geom';
 import { useTranslation } from 'react-i18next';
 
 
@@ -270,8 +269,8 @@ export default function GisTileDownload() {
     const mapDivRef = useRef<HTMLDivElement>(null);
     const mapRef = useRef<Map|null>(null);
     const tileLayer = useRef<TileLayer<XYZ>|null>(null);
-    const vectorSource = useRef<VectorSource<Feature<Geometry>>|null>(null);
-    const vectorLayer = useRef<VectorLayer<Feature<Geometry>>|null>(null);
+    const vectorSource = useRef<VectorSource|null>(null);
+    const vectorLayer = useRef<VectorLayer|null>(null);
     const filter = useRef('none');
 
     // 切换明暗模式
