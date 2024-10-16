@@ -1,7 +1,6 @@
 {
   "name": "moe-tools",
   "private": true,
-  "homepage": "https://hubenchang0515.github.io/moe-tools/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
