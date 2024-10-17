@@ -1,6 +1,13 @@
 {
     "title": "萌萌工具箱",
 
+    "common": {
+        "ok": "确定",
+        "open": "打开",
+        "close": "关闭",
+        "notice": "注意"
+    },
+
     "menu": {
         "home": "主页",
         "apps": "应用",
@@ -25,8 +32,16 @@
         "close": "关闭"
     },
 
+    "frame": {
+        "warning-message": "当前应用通过 iframe 展示，文件下载等功能受限，建议访问源页面使用此应用。",
+        "go-to-source-page": "前往"
+    },
+
     "apps": {
-        "gis-tile-download": "GIS 图块下载"
+        "gis-tile-download": "GIS 图块下载",
+        "todo": "待办事项",
+        "qt-theme": "Qt 主题",
+        "svg-icon": "Svg 图标"
     },
 
     "gis-tile-download": {

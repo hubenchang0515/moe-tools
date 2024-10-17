@@ -1,6 +1,13 @@
 {
     "title": "Moe Tools",
 
+    "common": {
+        "ok": "OK",
+        "open": "Open",
+        "close": "Close",
+        "notice": "Notice"
+    },
+
     "menu": {
         "home": "Home",
         "apps": "Applications",
@@ -25,8 +32,16 @@
         "close": "Close"
     },
 
+    "frame": {
+        "warning-message": "This application is displayed via iframe, functions like file download inaccessible. It is recommended to visite the original page.",
+        "go-to-source-page": "GO"
+    },
+
     "apps": {
-        "gis-tile-download": "GIS Tile Download"
+        "gis-tile-download": "GIS Tile Download",
+        "todo": "To Do List",
+        "qt-theme": "Qt Theme",
+        "svg-icon": "Svg Icon"
     },
 
     "gis-tile-download": {

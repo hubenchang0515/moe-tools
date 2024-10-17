@@ -115,7 +115,7 @@ export default function SlideMenu(props:SlideMenuProps) {
                                 <Collapse in={groupExpanded[index]} timeout="auto" unmountOnExit>
                                     <List component="div" disablePadding >
                                         {
-                                            group?.items.map((item) => (
+                                            group?.items.map((item, index) => (
                                                 <ListItem disablePadding key={index}>
                                                     <ListItemButton sx={{ pl: 4 }} href={item.url}>
                                                         <ListItemIcon><ExtensionIcon /></ListItemIcon>

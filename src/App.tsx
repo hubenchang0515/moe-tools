@@ -83,7 +83,7 @@ export default function App() {
                         </ButtonGroup>
                     </SlideMenu>
 
-                    <Box component="article" width={"100%"} flexGrow={1} flexShrink={1} onClick={() => {setMenuOpen(false);}}>
+                    <Box component="article" width={"100%"} flexGrow={1} flexShrink={1} onClick={()=>setMenuOpen(false)}>
                         <Routes>
                             <Route key="home" path="/" element={<Home/>}/>
                             {
