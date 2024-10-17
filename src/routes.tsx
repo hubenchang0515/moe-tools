@@ -8,6 +8,8 @@ interface RouteItem {
     element: JSX.Element;
 }
 
+const warning = window.location.origin !== 'https://hubenchang0515.github.io'
+
 const ROUTES: RouteItem[] = [
     {
         name: 'apps.gis-tile-download',
@@ -18,19 +20,19 @@ const ROUTES: RouteItem[] = [
     {
         name: 'apps.todo',
         url: 'todo',
-        element: <FramePage url="https://hubenchang0515.github.io/todo/"/>
+        element: <FramePage url="https://hubenchang0515.github.io/todo/" warning={warning}/>
     },
 
     {
         name: 'apps.qt-theme',
         url: 'qt-theme',
-        element: <FramePage url="https://hubenchang0515.github.io/QtTheme/QtTheme.html" warning/>
+        element: <FramePage url="https://hubenchang0515.github.io/QtTheme/QtTheme.html" warning={warning}/>
     },
 
     {
         name: 'apps.svg-icon',
         url: 'svg-icon',
-        element: <FramePage url="https://hubenchang0515.github.io/SvgIcons/SvgIcon.html" warning/>
+        element: <FramePage url="https://hubenchang0515.github.io/SvgIcons/SvgIcon.html" warning={warning}/>
     },
 
 ]

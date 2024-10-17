@@ -33,7 +33,7 @@
     },
 
     "frame": {
-        "warning-message": "当前应用通过 iframe 展示，文件下载等功能受限，建议访问源页面使用此应用。",
+        "warning-message": "当前应用通过 iframe 展示，文件下载等部分功能可能受限，建议访问源页面使用此应用。",
         "go-to-source-page": "前往"
     },
 

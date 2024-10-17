@@ -33,7 +33,7 @@
     },
 
     "frame": {
-        "warning-message": "This application is displayed via iframe, functions like file download inaccessible. It is recommended to visite the original page.",
+        "warning-message": "This application is displayed via iframe, and some functions such as downloading may inaccessible. It is recommended to visite the original page.",
         "go-to-source-page": "GO"
     },
 
