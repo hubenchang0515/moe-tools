@@ -9,7 +9,7 @@ import TitleBar from "./components/TitleBar";
 import SlideMenu, { Language, SlideMenuEntries, Theme } from "./components/SlideMenu";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
-import GisTileDownload from "./pages/GisTileDownload";
+import ROUTES from "./routes";
 
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
@@ -44,12 +44,12 @@ export default function App() {
     const entries:SlideMenuEntries = [
         {
             title: t('menu.apps'),
-            items: [
-                {
-                    title: t('apps.gis-tile-download'),
-                    url: "#gis-tile-download",
+            items: ROUTES.map((item) => {
+                return {
+                    title: t(item.name),
+                    url: `#${item.url}`,
                 }
-            ]
+            })
         }
     ]
 
@@ -85,8 +85,12 @@ export default function App() {
 
                     <Box component="article" width={"100%"} flexGrow={1} flexShrink={1} onClick={() => {setMenuOpen(false);}}>
                         <Routes>
-                            <Route key="home" path="/"  element={<Home/>}/>
-                            <Route key="gis-tile-download" path="/gis-tile-download"  element={<GisTileDownload/>}/>
+                            <Route key="home" path="/" element={<Home/>}/>
+                            {
+                                ROUTES.map((item) => {
+                                    return <Route key={item.name} path={item.url} element={item.element}/>
+                                })
+                            }
                         </Routes>
                     </Box>
                 </Box>

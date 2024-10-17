@@ -17,17 +17,17 @@ import { useTranslation } from "react-i18next";
 export type Theme = 'light'|'system'|'dark';
 export type Language = 'chinese'|'english';
 
-export interface ItemProps {
+export interface SlideMenuItemProps {
     title: string
     url: string
 }
 
-export interface GroupProps {
+export interface SlideMenuGroupProps {
     title: string
-    items: ItemProps[]
+    items: SlideMenuItemProps[]
 }
 
-export type SlideMenuEntries = GroupProps[];
+export type SlideMenuEntries = SlideMenuGroupProps[];
 
 export interface SlideMenuProps {
     open: boolean
