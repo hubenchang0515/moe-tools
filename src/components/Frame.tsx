@@ -1,43 +1,34 @@
-import { Box, Button, Fab } from "@mui/material";
-import PriorityHighSharpIcon from '@mui/icons-material/PriorityHighSharp';
-import MessageBox from "./MessageBox";
-import { useTranslation } from "react-i18next";
+import { Box, Button } from "@mui/material";
+import FabMessage, { FabMessageProps } from "./FabMessage";
 import { useEffect, useState } from "react";
+import { t } from "i18next";
 
 export interface FrameProps {
-    url: string;        // 源页面地址
-    warning: boolean;   // 是否显示警告信息
+    url: string;
+    severity?: FabMessageProps['severity'];
 }
 
 export default function Frame(props:FrameProps) {
-    const { t } = useTranslation();
-    const [dialogOpen, setDialogOpen] = useState(props.warning);
+    const openImmediately = () => ["warning", "error"].includes(props.severity??"");
+    const [messageOpen, setMessageOpen] = useState<boolean>(openImmediately());
+    useEffect(()=>setMessageOpen(openImmediately()), [props.url, props.severity]);
 
-    useEffect(() => {
-        setDialogOpen(props.warning);
-    }, [props.url, props.warning])
-    
     return (
         <Box sx={{width: '100%', height: '100%'}}>
-            <Fab 
-                color="warning" 
-                sx={{position:'absolute', left: 32, bottom: 32, zIndex:10}}
-                onClick={()=>setDialogOpen(true)}
-            >
-                <PriorityHighSharpIcon />
-            </Fab>
-            <MessageBox 
+            <FabMessage 
+                open={messageOpen} 
                 title={t("common.notice")}
                 content={t("frame.warning-message")}
-                severity="warning" 
-                open = {dialogOpen}
-                element={
-                    <Box display="flex" gap={1} justifyContent='flex-end'>
-                        <Button variant="text" color="inherit" onClick={()=>setDialogOpen(false)}>{t("common.ok")}</Button>
-                        <Button variant="contained" color="primary" href={props.url}>{t("frame.go-to-source-page")}</Button>
-                    </Box>
-                }
-            />
+                severity={props.severity} 
+                variant="standard"
+                onOpen={()=>setMessageOpen(true)} 
+                sx={{position:'absolute', left: 32, bottom: 32, zIndex:10}}
+            >
+                <Box display="flex" gap={1} justifyContent='flex-end'>
+                    <Button variant="contained" color={props.severity} href={props.url} target="_blank">{t("frame.go-to-source-page")}</Button>
+                    <Button variant="text" color="inherit" onClick={()=>setMessageOpen(false)}>{t("common.close")}</Button>
+                </Box>
+            </FabMessage>
             <iframe
                 src={props.url} 
                 style={{display:'block', border: 0, width: '100%', height: '100%'}}

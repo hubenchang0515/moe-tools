@@ -1,10 +1,10 @@
-import Frame from "../components/Frame";
+import Frame, { FrameProps } from "../components/Frame";
 
 export interface FramePageProps {
     url: string;
-    warning?: boolean;
+    severity?: FrameProps['severity']
 }
 
 export default function FramePage(props: FramePageProps) {
-    return (<Frame url={props.url} warning={!!props.warning}/>)
+    return (<Frame url={props.url} severity={props.severity}/>)
 }
