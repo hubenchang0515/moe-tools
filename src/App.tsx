@@ -56,7 +56,7 @@ export default function App() {
     return (
         <ThemeProvider theme={themeMode}>
             <CssBaseline/>
-            <Box display="flex" flexDirection="column" height="100vh">
+            <Box display="flex" flexDirection="column" height="100%">
                 <TitleBar title={t("title")} url="https://github.com/hubenchang0515/moe-tools" onToggleMenu={() => {setMenuOpen(!menuOpen)}}/>
 
                 <Box display="flex" width={"100%"} flexGrow={1} component="main">
