@@ -7,9 +7,6 @@ interface RouteItem {
     element: JSX.Element;
 }
 
-const SAME_ORIGIN = window.location.origin === 'https://hubenchang0515.github.io';
-const FRAME_SEVERITY = SAME_ORIGIN? "info" : "warning";
-
 const ROUTES: RouteItem[] = [
     {
         name: 'apps.gis-tile-download',
@@ -20,19 +17,19 @@ const ROUTES: RouteItem[] = [
     {
         name: 'apps.todo',
         url: 'todo',
-        element: <FramePage url="https://hubenchang0515.github.io/todo/" severity={FRAME_SEVERITY}/>
+        element: <FramePage url="https://hubenchang0515.github.io/todo/"/>
     },
 
     {
         name: 'apps.qt-theme',
         url: 'qt-theme',
-        element: <FramePage url="https://hubenchang0515.github.io/QtTheme/QtTheme.html" severity={FRAME_SEVERITY}/>
+        element: <FramePage url="https://hubenchang0515.github.io/QtTheme/QtTheme.html"/>
     },
 
     {
         name: 'apps.svg-icon',
         url: 'svg-icon',
-        element: <FramePage url="https://hubenchang0515.github.io/SvgIcons/SvgIcon.html" severity={FRAME_SEVERITY}/>
+        element: <FramePage url="https://hubenchang0515.github.io/SvgIcons/SvgIcon.html"/>
     },
 
 ]
