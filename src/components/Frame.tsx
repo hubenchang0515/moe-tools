@@ -37,7 +37,7 @@ export default function Frame(props:FrameProps) {
                 severity={props.severity} 
                 variant="standard"
                 onOpen={()=>setMessageOpen(true)} 
-                sx={{position:'absolute', left: 32, bottom: 32, zIndex:10}}
+                sx={{position:'fixed', left: 32, bottom: 32, zIndex:10}}
             >
                 <Box display="flex" gap={1} justifyContent='flex-end'>
                     <Button variant="contained" color={props.severity} href={props.url} target="_blank">{t("frame.go-to-source-page")}</Button>
