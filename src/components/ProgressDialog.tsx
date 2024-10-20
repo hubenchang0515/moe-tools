@@ -2,7 +2,7 @@ import { Alert, Box, Button, Dialog, DialogContent, DialogTitle, LinearProgress,
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useTranslation } from "react-i18next";
 
-export interface DownloadDialogProps {
+export interface ProgressDialogProps {
     open: boolean
     value: number
     max: number
@@ -11,7 +11,7 @@ export interface DownloadDialogProps {
     onCancel?: () => void
 }
 
-export default function DownloadDialog(props: DownloadDialogProps) {
+export default function ProgressDialog(props: ProgressDialogProps) {
     // i18n
     const { t } = useTranslation();
     
@@ -25,7 +25,7 @@ export default function DownloadDialog(props: DownloadDialogProps) {
                     <Box alignItems="center">
                         <Typography textAlign="center" sx={{position: 'relative', height: '2em', lineHeight: '2em'}}>{props.value}/{props.max}</Typography>
                         <Box sx={{ flexGrow:1 }}>
-                            <LinearProgress variant="buffer" value={progress}/>
+                            <LinearProgress variant="determinate" value={progress}/>
                         </Box>
                     </Box>
                     {props.message && (<Alert severity="info" sx={{pt:0, pb:0, mr:2}}>{props.message}</Alert>)}
