@@ -5,7 +5,9 @@
         "ok": "确定",
         "open": "打开",
         "close": "关闭",
-        "notice": "注意"
+        "notice": "注意",
+        "cancel": "取消",
+        "custom": "自定义"
     },
 
     "menu": {
@@ -60,8 +62,9 @@
         "clear": "清空",
         "download": "下载",
         "message": {
-            "please-select": "请在地图上选择下载范围.",
-            "please-keep": "请保持此页面可见以避免被浏览器暂停."
+            "please-select": "请在地图上选择下载范围。",
+            "please-keep": "请保持此页面可见，避免被浏览器冻结。",
+            "enter-to-confirm": "按回车键（Enter）确认"
         }
     },
 

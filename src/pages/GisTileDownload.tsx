@@ -11,7 +11,7 @@ import Graticule from 'ol/layer/Graticule.js';
 import Stroke from 'ol/style/Stroke.js';
 import {fromLonLat, toLonLat, transformExtent} from 'ol/proj.js';
 import "ol/ol.css";
-import { Alert, Box, Button, Grid, IconButton, MenuItem, Paper, Select, SelectChangeEvent, Slide, Slider, Snackbar, Stack, Tooltip, Typography } from '@mui/material';
+import { Alert, Box, Button, Grid, IconButton, MenuItem, Paper, Select, SelectChangeEvent, Slide, Slider, Snackbar, Stack, TextField, Tooltip, Typography } from '@mui/material';
 import JSZip from 'jszip';
 import Draw, { createBox } from 'ol/interaction/Draw';
 import VectorLayer from 'ol/layer/Vector';
@@ -163,6 +163,7 @@ export default function GisTileDownload() {
 
     // 选择哪个地图
     const [choice, setChoice] = useState(0);
+    const [customUrl, setCustomUrl] = useState("");
 
     // 风格
     const theme = useTheme();
@@ -203,6 +204,7 @@ export default function GisTileDownload() {
     const [concurrency, setConcurrency] = useState(10);
     const downloading = useRef(false);
     const download = async () => {
+        const url = choice < servers.length ? servers[choice].url : customUrl;
         const FOLDER_NAME = "maps";
         const PART_SIZE = 1000000;
         if (isNaN(area.current[0][0])) {
@@ -220,7 +222,7 @@ export default function GisTileDownload() {
         }
         setProgressMax(total);
 
-        let downloader = new XYZDownloader(servers[choice].url, concurrency);
+        let downloader = new XYZDownloader(url, concurrency);
         let zip = new JSZip();
         let done = 0;
 
@@ -233,9 +235,9 @@ export default function GisTileDownload() {
                 let partZip = zip;
                 zip = new JSZip();
                 let data = await partZip.generateAsync({type: "blob"}); // 异步生成时仍能添加文件，所以必须提前创建新的zip添加后续文件
-                let url = window.URL.createObjectURL(data);
+                let href = window.URL.createObjectURL(data);
                 let a = document.createElement("a");
-                a.href = url;
+                a.href = href;
                 a.download = `gis-tile-${part}.zip`;
                 a.click();
             }
@@ -263,9 +265,9 @@ export default function GisTileDownload() {
 
         await downloader.done();
         let data = await zip.generateAsync({type: "blob"});
-        let url = window.URL.createObjectURL(data);
+        let href = window.URL.createObjectURL(data);
         let a = document.createElement("a");
-        a.href = url;
+        a.href = href;
         a.download = "gis-tile.zip";
         a.click();
         setShowProgress(false);
@@ -281,19 +283,22 @@ export default function GisTileDownload() {
 
     // 切换明暗模式
     useEffect(() => {
-        filter.current = theme.palette.mode === 'dark' ? servers[choice].filter : 'none';
-        mapRef.current?.render();
+        if (choice < servers.length) {
+            filter.current = theme.palette.mode === 'dark' ? servers[choice].filter : 'none';
+            mapRef.current?.render();
+        }
     }, [theme.palette.mode, servers, choice]);
-
 
     // 切换地图服务器选项
     useEffect(() => {
+        const url = choice < servers.length ? servers[choice].url : customUrl;
+
         // 首次初始化
         if (mapDivRef.current && !mapRef.current) {
             // 地图块图层
             tileLayer.current = new TileLayer({
                 source: new XYZ({  
-                    url: servers[choice].url,       
+                    url: url,       
                     wrapX: true,
                 }),
             });
@@ -384,9 +389,9 @@ export default function GisTileDownload() {
             locate();
         } else {
             // 地图选项变化，切换url
-            tileLayer.current?.getSource()?.setUrl(servers[choice].url);
+            tileLayer.current?.getSource()?.setUrl(url);
         }
-    }, [servers, choice]);
+    }, [servers, choice, customUrl]);
 
     // 清除框选
     const cleanDraw = () => {
@@ -425,7 +430,28 @@ export default function GisTileDownload() {
                                             <MenuItem key={index} value={index}>{server.name}</MenuItem>
                                         ))
                                     }
+                                    <MenuItem key={servers.length} value={servers.length}>{t("common.custom")}</MenuItem>
                                 </Select>
+
+                                {
+                                    choice === servers.length && 
+                                    <TextField 
+                                        fullWidth
+                                        autoComplete='off'
+                                        variant="standard"
+                                        placeholder="http(s)://example.link/{z}/{x}/{y}.png" 
+                                        helperText={t("gis-tile-download.message.enter-to-confirm")}
+                                        defaultValue={customUrl} 
+                                        onKeyDown={(ev) => {
+                                            if (ev.key === "Enter") {
+                                                setCustomUrl((ev.target as HTMLInputElement).value);
+                                            }
+                                        }}
+                                        onPaste={(ev) => {
+                                            setCustomUrl(ev.clipboardData.getData("text"));
+                                        }}
+                                    />
+                                }
                             </Grid>
                             <Grid item xs={4} sx={{display:'flex', flexDirection:'column', justifyContent: 'center'}}>
                                 <Typography whiteSpace='nowrap' mr={2}>{t("gis-tile-download.z-range")}</Typography>

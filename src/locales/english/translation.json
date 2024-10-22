@@ -5,7 +5,9 @@
         "ok": "OK",
         "open": "Open",
         "close": "Close",
-        "notice": "Notice"
+        "notice": "Notice",
+        "cancel": "Cancel",
+        "custom": "Custom"
     },
 
     "menu": {
@@ -61,7 +63,8 @@
         "download": "Download",
         "message": {
             "please-select": "Please select the area in map to download.",
-            "please-keep": "Please keep this page visible to avoid being paused by the browser."
+            "please-keep": "Please keep this page visible to avoid being frozen by the browser.",
+            "enter-to-confirm": "Press Enter to confirm"
         }
     },
 
