@@ -107,6 +107,24 @@ const Proj = {
     }
 }
 
+// 判断是否是 GTS URL
+const isGisUrl = (text:string) => {
+    if (!text.includes("{x}") || !text.includes("{y}") || !text.includes("{z}")) {
+        return false;
+    }
+
+    try {
+        const url = new URL(text);
+        if (url.origin === 'null') {
+            return false;
+        }
+    } catch {
+        return false;
+    }
+
+    return true;
+}
+
 export default function GisTileDownload() {
     // i18n
     const { t } = useTranslation();
@@ -444,11 +462,16 @@ export default function GisTileDownload() {
                                         defaultValue={customUrl} 
                                         onKeyDown={(ev) => {
                                             if (ev.key === "Enter") {
-                                                setCustomUrl((ev.target as HTMLInputElement).value);
+                                                setCustomUrl((ev.target as HTMLTextAreaElement).value);
                                             }
                                         }}
                                         onPaste={(ev) => {
-                                            setCustomUrl(ev.clipboardData.getData("text"));
+                                            const text = ev.clipboardData.getData("text");
+                                            if (isGisUrl(text)) {
+                                                ev.preventDefault();
+                                                (ev.target as HTMLTextAreaElement).value = text;
+                                                setCustomUrl(text);
+                                            }
                                         }}
                                     />
                                 }
