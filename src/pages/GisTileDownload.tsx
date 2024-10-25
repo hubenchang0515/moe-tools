@@ -11,7 +11,7 @@ import Graticule from 'ol/layer/Graticule.js';
 import Stroke from 'ol/style/Stroke.js';
 import {fromLonLat, toLonLat, transformExtent} from 'ol/proj.js';
 import "ol/ol.css";
-import { Alert, Box, Button, Grid, IconButton, MenuItem, Paper, Select, SelectChangeEvent, Slide, Slider, Snackbar, Stack, TextField, Tooltip, Typography } from '@mui/material';
+import { Alert, Box, Button, Grid2 as Grid, IconButton, MenuItem, Paper, Select, SelectChangeEvent, Slide, Slider, Snackbar, Stack, TextField, Tooltip, Typography } from '@mui/material';
 import JSZip from 'jszip';
 import Draw, { createBox } from 'ol/interaction/Draw';
 import VectorLayer from 'ol/layer/Vector';
@@ -441,7 +441,7 @@ export default function GisTileDownload() {
                 <Stack spacing={1}>
                     <Paper sx={{pt:1, pb:1, pl:1, pr:1, width:320}}>
                         <Grid container spacing={1}>
-                            <Grid item xs={12}>
+                            <Grid size={12}>
                                 <Select fullWidth variant="standard" value={`${choice}`} onChange={(ev:SelectChangeEvent) => {setChoice(Number(ev.target.value));}}>
                                     {
                                         servers.map((server, index) => (
@@ -476,16 +476,16 @@ export default function GisTileDownload() {
                                     />
                                 }
                             </Grid>
-                            <Grid item xs={4} sx={{display:'flex', flexDirection:'column', justifyContent: 'center'}}>
+                            <Grid size={4} sx={{display:'flex', flexDirection:'column', justifyContent: 'center'}}>
                                 <Typography whiteSpace='nowrap' mr={2}>{t("gis-tile-download.z-range")}</Typography>
                             </Grid>
-                            <Grid item xs={8} sx={{display:'flex', flexDirection:'column', justifyContent: 'center'}}>
+                            <Grid size={8} sx={{display:'flex', flexDirection:'column', justifyContent: 'center'}}>
                                 <Slider valueLabelDisplay="auto" value={zoomRange} step={1} marks min={0} max={23} onChange={(_, v) => {setZoomRange(v as number[]);}}/>
                             </Grid>
-                            <Grid item xs={4} sx={{display:'flex', flexDirection:'column', justifyContent: 'center'}}>
+                            <Grid size={4} sx={{display:'flex', flexDirection:'column', justifyContent: 'center'}}>
                                 <Typography whiteSpace='nowrap' mr={2}>{t("gis-tile-download.concurrency")}</Typography>
                             </Grid>
-                            <Grid item xs={8} sx={{display:'flex', flexDirection:'column', justifyContent: 'center'}}>
+                            <Grid size={8} sx={{display:'flex', flexDirection:'column', justifyContent: 'center'}}>
                                 <Slider valueLabelDisplay="auto" value={concurrency} step={1} marks min={1} max={20} onChange={(_, v) => {setConcurrency(v as number);}}/>
                             </Grid>
                         </Grid>
