@@ -13,6 +13,7 @@ import ROUTES from "./routes";
 
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
+import NotFound from "./pages/NotFound";
 
 export default function App() {
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -91,6 +92,7 @@ export default function App() {
                                     return <Route key={item.name} path={item.url} element={item.element}/>
                                 })
                             }
+                            <Route key="404" path="*" element={<NotFound/>}/>
                         </Routes>
                     </Box>
                 </Box>
