@@ -2,6 +2,7 @@ import { Box, useTheme } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 export interface FrameProps {
     url: string;
+    children?: JSX.Element;
 }
 
 
@@ -33,6 +34,7 @@ export default function Frame(props:FrameProps) {
                 ref={iframeRef}
                 onLoad={()=>setIframeBody(iframeRef.current?.contentDocument?.body)}
             />
+            {props.children}
         </Box>
     )
 }

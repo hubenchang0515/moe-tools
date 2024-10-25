@@ -17,7 +17,7 @@ export interface FabMessageProps {
 
 export default function FabMessage(props:FabMessageProps) {
     return (
-        <Box>
+        <Box sx={{position:'relative', top: 0, bottom: 0, left:0, right: 0}}>
             <Fab 
                 color={props.severity}
                 sx={props.sx}

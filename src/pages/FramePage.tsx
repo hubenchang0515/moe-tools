@@ -20,21 +20,22 @@ export default function FramePage(props: FramePageProps) {
 
     return (
         <Box sx={{width: '100%', height: '100%'}}>
-            <FabMessage 
-                open={messageOpen} 
-                title={t("common.notice")}
-                content={t("frame.warning-message")}
-                severity={severity} 
-                variant="standard"
-                onOpen={()=>setMessageOpen(true)} 
-                sx={{position:'fixed', left: 32, bottom: 32, zIndex:10}}
-            >
-                <Box display="flex" gap={1} justifyContent='flex-end'>
-                    <Button variant="contained" color={severity} href={url.toString()} target="_blank">{t("frame.go-to-source-page")}</Button>
-                    <Button variant="text" color="inherit" onClick={()=>setMessageOpen(false)}>{t("common.close")}</Button>
-                </Box>
-            </FabMessage>
-            <Frame url={props.url}/>
+            <Frame url={props.url}>
+                <FabMessage 
+                    open={messageOpen} 
+                    title={t("common.notice")}
+                    content={t("frame.warning-message")}
+                    severity={severity} 
+                    variant="standard"
+                    onOpen={()=>setMessageOpen(true)} 
+                    sx={{position:'absolute', left: 32, bottom: 32, zIndex:10}}
+                >
+                    <Box display="flex" gap={1} justifyContent='flex-end'>
+                        <Button variant="contained" color={severity} href={url.toString()} target="_blank">{t("frame.go-to-source-page")}</Button>
+                        <Button variant="text" color="inherit" onClick={()=>setMessageOpen(false)}>{t("common.close")}</Button>
+                    </Box>
+                </FabMessage>
+            </Frame>
         </Box>
     )
 }
