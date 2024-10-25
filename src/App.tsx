@@ -61,7 +61,18 @@ export default function App() {
                 <TitleBar title={t("title")} url="https://github.com/hubenchang0515/moe-tools" onToggleMenu={() => {setMenuOpen(!menuOpen)}}/>
 
                 <Box display="flex" width={"100%"} flexGrow={1} component="main">
-                    <SlideMenu width={320} open={menuOpen} theme={theme} language={language} head={<Toolbar/>} entries={entries} onThemeChanged={(theme) => {setTheme(theme);}} onLanguageChanged={(language) => {setLanguageI18n(language);}}>
+                    <SlideMenu 
+                        width={320} 
+                        open={menuOpen} 
+                        homeUrl="#/"
+                        advanceUrl="#/advance"
+                        theme={theme} 
+                        language={language} 
+                        head={<Toolbar/>} 
+                        entries={entries} 
+                        onThemeChanged={(theme) => setTheme(theme)} 
+                        onLanguageChanged={(language) => setLanguageI18n(language)}
+                    >
                         <Box flexGrow={1}/>
                         <ButtonGroup fullWidth color="inherit">
                             <Tooltip title={t('menu-bottom.sync')} placement="top" arrow>

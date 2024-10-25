@@ -33,6 +33,9 @@ export interface SlideMenuProps {
     open: boolean
     width: number | string
 
+    homeUrl?: string
+    advanceUrl?: string
+
     theme: Theme
     onThemeChanged: (theme:Theme) => void
 
@@ -89,16 +92,19 @@ export default function SlideMenu(props:SlideMenuProps) {
             >
                 {props.head}
                 <List sx={{width: "100%"}}>
-                    <ListItem disablePadding>
-                        <ListItemButton href="#">
-                            <ListItemIcon>
-                                <HomeIcon/>
-                            </ListItemIcon>
-                            <ListItemText>
-                                {t("menu.home")}
-                            </ListItemText>
-                        </ListItemButton>
-                    </ListItem>
+                    {
+                        props.homeUrl &&
+                        <ListItem disablePadding>
+                            <ListItemButton href={props.homeUrl}>
+                                <ListItemIcon>
+                                    <HomeIcon/>
+                                </ListItemIcon>
+                                <ListItemText>
+                                    {t("menu.home")}
+                                </ListItemText>
+                            </ListItemButton>
+                        </ListItem>
+                    }
 
                     {
                         props.entries?.map((group, index) => (
@@ -182,14 +188,18 @@ export default function SlideMenu(props:SlideMenuProps) {
                                 </ListItemButton>
                             </ListItem>
 
-                            <ListItem disablePadding>
-                                <ListItemButton sx={{ pl: 4 }}>
-                                    <ListItemIcon>
-                                    <SettingsIcon />
-                                    </ListItemIcon>
-                                    <ListItemText primary={t("settings.advance")} />
-                                </ListItemButton>
-                            </ListItem>
+                            {
+                                props.advanceUrl &&
+                                <ListItem disablePadding>
+                                    <ListItemButton sx={{ pl: 4 }} href={props.advanceUrl}>
+                                        <ListItemIcon>
+                                        <SettingsIcon />
+                                        </ListItemIcon>
+                                        <ListItemText primary={t("settings.advance")} />
+                                    </ListItemButton>
+                                </ListItem>
+                            }
+                            
                         </List>
                     </Collapse>    
                 </List>
