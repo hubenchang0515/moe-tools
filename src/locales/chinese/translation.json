@@ -31,7 +31,7 @@
     "menu-bottom": {
         "sync": "同步",
         "feedback": "反馈",
-        "close": "关闭"
+        "collapse": "折叠"
     },
 
     "frame": {

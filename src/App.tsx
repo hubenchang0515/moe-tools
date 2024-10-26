@@ -1,9 +1,9 @@
-import { Box, ButtonGroup, CssBaseline,ThemeProvider, Toolbar, Tooltip, createTheme, Button } from "@mui/material";
+import { Box, ButtonGroup, CssBaseline,ThemeProvider, Tooltip, createTheme, Button } from "@mui/material";
 import CloudSyncIcon from '@mui/icons-material/CloudSync';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import BugReportIcon from '@mui/icons-material/BugReport';
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import TitleBar from "./components/TitleBar";
 import SlideMenu, { Language, SlideMenuEntries, Theme } from "./components/SlideMenu";
@@ -16,8 +16,9 @@ import { useTranslation } from 'react-i18next';
 import NotFound from "./pages/NotFound";
 
 export default function App() {
-    const [menuOpen, setMenuOpen] = useState<boolean>(false);
-    const [theme, setTheme] = useState<Theme>('system')
+    const [menuOpen, setMenuOpen] = useState<boolean>(true);
+    const [menuExpand, setMenuExpand] = useState<boolean>(false);
+    const [theme, setTheme] = useState<Theme>('system');
     const [language, setLanguage] = useState<Language>(i18n.language as Language);
 
     // 系统主题
@@ -54,26 +55,34 @@ export default function App() {
         }
     ]
 
+    const [titleHeight, setTitleHeight] = useState(0);
+    const measure = useCallback((node:any) => {
+        if (node !== null) {
+            setTitleHeight(node.getBoundingClientRect().height);
+          }
+    }, []);
+
     return (
         <ThemeProvider theme={themeMode}>
             <CssBaseline/>
             <Box display="flex" flexDirection="column" height="100%">
-                <TitleBar title={t("title")} url="https://github.com/hubenchang0515/moe-tools" onToggleMenu={() => {setMenuOpen(!menuOpen)}}/>
+                <TitleBar ref={measure} title={t("title")} url="https://github.com/hubenchang0515/moe-tools" onToggleMenu={() => setMenuOpen(!menuOpen)}/>
 
-                <Box display="flex" width={"100%"} flexGrow={1} component="main">
-                    <SlideMenu 
+                <Box display="flex" height={`calc(100% - ${titleHeight}px)`} flexGrow={1} component="main">
+                    <SlideMenu
                         width={320} 
-                        open={menuOpen} 
+                        open={menuOpen}
+                        expand={menuExpand}
                         homeUrl="#/"
                         advanceUrl="#/advance"
                         theme={theme} 
                         language={language} 
-                        head={<Toolbar/>} 
                         entries={entries} 
+                        onOpenChanged={(open) => setMenuOpen(open)}
+                        onExpandChanged={(expand) => setMenuExpand(expand)}
                         onThemeChanged={(theme) => setTheme(theme)} 
                         onLanguageChanged={(language) => setLanguageI18n(language)}
                     >
-                        <Box flexGrow={1}/>
                         <ButtonGroup fullWidth color="inherit">
                             <Tooltip title={t('menu-bottom.sync')} placement="top" arrow>
                                 <Button variant="text" >
@@ -87,15 +96,29 @@ export default function App() {
                                 </Button>
                             </Tooltip>
 
-                            <Tooltip title={t('menu-bottom.close')} placement="top" arrow>
-                                <Button variant="text" onClick={() => {setMenuOpen(false)}}>
+                            <Tooltip title={t('menu-bottom.collapse')} placement="top" arrow>
+                                <Button variant="text" onClick={(ev) => {
+                                    ev.stopPropagation();
+                                    setMenuExpand(false);
+                                }}>
                                     <KeyboardDoubleArrowLeftIcon />
                                 </Button>
                             </Tooltip>
                         </ButtonGroup>
                     </SlideMenu>
 
-                    <Box component="article" width={"100%"} flexGrow={1} flexShrink={1} onClick={()=>setMenuOpen(false)}>
+                    <Box 
+                        component="article" 
+                        height={"calc(100%)"}
+                        overflow={"auto"} 
+                        flexGrow={1} 
+                        flexShrink={1} 
+                        onClick={() => {
+                            if (menuExpand) {
+                                setMenuExpand(false);
+                            }
+                        }}
+                    >
                         <Routes>
                             <Route key="home" path="/" element={<Home/>}/>
                             {

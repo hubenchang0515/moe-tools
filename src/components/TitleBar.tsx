@@ -2,6 +2,7 @@ import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import SearchInput from "./SearchInput";
+import React, { Ref } from "react";
 
 export interface TitleBarProps {
     title: string
@@ -10,9 +11,9 @@ export interface TitleBarProps {
     onToggleMenu: () => void
 }
 
-export default function TitleBar(props:TitleBarProps) {
+export function TitleBar(props:TitleBarProps, ref?:Ref<unknown>) {
     return (
-        <Box>
+        <Box ref={ref}>
             <AppBar component="nav" color="primary" elevation={24}>
                 <Toolbar>
                     <IconButton
@@ -52,3 +53,5 @@ export default function TitleBar(props:TitleBarProps) {
         </Box>
     )
 }
+
+export default React.forwardRef(TitleBar);

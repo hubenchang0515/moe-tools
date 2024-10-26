@@ -31,7 +31,7 @@
     "menu-bottom": {
         "sync": "Sync",
         "feedback": "Feedback",
-        "close": "Close"
+        "collapse": "Collapse"
     },
 
     "frame": {
