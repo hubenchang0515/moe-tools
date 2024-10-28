@@ -11,6 +11,7 @@ import BrightnessAutoIcon from '@mui/icons-material/BrightnessAuto';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import TranslateIcon from '@mui/icons-material/Translate';
+import InfoIcon from '@mui/icons-material/Info';
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -34,6 +35,7 @@ export type SlideMenuEntries = SlideMenuGroupProps[];
 export interface SlideMenuProps {
     width: number | string
     homeUrl?: string
+    aboutUrl?: string
     advanceUrl?: string
 
     open?: boolean,
@@ -206,11 +208,23 @@ export default function SlideMenu(props:SlideMenuProps) {
                                         </ListItem>
 
                                         {
+                                            props.aboutUrl &&
+                                            <ListItem disablePadding>
+                                                <ListItemButton sx={{ pl: 4 }} href={props.aboutUrl}>
+                                                    <ListItemIcon>
+                                                        <InfoIcon />
+                                                    </ListItemIcon>
+                                                    <ListItemText primary={t("settings.about")} />
+                                                </ListItemButton>
+                                            </ListItem>
+                                        }
+
+                                        {
                                             props.advanceUrl &&
                                             <ListItem disablePadding>
                                                 <ListItemButton sx={{ pl: 4 }} href={props.advanceUrl}>
                                                     <ListItemIcon>
-                                                    <SettingsIcon />
+                                                        <SettingsIcon />
                                                     </ListItemIcon>
                                                     <ListItemText primary={t("settings.advance")} />
                                                 </ListItemButton>

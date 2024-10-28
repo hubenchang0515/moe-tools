@@ -17,6 +17,7 @@
     },
 
     "settings": {
+        "about": "About",
         "theme": "Theme",
         "language": "Language",
         "advance": "Advance"

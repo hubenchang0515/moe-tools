@@ -14,6 +14,7 @@ import ROUTES from "./routes";
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import NotFound from "./pages/NotFound";
+import About from "./pages/About";
 
 export default function App() {
     const [menuOpen, setMenuOpen] = useState<boolean>(true);
@@ -74,6 +75,7 @@ export default function App() {
                         open={menuOpen}
                         expand={menuExpand}
                         homeUrl="#/"
+                        aboutUrl="#/about"
                         advanceUrl="#/advance"
                         theme={theme} 
                         language={language} 
@@ -109,7 +111,7 @@ export default function App() {
 
                     <Box 
                         component="article" 
-                        height={"calc(100%)"}
+                        height={"100%"}
                         overflow={"auto"} 
                         flexGrow={1} 
                         flexShrink={1} 
@@ -120,13 +122,14 @@ export default function App() {
                         }}
                     >
                         <Routes>
+                            <Route key="404" path="*" element={<NotFound/>}/>
                             <Route key="home" path="/" element={<Home/>}/>
+                            <Route key="about" path="/about" element={<About/>}/>
                             {
                                 ROUTES.map((item) => {
                                     return <Route key={item.name} path={item.url} element={item.element}/>
                                 })
                             }
-                            <Route key="404" path="*" element={<NotFound/>}/>
                         </Routes>
                     </Box>
                 </Box>

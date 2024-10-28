@@ -17,6 +17,7 @@
     },
 
     "settings": {
+        "about": "关于",
         "theme": "主题",
         "language": "语言",
         "advance": "高级设置"
