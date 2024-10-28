@@ -17,24 +17,51 @@ export default function Markdown(props:MarkdownProps) {
             marginBlock: '16px',
             marginInline: 0,
             padding: 0,
+            
         },
 
-        '& h1': theme.typography.h1,
+        '& h1': {
+            ...theme.typography.h1,
+            wordBreak: 'break-all',
+            whiteSpace: 'wrap',
+            
+        },
 
-        '& h2': theme.typography.h2,
+        '& h2': {
+            ...theme.typography.h2,
+            wordBreak: 'break-all',
+            whiteSpace: 'wrap',
+        },
 
-        '& h3': theme.typography.h3,
+        '& h3': {
+            ...theme.typography.h3,
+            wordBreak: 'break-all',
+            whiteSpace: 'wrap',
+        },
 
-        '& h4': theme.typography.h4,
+        '& h4': {
+            ...theme.typography.h4,
+            wordBreak: 'break-all',
+            whiteSpace: 'wrap',
+        },
 
-        '& h5': theme.typography.h5,
+        '& h5': {
+            ...theme.typography.h5,
+            wordBreak: 'break-all',
+            whiteSpace: 'wrap',
+        },
 
-        '& h6': theme.typography.h6,
+        '& h6': {
+            ...theme.typography.h6,
+            wordBreak: 'break-all',
+            whiteSpace: 'wrap',
+        },
 
         '& p': {
             ...theme.typography.body1,
             textIndent: '2em',
             wordBreak: 'break-all',
+            whiteSpace: 'wrap',
         },
 
         '& blockquote': {
@@ -72,11 +99,11 @@ export default function Markdown(props:MarkdownProps) {
             border: `1px solid ${theme.palette.divider}`,
         },
 
-        "& th, tr:nth-child(even)": {
+        "& th, tr:nth-of-type(even)": {
             backgroundColor: theme.palette.mode === "dark" ? theme.palette.grey[800] : theme.palette.grey[100],
         },
 
-        "& tr:nth-child(odd)": {
+        "& tr:nth-of-type(odd)": {
             backgroundColor: theme.palette.mode === "dark" ? theme.palette.grey[700] : theme.palette.grey[200],
         },
     }
@@ -84,7 +111,7 @@ export default function Markdown(props:MarkdownProps) {
     const divRef = useRef<HTMLDivElement>();
 
     useEffect(() => {
-        if (props.text) {
+        if (props.text !== undefined) {
             marked.parse(props.text, {async: true}).then((value) => {
                 if (divRef.current) {
                     divRef.current.innerHTML = value;
@@ -96,7 +123,6 @@ export default function Markdown(props:MarkdownProps) {
                 if (response.ok && divRef.current) {
                     divRef.current.innerHTML = await marked.parse(await response.text(), {async: true});
                     hljs.highlightAll();
-                    console.log("refresh");
                 }
             });
         }
