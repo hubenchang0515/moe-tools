@@ -1,9 +1,10 @@
-import { Box, ButtonGroup, CssBaseline,ThemeProvider, Tooltip, createTheme, Button } from "@mui/material";
+import { Box, ButtonGroup, CssBaseline,ThemeProvider, Tooltip, createTheme, Button, Fab, Slide } from "@mui/material";
 import CloudSyncIcon from '@mui/icons-material/CloudSync';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import BugReportIcon from '@mui/icons-material/BugReport';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import TitleBar from "./components/TitleBar";
 import SlideMenu, { Language, SlideMenuEntries, Theme } from "./components/SlideMenu";
@@ -56,6 +57,7 @@ export default function App() {
         }
     ]
 
+    // 测量标题栏高度
     const [titleHeight, setTitleHeight] = useState(0);
     const measure = useCallback((node:any) => {
         if (node !== null) {
@@ -63,13 +65,32 @@ export default function App() {
           }
     }, []);
 
+    // 检测主题区域高度，动态显示返回顶部按钮
+    const mainRef = useRef<HTMLDivElement>();
+    const [showBackTop, setShowBackTop] = useState(false);
+    useEffect(() => {
+        if (!mainRef.current) return;
+        const observer = new ResizeObserver(() => {
+            if (mainRef.current && mainRef.current?.clientHeight < mainRef.current?.scrollHeight) {
+                setShowBackTop(true);
+            } else {
+                setShowBackTop(false);
+            }
+        });
+        observer.observe(mainRef.current);
+
+        return () => {
+            observer.disconnect();
+        }
+    }, [mainRef.current]);
+
     return (
         <ThemeProvider theme={themeMode}>
             <CssBaseline/>
             <Box display="flex" flexDirection="column" height="100%">
                 <TitleBar ref={measure} title={t("title")} url="https://github.com/hubenchang0515/moe-tools" onToggleMenu={() => setMenuOpen(!menuOpen)}/>
 
-                <Box display="flex" height={`calc(100% - ${titleHeight}px)`} flexGrow={1} component="main">
+                <Box display="flex" height={`calc(100% - ${titleHeight}px)`} flexGrow={1}>
                     <SlideMenu
                         width={320} 
                         open={menuOpen}
@@ -110,7 +131,8 @@ export default function App() {
                     </SlideMenu>
 
                     <Box 
-                        component="article" 
+                        ref={mainRef}
+                        component="main" 
                         height={"100%"}
                         overflow={"auto"} 
                         flexGrow={1} 
@@ -131,6 +153,20 @@ export default function App() {
                                 })
                             }
                         </Routes>
+
+                        <Slide in={showBackTop} direction="left">
+                            <Fab 
+                                color="primary" 
+                                sx={{
+                                    position:'fixed', right:32, bottom:32
+                                }}
+                                onClick={()=>{
+                                    mainRef.current?.scrollTo({top:0, behavior:"smooth"});
+                                }}
+                            >
+                                <ArrowUpwardIcon/>
+                            </Fab>
+                        </Slide>
                     </Box>
                 </Box>
             </Box>
