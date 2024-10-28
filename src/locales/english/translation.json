@@ -7,7 +7,10 @@
         "close": "Close",
         "notice": "Notice",
         "cancel": "Cancel",
-        "custom": "Custom"
+        "custom": "Custom",
+        "edit": "Edit",
+        "refresh": "Refresh",
+        "preview": "Preview"
     },
 
     "menu": {
@@ -44,7 +47,8 @@
         "gis-tile-download": "GIS Tile Download",
         "todo": "To Do List",
         "qt-theme": "Qt Theme",
-        "svg-icon": "Svg Icon"
+        "svg-icon": "Svg Icon",
+        "markdown-editor": "Markdown Editor"
     },
 
     "gis-tile-download": {
@@ -67,6 +71,11 @@
             "please-keep": "Please keep this page visible to avoid being frozen by the browser.",
             "enter-to-confirm": "Press Enter to confirm"
         }
+    },
+
+    "markdown-editor": {
+        "auto-refresh": "Auto Refresh",
+        "lag-warning": "This feature may cause page lags"
     },
 
     "components": {

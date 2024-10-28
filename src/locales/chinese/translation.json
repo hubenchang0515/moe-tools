@@ -7,7 +7,10 @@
         "close": "关闭",
         "notice": "注意",
         "cancel": "取消",
-        "custom": "自定义"
+        "custom": "自定义",
+        "edit": "编辑",
+        "refresh": "刷新",
+        "preview": "预览"
     },
 
     "menu": {
@@ -44,7 +47,8 @@
         "gis-tile-download": "GIS 图块下载",
         "todo": "待办事项",
         "qt-theme": "Qt 主题",
-        "svg-icon": "Svg 图标"
+        "svg-icon": "Svg 图标",
+        "markdown-editor": "Markdown 编辑器"
     },
 
     "gis-tile-download": {
@@ -67,6 +71,11 @@
             "please-keep": "请保持此页面可见，避免被浏览器冻结。",
             "enter-to-confirm": "按回车键（Enter）确认"
         }
+    },
+
+    "markdown-editor": {
+        "auto-refresh": "自动刷新",
+        "lag-warning": "这个功能可能导致页面卡顿"
     },
 
     "components": {

@@ -1,5 +1,6 @@
 import FramePage from "./pages/FramePage";
 import GisTileDownload from "./pages/GisTileDownload";
+import MarkdownEditor from "./pages/MarkdownEditor";
 
 interface RouteItem {
     name: string;
@@ -30,6 +31,12 @@ const ROUTES: RouteItem[] = [
         name: 'apps.svg-icon',
         url: '/svg-icon',
         element: <FramePage url="https://hubenchang0515.github.io/SvgIcons/SvgIcon.html"/>
+    },
+
+    {
+        name: 'apps.markdown-editor',
+        url: '/markdown-editor',
+        element: <MarkdownEditor/>
     },
 
 ]
