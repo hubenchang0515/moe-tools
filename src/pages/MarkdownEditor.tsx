@@ -18,7 +18,7 @@ export default function MarkdownEditor() {
 
     return (
         <Container 
-            maxWidth="xl" 
+            maxWidth="xl"
             sx={{
                 maxWidth: '100%',
                 marginY: '16px', 
@@ -127,7 +127,6 @@ export default function MarkdownEditor() {
                                 variant="contained"
                                 onClick={()=>{
                                     const iframe = document.getElementById('iframe-to-export')! as HTMLIFrameElement;
-                                    document.body.appendChild(iframe);
                                     iframe.contentDocument!.body.className = "markdown-body";
                                     iframe.contentDocument!.body.innerHTML = markdownHtml;
                                     const hljsCss = iframe.contentDocument?.createElement('link');
