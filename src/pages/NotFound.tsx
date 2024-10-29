@@ -10,7 +10,7 @@ export default function NotFound() {
                 404 Not Found
             </Typography>
             <Typography variant="caption" sx={{textAlign:'center'}}>
-                Location Path: <span style={{textDecoration:'underline'}}>{location.pathname}</span>
+                Location Path: <span style={{textDecoration:'underline'}}>{decodeURI(location.pathname)}</span>
             </Typography>
             <Typography variant="overline" sx={{textAlign:'center'}}>
                 Back To <Link href="#">Home</Link>
