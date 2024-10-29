@@ -53,6 +53,8 @@ export default function MarkdownEditor() {
                                 type="file"
                                 accept=".md"
                                 style={{
+                                    clip: 'rect(0 0 0 0)',
+                                    clipPath: 'inset(50%)',
                                     width: 0,
                                     height: 0,
                                 }}
