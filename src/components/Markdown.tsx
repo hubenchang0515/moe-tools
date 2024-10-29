@@ -14,10 +14,11 @@ export default function Markdown(props:MarkdownProps) {
     const theme = useTheme();
 
     const style:SxProps<Theme> = {
+        overflow: 'auto',
+
         '& *': {
             marginBlock: '16px',
             marginInline: 0,
-            padding: 0,
             
         },
 
