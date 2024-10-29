@@ -5,12 +5,16 @@
         "ok": "确定",
         "open": "打开",
         "close": "关闭",
+        "save": "保存",
         "notice": "注意",
         "cancel": "取消",
         "custom": "自定义",
         "edit": "编辑",
         "refresh": "刷新",
-        "preview": "预览"
+        "preview": "预览",
+        "print": "打印",
+        "import": "导入",
+        "export": "导出"
     },
 
     "menu": {
@@ -74,8 +78,11 @@
     },
 
     "markdown-editor": {
+        "edit": "编辑",
+        "preview": "预览: 导出功能通过浏览器的打印功能实现，可手动选取目标为 PDF 或打印机",
         "auto-refresh": "自动刷新",
-        "lag-warning": "这个功能可能导致页面卡顿"
+        "lag-warning": "这个功能可能导致页面卡顿",
+        "print-warning": "这个功能依赖浏览器，可能无法使用"
     },
 
     "components": {

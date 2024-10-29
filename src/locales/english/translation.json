@@ -5,12 +5,16 @@
         "ok": "OK",
         "open": "Open",
         "close": "Close",
+        "save": "Save",
         "notice": "Notice",
         "cancel": "Cancel",
         "custom": "Custom",
         "edit": "Edit",
         "refresh": "Refresh",
-        "preview": "Preview"
+        "preview": "Preview",
+        "print": "Print",
+        "import": "Import",
+        "export": "Export"
     },
 
     "menu": {
@@ -74,8 +78,11 @@
     },
 
     "markdown-editor": {
+        "edit": "EDIT",
+        "preview": "PREVIEW: The export function is implemented through the browser's print function, and the target can be manually selected as PDF or printer.",
         "auto-refresh": "Auto Refresh",
-        "lag-warning": "This feature may cause page lags"
+        "lag-warning": "This feature may cause page lags",
+        "print-warning": "This feature depends on the browser and may not be available"
     },
 
     "components": {

@@ -7,6 +7,7 @@ import { Box, SxProps, Theme, useTheme } from "@mui/material";
 export interface MarkdownProps {
     text?: string
     url?: string
+    onChange?: (html:string)=>void
 }
 
 export default function Markdown(props:MarkdownProps) {
@@ -116,6 +117,7 @@ export default function Markdown(props:MarkdownProps) {
                 if (divRef.current) {
                     divRef.current.innerHTML = value;
                     hljs.highlightAll();
+                    props.onChange?.(divRef.current.innerHTML);
                 }
             }) ;
         } else if (props.url) {
@@ -123,6 +125,7 @@ export default function Markdown(props:MarkdownProps) {
                 if (response.ok && divRef.current) {
                     divRef.current.innerHTML = await marked.parse(await response.text(), {async: true});
                     hljs.highlightAll();
+                    props.onChange?.(divRef.current.innerHTML);
                 }
             });
         }
