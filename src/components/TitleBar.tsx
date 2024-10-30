@@ -8,7 +8,8 @@ export interface TitleBarProps {
     title: string
     url: string
 
-    onToggleMenu: () => void
+    onToggleMenu?: () => void
+    onSearch?:(text:string) => void
 }
 
 export function TitleBar(props:TitleBarProps, ref?:Ref<unknown>) {
@@ -32,7 +33,7 @@ export function TitleBar(props:TitleBarProps, ref?:Ref<unknown>) {
 
                     <Box sx={{ flexGrow: 1 }} />
 
-                    <SearchInput/>
+                    <SearchInput onSearch={props.onSearch}/>
 
                     <Box sx={{ flexGrow: 1 }} />
                     

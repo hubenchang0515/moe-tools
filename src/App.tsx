@@ -9,7 +9,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import TitleBar from "./components/TitleBar";
 import SlideMenu, { Language, SlideMenuEntries, Theme } from "./components/SlideMenu";
 import Home from "./pages/Home";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import ROUTES from "./routes";
 
 import i18n from 'i18next';
@@ -22,7 +22,7 @@ export default function App() {
     const [menuExpand, setMenuExpand] = useState<boolean>(false);
     const [theme, setTheme] = useState<Theme>('system');
     const [language, setLanguage] = useState<Language>(i18n.language as Language);
-
+    const navigate = useNavigate();
     // 系统主题
     const systemDark = window.matchMedia("(prefers-color-scheme:dark)");
     const [systemTheme, setSystemTheme] = useState<'light'|'dark'>(systemDark.matches ? 'dark' : 'light'); 
@@ -57,6 +57,11 @@ export default function App() {
         }
     ]
 
+    // 搜索功能
+    const onSearch = (text:string) => {
+        navigate(`/search?text=${text}`);
+    }
+
     // 测量标题栏高度
     const [titleHeight, setTitleHeight] = useState(0);
     const measure = useCallback((node:any) => {
@@ -88,7 +93,7 @@ export default function App() {
         <ThemeProvider theme={themeMode}>
             <CssBaseline/>
             <Box display="flex" flexDirection="column" height="100%">
-                <TitleBar ref={measure} title={t("title")} url="https://github.com/hubenchang0515/moe-tools" onToggleMenu={() => setMenuOpen(!menuOpen)}/>
+                <TitleBar ref={measure} title={t("title")} url="https://github.com/hubenchang0515/moe-tools" onToggleMenu={() => setMenuOpen(!menuOpen)} onSearch={onSearch}/>
 
                 <Box display="flex" height={`calc(100% - ${titleHeight}px)`} flexGrow={1}>
                     <SlideMenu
