@@ -1,5 +1,5 @@
 import { Container, Link, Typography } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { useHref, useLocation } from "react-router-dom";
 
 export default function NotFound() {
     const location = useLocation();
@@ -13,7 +13,7 @@ export default function NotFound() {
                 Location Path: <span style={{textDecoration:'underline'}}>{decodeURI(location.pathname + location.search)}</span>
             </Typography>
             <Typography variant="overline" sx={{textAlign:'center'}}>
-                Back To <Link href="#">Home</Link>
+                Back To <Link href={useHref("/")}>Home</Link>
             </Typography>
         </Container>
     )

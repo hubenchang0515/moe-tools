@@ -9,7 +9,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import TitleBar from "./components/TitleBar";
 import SlideMenu, { Language, SlideMenuEntries, Theme } from "./components/SlideMenu";
 import Home from "./pages/Home";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useHref, useNavigate } from "react-router-dom";
 import ROUTES from "./routes";
 
 import i18n from 'i18next';
@@ -51,7 +51,7 @@ export default function App() {
             items: ROUTES.map((item) => {
                 return {
                     title: t(item.name),
-                    url: `#${item.url}`,
+                    url: useHref(item.url),
                 }
             })
         }
@@ -59,7 +59,10 @@ export default function App() {
 
     // 搜索功能
     const onSearch = (text:string) => {
-        navigate(`/search?text=${text}`);
+        navigate({
+            pathname: "/search",
+            search: `?text=${text}`
+        });
     }
 
     // 测量标题栏高度
@@ -100,9 +103,9 @@ export default function App() {
                         width={320} 
                         open={menuOpen}
                         expand={menuExpand}
-                        homeUrl="#/"
-                        aboutUrl="#/about"
-                        advanceUrl="#/advance"
+                        homeUrl={useHref("/")}
+                        aboutUrl={useHref("/about")}
+                        advanceUrl={useHref("/advance")}
                         theme={theme} 
                         language={language} 
                         entries={entries} 
