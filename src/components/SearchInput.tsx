@@ -16,14 +16,16 @@ export default function SearchInput(props:SearchInputProps) {
                 onChange={(ev)=>setText(ev.target.value)}
                 onKeyDown={(ev) => {
                     if (ev.key === "Enter" && text) {
-                        props.onSearch?.(text)
+                        props.onSearch?.(text);
+                        setText("");
                     }
                 }}
             />
             <IconButton 
                 onClick={()=>{
                     if (text) {
-                        props.onSearch?.(text)
+                        props.onSearch?.(text);
+                        setText("");
                     }
                 }}
             >
