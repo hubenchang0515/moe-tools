@@ -79,10 +79,10 @@
 
     "markdown-editor": {
         "edit": "EDIT",
-        "preview": "PREVIEW: The export function is implemented through the browser's print function, and the target can be manually selected as PDF or printer.",
+        "preview": "PREVIEW",
         "auto-refresh": "Auto Refresh",
         "lag-warning": "This feature may cause page lags",
-        "print-warning": "This feature depends on the browser and may not be available"
+        "info": "The [Export] function is implemented through the browser's printing interface, and some browsers may not be available. It is recommended to use the Chrome browser. When exporting PDF, it is recommended to select [Save as PDF] for the [Destination] option."
     },
 
     "components": {

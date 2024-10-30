@@ -79,10 +79,10 @@
 
     "markdown-editor": {
         "edit": "编辑",
-        "preview": "预览: 导出功能通过浏览器的打印功能实现，可手动选取目标为 PDF 或打印机",
+        "preview": "预览",
         "auto-refresh": "自动刷新",
         "lag-warning": "这个功能可能导致页面卡顿",
-        "print-warning": "这个功能依赖浏览器，可能无法使用"
+        "info": "[导出]功能通过浏览器的打印接口实现，部分浏览器可能无法使用。建议使用 Chrome 浏览器，导出 PDF 时[目标打印机]选项建议选择[另存为 PDF]。"
     },
 
     "components": {
