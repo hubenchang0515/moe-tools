@@ -89,10 +89,12 @@ export default function MarkdownEditor() {
                             </Button>
                             
                             <Box flexGrow={1}/>
-
-                            <IconButton onClick={()=>setMessageOpen(true)}>
-                                <HelpIcon/>
-                            </IconButton>
+                            
+                            <Tooltip arrow title={t("markdown-editor.info")}>
+                                <IconButton onClick={()=>setMessageOpen(true)}>
+                                    <HelpIcon/>
+                                </IconButton>
+                            </Tooltip>
                         </Box>
                         
                         <Alert severity="info"> {t("markdown-editor.edit")} </Alert>
