@@ -28,7 +28,8 @@ export default function FramePage(props: FramePageProps) {
                     severity={severity} 
                     variant="standard"
                     onOpen={()=>setMessageOpen(true)} 
-                    sx={{position:'absolute', left: 32, bottom: 32, zIndex:10}}
+                    sx={{position:'relative', top: 0, bottom: 0, left:0, right: 0}}
+                    fabSx={{position:'absolute', left: 32, bottom: 32, zIndex:10}}
                 >
                     <Box display="flex" gap={1} justifyContent='flex-end'>
                         <Button variant="contained" color={severity} href={url.toString()} target="_blank">{t("frame.go-to-source-page")}</Button>

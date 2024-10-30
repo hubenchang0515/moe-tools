@@ -7,23 +7,25 @@ export interface FabMessageProps {
     open: boolean
     title: string;
     content: string;
+    icon?: JSX.Element;
     severity?: MessageBoxProps['severity'];
     variant?: MessageBoxProps['variant'];
     onOpen?: FabProps['onClick'];
     onClose?: MessageBoxProps['onClose'];
     sx?: FabProps['sx'];
+    fabSx?: FabProps['sx'];
     children?: JSX.Element;
 }
 
 export default function FabMessage(props:FabMessageProps) {
     return (
-        <Box sx={{position:'relative', top: 0, bottom: 0, left:0, right: 0}}>
+        <Box sx={props.sx}>
             <Fab 
                 color={props.severity}
-                sx={props.sx}
+                sx={props.fabSx}
                 onClick={props.onOpen}
             >
-                <MessageIcon />
+                { props.icon ?? <MessageIcon /> }
             </Fab>
             <MessageBox 
                 title={props.title}
