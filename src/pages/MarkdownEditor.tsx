@@ -65,6 +65,7 @@ export default function MarkdownEditor() {
                                         if (ev.target.files && ev.target.files.length > 0) {
                                             const file = ev.target.files[0];
                                             setData(await file.text());
+                                            ev.target.value = "";
                                         }
                                     }}
                                 />
