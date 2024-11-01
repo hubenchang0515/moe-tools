@@ -18,12 +18,19 @@ function escapeHTML(text:string) {
 function unescapeHTML(text:string) {
     const div = document.createElement('div');
     div.innerHTML = text;
-    return div.textContent;
+    return div.textContent??"";
 }
 
 export function printMarkdown(markdown:string, iframe:HTMLIFrameElement) {
     return new Promise((resolve, reject) => {
-        marked.parse(markdown, {async: true}).then((value) => {
+        const renderer = new marked.Renderer();
+
+        renderer.heading = ({ text, depth }) => {
+            const id = unescapeHTML(text).replace(/\s+/g, "-");
+            return `<h${depth} id=${id}>${text}</h${depth}>`;
+        }
+
+        marked.parse(markdown, {async: true, renderer:renderer}).then((value) => {
             try {
                 iframe.contentDocument!.body.className = "markdown-body";
                 iframe.contentDocument!.body.innerHTML = value;
@@ -52,6 +59,7 @@ export function printMarkdown(markdown:string, iframe:HTMLIFrameElement) {
                     iframe.contentDocument!.body.append(highlightAllScript);
                     iframe.contentWindow!.print();
                     resolve(null);
+                    console.log(iframe)
                 }
             } catch (e) {
                 reject(e);
@@ -243,9 +251,8 @@ function MarkdownToken(props:{token:Token}):JSX.Element {
 
             if (token.href.startsWith("#")) {
                 const anchor = token.href.slice(1);
-                const target = document.getElementById(anchor);
                 return (
-                    <Link component="button" onClick={()=>{target?.scrollIntoView({behavior:"smooth"})}}>
+                    <Link component="button" onClick={()=>{document.getElementById(anchor)?.scrollIntoView({behavior:"smooth"})}}>
                         {
                             token.tokens.map((item, index) => {
                                 return <MarkdownToken key={index} token={item}/>
