@@ -1,6 +1,6 @@
-import { Alert, Box, Button, Container, FormControlLabel, IconButton, Paper, Stack, Switch, TextField, Tooltip } from "@mui/material";
+import { Alert, Box, Button, CircularProgress, Container, FormControlLabel, IconButton, Paper, Stack, Switch, TextField, Tooltip } from "@mui/material";
 import { useEffect, useState } from "react";
-import Markdown from "../components/Markdown";
+import Markdown, { printMarkdown } from "../components/Markdown";
 import { useTranslation } from "react-i18next";
 import HelpIcon from '@mui/icons-material/Help';
 import MessageBox from "../components/MessageBox";
@@ -9,9 +9,9 @@ export default function MarkdownEditor() {
     const { t } = useTranslation();
     const [data, setData] = useState("");
     const [markdown, setMarkdown] = useState("");
-    const [markdownHtml, setMarkdownHtml] = useState("");
     const [autoRefresh, setAutoRefresh] = useState(true);
     const [messageOpen, setMessageOpen] = useState<boolean>(false);
+    const [exporting, setExporting] = useState<boolean>(false);
 
     useEffect(() => {
         if (autoRefresh) {
@@ -129,29 +129,15 @@ export default function MarkdownEditor() {
                         <Button 
                             disabled={typeof window.print !== 'function'}
                             variant="contained"
+                            startIcon={exporting && <CircularProgress size={'16px'} color="inherit" />}
                             onClick={()=>{
                                 const iframe = document.getElementById('iframe-to-export')! as HTMLIFrameElement;
-                                iframe.contentDocument!.body.className = "markdown-body";
-                                iframe.contentDocument!.body.innerHTML = markdownHtml;
-
-                                const hljsCss = iframe.contentDocument!.createElement('link');
-                                hljsCss.rel = "stylesheet";
-                                hljsCss.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github.min.css";
-                                iframe.contentDocument!.head.append(hljsCss);
-
-                                const githubMarkdownCss = iframe.contentDocument!.createElement('link');
-                                githubMarkdownCss.rel = "stylesheet";
-                                githubMarkdownCss.href = "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.7.0/github-markdown.min.css";
-                                iframe.contentDocument!.head.append(githubMarkdownCss);
-
-                                const otherStyle = iframe.contentDocument!.createElement('style');
-                                otherStyle.textContent = "code * {white-space:pre-wrap; }";
-                                iframe.contentDocument!.head.append(otherStyle);
-
-                                iframe.contentWindow!.print();
+                                setExporting(true);
+                                printMarkdown(markdown, iframe).finally(() => {setExporting(false)});
                             }}
                         >
                             {t("common.export")}
+                            
                         </Button>
 
                         <Tooltip arrow title={t("markdown-editor.info")}>
@@ -172,7 +158,7 @@ export default function MarkdownEditor() {
                         }}
                         square
                     >
-                        <Markdown text={markdown} onChange={(html)=>setMarkdownHtml(html)}/>
+                        <Markdown text={markdown}/>
                     </Paper>
                 </Stack>
             </Box>
