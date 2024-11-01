@@ -1,4 +1,4 @@
-import { Box, Collapse, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Tooltip, Typography } from "@mui/material";
+import { Box, Collapse, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Slide, Tooltip, Typography } from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
 import AppsIcon from '@mui/icons-material/Apps';
 import ExtensionIcon from '@mui/icons-material/Extension';
@@ -12,7 +12,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import TranslateIcon from '@mui/icons-material/Translate';
 import InfoIcon from '@mui/icons-material/Info';
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export type SideMenuState = "hidden" | "collapse" | "expand";
@@ -51,7 +51,7 @@ export interface SlideMenuProps {
     onLanguageChanged: (language:Language) => void
 
     entries?: SlideMenuEntries
-    children?: React.ReactNode
+    children?: JSX.Element
 }
 
 export default function SlideMenu(props:SlideMenuProps) {
@@ -236,7 +236,14 @@ export default function SlideMenu(props:SlideMenuProps) {
                             </List>
 
                             <Box flexGrow={1} flexShrink={1} onClick={()=>props.onExpandChanged?.(true)}/>
-                            {props.expand && props.children}
+
+                            {
+                                props.children && 
+                                <Slide in={props.expand} direction="right">
+                                    {props.children}
+                                </Slide>
+                            }
+                            
                         </Box>
                     </Collapse>
                 </Collapse>
