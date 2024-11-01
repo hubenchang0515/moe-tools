@@ -17,6 +17,13 @@ import { useTranslation } from 'react-i18next';
 import NotFound from "./pages/NotFound";
 import About from "./pages/About";
 
+import '@fontsource/roboto/100.css';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import '@fontsource/roboto/900.css';
+
 export default function App() {
     const [menuOpen, setMenuOpen] = useState<boolean>(true);
     const [menuExpand, setMenuExpand] = useState<boolean>(false);
