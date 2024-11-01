@@ -1,4 +1,4 @@
-import * as marked from "marked";
+import { marked } from "marked";
 import hljs from 'highlight.js';
 import 'highlight.js/styles/vs2015.css';
 import { useEffect, useRef } from "react";
@@ -17,7 +17,7 @@ export default function Markdown(props:MarkdownProps) {
         overflow: 'auto',
 
         '& *': {
-            marginBlock: '16px',
+            marginBlock: '8px',
             marginInline: 0,
             
         },
@@ -61,7 +61,6 @@ export default function Markdown(props:MarkdownProps) {
 
         '& p': {
             ...theme.typography.body1,
-            textIndent: '2em',
             wordBreak: 'break-all',
             whiteSpace: 'wrap',
         },
@@ -112,9 +111,27 @@ export default function Markdown(props:MarkdownProps) {
 
     const divRef = useRef<HTMLDivElement>();
 
+    const renderer = new marked.Renderer();
+
+    renderer.heading = ({ tokens, depth }) => {
+        const text = renderer.parser.parseInline(tokens);
+        const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+        return `<h${depth} id=${escapedText}>${text}</h${depth}>`;
+    }
+
+    renderer.link = ({ href, tokens }) => {
+        const text = renderer.parser.parseInline(tokens);
+        if (href.startsWith("#")) {
+            const anchor = href.slice(1);
+            return `<a href="javascript:void(0)" onclick="document.getElementById('${anchor}').scrollIntoView({ behavior: 'smooth'})">${text}</a>`;
+        } else {
+            return `<a href='${href}'>${text}</a>`;
+        }
+    }
+
     useEffect(() => {
         if (props.text !== undefined) {
-            marked.parse(props.text, {async: true}).then((value) => {
+            marked.parse(props.text, {async: true, renderer: renderer}).then((value) => {
                 if (divRef.current) {
                     divRef.current.innerHTML = value;
                     hljs.highlightAll();
@@ -122,11 +139,17 @@ export default function Markdown(props:MarkdownProps) {
                 }
             }) ;
         } else if (props.url) {
-            fetch(props.url).then(async (response) => {
-                if (response.ok && divRef.current) {
-                    divRef.current.innerHTML = await marked.parse(await response.text(), {async: true});
-                    hljs.highlightAll();
-                    props.onChange?.(divRef.current.innerHTML);
+            fetch(props.url).then((response) => {
+                if (response.ok) {
+                    response.text().then((text) => {
+                        marked.parse(text, {async: true, renderer: renderer}).then((value) => {
+                            if (divRef.current) {
+                                divRef.current.innerHTML = value;
+                                hljs.highlightAll();
+                                props.onChange?.(divRef.current.innerHTML);
+                            }
+                        }) ;
+                    })
                 }
             });
         }
