@@ -73,7 +73,7 @@ function MarkdownToken(props:{token:Token}):JSX.Element {
         case "heading": {
             const token = props.token as Tokens.Heading;
             return (
-                <Typography id={escapeHTML(token.text)} variant={`h${token.depth}` as TypographyProps['variant']}>
+                <Typography id={escapeHTML(token.text).replace(/\s+/g, "-")} variant={`h${token.depth}` as TypographyProps['variant']}>
                     {
                         token.tokens.map((token,index) => {
                             return <MarkdownToken key={index} token={token}/>
