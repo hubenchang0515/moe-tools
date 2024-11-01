@@ -20,163 +20,172 @@ export default function MarkdownEditor() {
     }, [data]);
 
     return (
-        <Box >
-            <Container 
-                maxWidth="xl"
+        <Container 
+            maxWidth="xl"
+            sx={{
+                width: '100%',
+                height: '100%',
+                paddingY: 2,
+                gap: 2, 
+                flexWrap: "wrap",
+            }}
+        >   
+            <Box
                 sx={{
-                    width: '100%',
-                    height: '100%',
-                    paddingY: 2,
+                    display: 'flex', 
+                    flexGrow: 1,
                     gap: 2, 
+                    alignContent: "center",
                     flexWrap: "wrap",
-                }}
-            >   
-                <Box
+                }}    
+            >
+                <Stack
+                    spacing={2}
                     sx={{
-                        display: 'flex', 
                         flexGrow: 1,
-                        gap: 2, 
-                        alignContent: "center",
-                        flexWrap: "wrap",
-                    }}    
+                        flexShrink: 1,
+                        flexBasis: 1,
+                        minWidth: '400px',
+                    }} 
                 >
-                    <Stack
-                        spacing={2}
-                        sx={{
-                            flexGrow: 1,
-                            flexShrink: 1,
-                            flexBasis: 1,
-                            minWidth: '200px',
-                        }} 
-                    >
-                        <Box display={"flex"} gap={2}>
-                            <Button variant="contained" component="label">
-                                {t("common.open")}
-                                <input 
-                                    type="file"
-                                    accept=".md"
-                                    style={{
-                                        clip: 'rect(0 0 0 0)',
-                                        clipPath: 'inset(50%)',
-                                        width: 0,
-                                        height: 0,
-                                    }}
-                                    onChange={async (ev) =>{
-                                        if (ev.target.files && ev.target.files.length > 0) {
-                                            const file = ev.target.files[0];
-                                            setData(await file.text());
-                                            ev.target.value = "";
-                                        }
-                                    }}
-                                />
-                            </Button>
-
-                            <Button 
-                                variant="contained"
-                                onClick={()=>{
-                                    const blob = new Blob([data],{type: 'text/plain'});
-                                    const url = URL.createObjectURL(blob);
-                                    const a = document.createElement('a');
-                                    a.href = url;
-                                    a.download = "file.md";
-                                    document.body.appendChild(a);
-                                    a.click();
-                                    document.body.removeChild(a);
-                                    URL.revokeObjectURL(url);
+                    <Box display={"flex"} gap={2}>
+                        <Button variant="contained" component="label">
+                            {t("common.open")}
+                            <input 
+                                type="file"
+                                accept=".md"
+                                style={{
+                                    clip: 'rect(0 0 0 0)',
+                                    clipPath: 'inset(50%)',
+                                    width: 0,
+                                    height: 0,
                                 }}
-                            >
-                                {t("common.save")}
-                            </Button>
-                            
-                            <Box flexGrow={1}/>
-                            
-                            <Tooltip arrow title={t("markdown-editor.info")}>
-                                <IconButton onClick={()=>setMessageOpen(true)}>
-                                    <HelpIcon/>
-                                </IconButton>
-                            </Tooltip>
-                        </Box>
-                        
-                        <Alert severity="info"> {t("markdown-editor.edit")} </Alert>
-                        <TextField
-                            multiline
-                            fullWidth
-                            value={data}
-                            onChange={(ev) => setData(ev.target.value)}
-                        />
-                    </Stack>
-                    
-                    <Stack
-                        spacing={2}
-                        sx={{
-                            flexGrow: 1,
-                            flexShrink: 1,
-                            flexBasis: 1,
-                            minWidth: '200px',
-                        }} 
-                    >
-                        <Box display={"flex"} gap={2}>
-                            <FormControlLabel 
-                                label={t("markdown-editor.auto-refresh")} 
-                                control={
-                                    <Tooltip arrow title={t("markdown-editor.lag-warning")}>
-                                        <Switch checked={autoRefresh} onChange={(ev)=>setAutoRefresh(ev.target.checked)}/>
-                                    </Tooltip>
-                                }
+                                onChange={async (ev) =>{
+                                    if (ev.target.files && ev.target.files.length > 0) {
+                                        const file = ev.target.files[0];
+                                        setData(await file.text());
+                                        ev.target.value = "";
+                                    }
+                                }}
                             />
-                            <Button 
-                                variant="contained"
-                                onClick={()=>{
-                                        setMarkdown(data);
-                                }}
-                            >
-                                {t("common.refresh")}
-                            </Button>
-                            <Button 
-                                disabled={typeof window.print !== 'function'}
-                                variant="contained"
-                                onClick={()=>{
-                                    const iframe = document.getElementById('iframe-to-export')! as HTMLIFrameElement;
-                                    iframe.contentDocument!.body.className = "markdown-body";
-                                    iframe.contentDocument!.body.innerHTML = markdownHtml;
-                                    const hljsCss = iframe.contentDocument?.createElement('link');
-                                    hljsCss!.rel = "stylesheet";
-                                    hljsCss!.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github-dark.min.css";
-                                    iframe.contentDocument!.head.append(hljsCss!);
-                                    const githubMarkdownCss = iframe.contentDocument?.createElement('link');
-                                    githubMarkdownCss!.rel = "stylesheet";
-                                    githubMarkdownCss!.href = "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.7.0/github-markdown.min.css";
-                                    iframe.contentDocument!.head.append(githubMarkdownCss!);
-                                    iframe.contentWindow!.print();
-                                }}
-                            >
-                                {t("common.export")}
-                            </Button>
-                        </Box>
-                        <Alert severity="info"> {t("markdown-editor.preview")} </Alert>
-                        <Paper 
-                            sx={{
-                                flexGrow:1,
-                                flexShrink: 1,
-                                flexBasis: 1,
-                                minWidth: '200px',
-                                whiteSpace: "wrap",
-                                px: 1,
+                        </Button>
+
+                        <Button 
+                            variant="contained"
+                            onClick={()=>{
+                                const blob = new Blob([data],{type: 'text/plain'});
+                                const url = URL.createObjectURL(blob);
+                                const a = document.createElement('a');
+                                a.href = url;
+                                a.download = "file.md";
+                                document.body.appendChild(a);
+                                a.click();
+                                document.body.removeChild(a);
+                                URL.revokeObjectURL(url);
                             }}
-                            square
                         >
-                            <Markdown text={markdown} onChange={(html)=>setMarkdownHtml(html)}/>
-                        </Paper>
-                    </Stack>
-                </Box>
-                <iframe id='iframe-to-export' style={{display:'none'}}/>
-                <MessageBox 
-                    open={messageOpen} 
-                    severity="info"
-                    onClose={()=>setMessageOpen(false)}
-                    title={t("common.notice")}
-                    content={t("markdown-editor.info")}/>
-            </Container>
-        </Box>
+                            {t("common.save")}
+                        </Button>
+                        
+                        <Box flexGrow={1}/>
+                        
+                        <FormControlLabel 
+                            label={t("markdown-editor.auto-refresh")} 
+                            control={
+                                <Tooltip arrow title={t("markdown-editor.lag-warning")}>
+                                    <Switch checked={autoRefresh} onChange={(ev)=>setAutoRefresh(ev.target.checked)}/>
+                                </Tooltip>
+                            }
+                        />
+                    </Box>
+                    
+                    <Alert severity="info"> {t("markdown-editor.edit")} </Alert>
+                    <TextField
+                        multiline
+                        fullWidth
+                        value={data}
+                        onChange={(ev) => setData(ev.target.value)}
+                    />
+                </Stack>
+                
+                <Stack
+                    spacing={2}
+                    sx={{
+                        flexGrow: 1,
+                        flexShrink: 1,
+                        flexBasis: 1,
+                        minWidth: '400px',
+                    }} 
+                >
+                    <Box display={"flex"} gap={2}>
+                        <Button 
+                            variant="contained"
+                            onClick={()=>{
+                                    setMarkdown(data);
+                            }}
+                        >
+                            {t("common.refresh")}
+                        </Button>
+                        <Button 
+                            disabled={typeof window.print !== 'function'}
+                            variant="contained"
+                            onClick={()=>{
+                                const iframe = document.getElementById('iframe-to-export')! as HTMLIFrameElement;
+                                iframe.contentDocument!.body.className = "markdown-body";
+                                iframe.contentDocument!.body.innerHTML = markdownHtml;
+
+                                const hljsCss = iframe.contentDocument!.createElement('link');
+                                hljsCss.rel = "stylesheet";
+                                hljsCss.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github.min.css";
+                                iframe.contentDocument!.head.append(hljsCss);
+
+                                const githubMarkdownCss = iframe.contentDocument!.createElement('link');
+                                githubMarkdownCss.rel = "stylesheet";
+                                githubMarkdownCss.href = "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.7.0/github-markdown.min.css";
+                                iframe.contentDocument!.head.append(githubMarkdownCss);
+
+                                const otherStyle = iframe.contentDocument!.createElement('style');
+                                otherStyle.textContent = "code * {white-space:pre-wrap; }";
+                                iframe.contentDocument!.head.append(otherStyle);
+
+                                iframe.contentWindow!.print();
+                            }}
+                        >
+                            {t("common.export")}
+                        </Button>
+
+                        <Tooltip arrow title={t("markdown-editor.info")}>
+                            <IconButton onClick={()=>setMessageOpen(true)}>
+                                <HelpIcon/>
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
+                    <Alert severity="info"> {t("markdown-editor.preview")} </Alert>
+                    <Paper 
+                        sx={{
+                            flexGrow:1,
+                            flexShrink: 1,
+                            flexBasis: 1,
+                            minWidth: '200px',
+                            whiteSpace: "wrap",
+                            px: 1,
+                        }}
+                        square
+                    >
+                        <Markdown text={markdown} onChange={(html)=>setMarkdownHtml(html)}/>
+                    </Paper>
+                </Stack>
+            </Box>
+
+            <iframe id='iframe-to-export' style={{display:'none'}}/>
+
+            <MessageBox 
+                open={messageOpen} 
+                severity="info"
+                onClose={()=>setMessageOpen(false)}
+                title={t("common.notice")}
+                content={t("markdown-editor.info")}
+            />
+        </Container>
     )
 }
