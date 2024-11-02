@@ -2,7 +2,7 @@ import { marked, Token, Tokens } from "marked";
 import hljs from 'highlight.js';
 import 'highlight.js/styles/vs2015.min.css';
 import { useEffect, useState } from "react";
-import { Alert, Box, Chip, Divider, Link, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, TypographyProps } from "@mui/material";
+import { Alert, AlertProps, Box, Chip, Divider, Link, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, TypographyProps } from "@mui/material";
 
 export interface MarkdownProps {
     text?: string
@@ -59,7 +59,6 @@ export function printMarkdown(markdown:string, iframe:HTMLIFrameElement) {
                     iframe.contentDocument!.body.append(highlightAllScript);
                     iframe.contentWindow!.print();
                     resolve(null);
-                    console.log(iframe)
                 }
             } catch (e) {
                 reject(e);
@@ -67,6 +66,13 @@ export function printMarkdown(markdown:string, iframe:HTMLIFrameElement) {
         });
     })
 }
+
+const HEADING_VERIANTS = ["h1", "h2", "h3", "h4", "h5", "h6", "subtitle1", "subtitle2", "body1", "body2", "caption", "button", "overline"];
+const HEADING_COLORS = ["primary", "secondary", "success", "error", "info", "warning"];
+const HEADING_ALIGNS = ["left", "center", "right", "justify"];
+
+const ALERT_SERERITIES = ["success", "info", "warning", "error"];
+const ALERT_VAIRIANTS = ["standard", "filled", "outlined"];
 
 function MarkdownToken(props:{token:Token}):JSX.Element {
     switch (props.token.type) {
@@ -80,15 +86,34 @@ function MarkdownToken(props:{token:Token}):JSX.Element {
 
         case "heading": {
             const token = props.token as Tokens.Heading;
-            return (
-                <Typography id={escapeHTML(token.text).replace(/\s+/g, "-")} variant={`h${token.depth}` as TypographyProps['variant']}>
-                    {
-                        token.tokens.map((token,index) => {
-                            return <MarkdownToken key={index} token={token}/>
-                        })
-                    }
-                </Typography>
-            )
+            const matches = /^\[!(.+)\]\s*/.exec(token.text);
+            const text = token.text.replace(/^\[!(.+)\]\s*/, "")
+            if (matches) {
+                // [!variant, color, align]
+                const args = matches[1].split(",");
+                const variant = (args.length > 0 && HEADING_VERIANTS.includes(args[0].trim()) ? args[0].trim() : `h${token.depth}`) as TypographyProps['variant'];
+                const color = (args.length > 1 && HEADING_COLORS.includes(args[1].trim()) ? args[1].trim() : "inherit") as TypographyProps['color'];
+                const align = (args.length > 2 && HEADING_ALIGNS.includes(args[2].trim()) ? args[2].trim() : "inherit") as TypographyProps['align'];
+                return (
+                    <Typography id={escapeHTML(text).replace(/\s+/g, "-")} variant={variant} color={color} align={align}>
+                        {
+                            token.tokens.map((token,index) => {
+                                return <MarkdownToken key={index} token={token}/>
+                            })
+                        }
+                    </Typography>
+                )
+            } else {
+                return (
+                    <Typography id={escapeHTML(token.text).replace(/\s+/g, "-")} variant={`h${token.depth}` as TypographyProps['variant']}>
+                        {
+                            token.tokens.map((token,index) => {
+                                return <MarkdownToken key={index} token={token}/>
+                            })
+                        }
+                    </Typography>
+                )
+            }
         }
 
         case "table": {
@@ -146,15 +171,32 @@ function MarkdownToken(props:{token:Token}):JSX.Element {
 
         case "blockquote": {
             const token = props.token as Tokens.Blockquote
-            return (
-                <Alert severity="info" sx={{marginBlock:'8px'}}>
-                    {
-                        token.tokens.map((token, index) => {
-                            return <MarkdownToken key={index} token={token}/>
-                        })
-                    }
-                </Alert>
-            );
+            const matches = /^\[!(.+)\]\s*/.exec(token.text);
+            if (matches) {
+                // [!severity, variant]
+                const args = matches[1].split(",");
+                const severity = (args.length > 0 && ALERT_SERERITIES.includes(args[0].trim()) ? args[0].trim() : "info") as AlertProps['severity'];
+                const variant = (args.length > 1 && ALERT_VAIRIANTS.includes(args[1].trim()) ? args[1].trim() : "standard") as AlertProps['variant'];
+                return (
+                    <Alert severity={severity} variant={variant} sx={{marginBlock:'8px'}}>
+                        {
+                            token.tokens.map((token, index) => {
+                                return <MarkdownToken key={index} token={token}/>
+                            })
+                        }
+                    </Alert>
+                )
+            } else {
+                return (
+                    <Alert severity="info" sx={{marginBlock:'8px'}}>
+                        {
+                            token.tokens.map((token, index) => {
+                                return <MarkdownToken key={index} token={token}/>
+                            })
+                        }
+                    </Alert>
+                );
+            }
         }
 
         case "list": {
@@ -197,10 +239,20 @@ function MarkdownToken(props:{token:Token}):JSX.Element {
 
         case "paragraph": {
             const token = props.token as Tokens.Paragraph
+            let tokens:Token[] = []
+            // 忽略段落开头的特殊标记 [!xxx] 以及它之后的换行
+            if (token.tokens.length > 1 && /^\[!.+\]\s*$/.test(token.tokens[0].raw)) {
+                tokens = token.tokens.slice(token.tokens[1].type === "br" ? 2 : 1);
+            } else if(token.tokens.length > 0 && /^\[!.+\]\s*$/.test(token.tokens[0].raw)) {
+                tokens = token.tokens.slice(1);
+            }else {
+                tokens = token.tokens
+            }
+            
             return (
                 <Typography variant="body1">
                     {
-                        token.tokens.map((item, index) => {
+                        tokens.map((item, index) => {
                             return <MarkdownToken key={index} token={item}/>
                         })
                     }
@@ -225,6 +277,27 @@ function MarkdownToken(props:{token:Token}):JSX.Element {
                         }
                     </>
                 )
+            } else if(token.text.match(/{.+}/g)) {
+                // 自定义锚点 {xxxx}
+                const matches = token.text.match(/{.+}/g)!;
+                const items = token.text.split(/{.+}/g);
+                return (
+                    <span>
+                        {
+                            matches.map((match, index) => {
+                                return <span key={index} id={match}/>
+                            })
+                        }
+                        {
+                            items.map((item, index) => {
+                                return <span key={index}>{unescapeHTML(item)}</span>
+                            })
+                        }
+                    </span>
+                )
+            } else if(/^\[!.+\]\s*/.test(token.text)) {
+                // 清除特殊标记 [!xxx]
+                return <>{unescapeHTML(token.text.replace(/^\[!.+\]\s*/, ""))}</>
             } else {
                 return <>{unescapeHTML(token.text)}</>
             }
@@ -331,13 +404,13 @@ export default function Markdown(props:MarkdownProps) {
 
     useEffect(() => {
         if (props.text !== undefined) {
-            const tokens = marked.lexer(props.text);
+            const tokens = marked.lexer(props.text, {gfm:true});
             setTokens(tokens);
         } else if (props.url) {
             fetch(props.url).then((response) => {
                 if (response.ok) {
                     response.text().then((text) => {
-                        const tokens = marked.lexer(text);
+                        const tokens = marked.lexer(text, {gfm:true});
                         setTokens(tokens);
                     })
                 }
