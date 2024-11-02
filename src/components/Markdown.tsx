@@ -277,15 +277,15 @@ function MarkdownToken(props:{token:Token}):JSX.Element {
                         }
                     </>
                 )
-            } else if(token.text.match(/{.+}/g)) {
-                // 自定义锚点 {xxxx}
-                const matches = token.text.match(/{.+}/g)!;
-                const items = token.text.split(/{.+}/g);
+            } else if(token.text.match(/{#[a-zA-Z_]+[a-zA-Z_0-9]*}/g)) {
+                // 自定义锚点 {#xxxx}
+                const matches = token.text.match(/{#[a-zA-Z_]+[a-zA-Z_0-9]*}/g)!;
+                const items = token.text.split(/{#[a-zA-Z_]+[a-zA-Z_0-9]*}/g);
                 return (
                     <span>
                         {
                             matches.map((match, index) => {
-                                return <span key={index} id={match}/>
+                                return <span key={index} id={match.slice(2, -1)}/>
                             })
                         }
                         {
@@ -325,7 +325,7 @@ function MarkdownToken(props:{token:Token}):JSX.Element {
             if (token.href.startsWith("#")) {
                 const anchor = token.href.slice(1);
                 return (
-                    <Link component="button" onClick={()=>{document.getElementById(anchor)?.scrollIntoView({behavior:"smooth"})}}>
+                    <Link component="button" variant="caption" onClick={()=>{document.getElementById(anchor)?.scrollIntoView({behavior:"smooth"})}}>
                         {
                             token.tokens.map((item, index) => {
                                 return <MarkdownToken key={index} token={item}/>
