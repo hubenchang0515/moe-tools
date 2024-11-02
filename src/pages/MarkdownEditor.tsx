@@ -158,7 +158,7 @@ export default function MarkdownEditor() {
                         }}
                         square
                     >
-                        <Markdown text={markdown}/>
+                        <Markdown text={markdown} forceRefresh/>
                     </Paper>
                 </Stack>
             </Box>

@@ -7,6 +7,7 @@ import { Alert, AlertProps, Box, Chip, Divider, Link, Paper, Table, TableBody, T
 export interface MarkdownProps {
     text?: string
     url?: string
+    forceRefresh?: boolean
 }
 
 function escapeHTML(text:string) {
@@ -400,9 +401,13 @@ function MarkdownToken(props:{token:Token}):JSX.Element {
 }
 
 export default function Markdown(props:MarkdownProps) {
+    const [key, setKey] = useState(0);
     const [tokens, setTokens] = useState<Token[]>([]);
 
     useEffect(() => {
+        if (props.forceRefresh) {
+            setKey((key + 1) % 100);
+        }
         if (props.text !== undefined) {
             const tokens = marked.lexer(props.text, {gfm:true});
             setTokens(tokens);
@@ -419,14 +424,11 @@ export default function Markdown(props:MarkdownProps) {
     }, [props.text, props.url]);
 
     useEffect(() => {
-        const log = console.log;
-        console.log = ()=>{}; // 屏蔽 log
         hljs.highlightAll();
-        console.log = log;
     }, [tokens])
 
     return (
-        <Box className="markdown-body">
+        <Box className="markdown-body" key={key}>
             {
                 tokens.map((token, index) => {
                     return (
