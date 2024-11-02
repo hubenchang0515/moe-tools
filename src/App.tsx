@@ -4,18 +4,16 @@ import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrow
 import BugReportIcon from '@mui/icons-material/BugReport';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useRef, useState } from "react";
 
 import TitleBar from "./components/TitleBar";
 import SlideMenu, { Language, SlideMenuEntries, Theme } from "./components/SlideMenu";
-import Home from "./pages/Home";
+
 import { Route, Routes, useHref, useNavigate } from "react-router-dom";
 import ROUTES from "./routes";
 
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
-import NotFound from "./pages/NotFound";
-import About from "./pages/About";
 
 import '@fontsource/roboto/100.css';
 import '@fontsource/roboto/300.css';
@@ -23,6 +21,10 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import '@fontsource/roboto/900.css';
+
+const Home = React.lazy(()=>import("./pages/Home"));
+const NotFound = React.lazy(()=>import("./pages/NotFound"));
+const About = React.lazy(()=>import("./pages/About"));
 
 export default function App() {
     const [menuOpen, setMenuOpen] = useState<boolean>(true);
@@ -158,16 +160,18 @@ export default function App() {
                             }
                         }}
                     >
-                        <Routes>
-                            <Route key="404" path="*" element={<NotFound/>}/>
-                            <Route key="home" path="/" element={<Home/>}/>
-                            <Route key="about" path="/about" element={<About/>}/>
-                            {
-                                ROUTES.map((item) => {
-                                    return <Route key={item.name} path={item.url} element={item.element}/>
-                                })
-                            }
-                        </Routes>
+                        <Suspense>
+                            <Routes>
+                                <Route key="404" path="*" element={<NotFound/>}/>
+                                <Route key="home" path="/" element={<Home/>}/>
+                                <Route key="about" path="/about" element={<About/>}/>
+                                {
+                                    ROUTES.map((item) => {
+                                        return <Route key={item.name} path={item.url} element={item.element}/>
+                                    })
+                                }
+                            </Routes>
+                        </Suspense>
 
                         <Slide in={showBackTop} direction="left">
                             <Fab 

@@ -1,12 +1,14 @@
-import FramePage from "./pages/FramePage";
-import GisTileDownload from "./pages/GisTileDownload";
-import MarkdownEditor from "./pages/MarkdownEditor";
+import React from "react";
 
 interface RouteItem {
     name: string;
     url: string;
     element: JSX.Element;
 }
+
+const FramePage = React.lazy(()=>import("./pages/FramePage"));
+const GisTileDownload = React.lazy(()=>import("./pages/GisTileDownload"));
+const MarkdownEditor = React.lazy(()=>import("./pages/MarkdownEditor"));
 
 const ROUTES: RouteItem[] = [
     {
