@@ -45,7 +45,7 @@ export default function MarkdownEditor() {
                         flexGrow: 1,
                         flexShrink: 1,
                         flexBasis: 1,
-                        minWidth: '400px',
+                        minWidth: '300px',
                     }} 
                 >
                     <Box display={"flex"} gap={2}>
@@ -114,7 +114,7 @@ export default function MarkdownEditor() {
                         flexGrow: 1,
                         flexShrink: 1,
                         flexBasis: 1,
-                        minWidth: '400px',
+                        minWidth: '300px',
                     }} 
                 >
                     <Box display={"flex"} gap={2}>
