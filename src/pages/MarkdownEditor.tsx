@@ -4,7 +4,7 @@ import Markdown, { printMarkdown } from "../components/Markdown";
 import { useTranslation } from "react-i18next";
 import HelpIcon from '@mui/icons-material/Help';
 import MessageBox from "../components/MessageBox";
-import CodeEditor from "../components/CodeEditor";
+import HighlightEditor from "../components/HighlightEditor";
 
 export default function MarkdownEditor() {
     const { t } = useTranslation();
@@ -101,7 +101,7 @@ export default function MarkdownEditor() {
                     </Box>
                     
                     <Alert severity="info"> {t("markdown-editor.edit")} </Alert>
-                    <CodeEditor language="markdown" text={data} onChange={(text)=>setData(text)}/>
+                    <HighlightEditor language="markdown" text={data} onChange={(text)=>setData(text)}/>
                 </Stack>
                 
                 <Stack

@@ -1,27 +1,32 @@
 import { Box, SxProps, Theme } from "@mui/material";
 import hljs from "highlight.js";
 import { CSSProperties, KeyboardEvent, useEffect, useRef, useState } from "react";
+import 'highlight.js/styles/vs2015.min.css';
 
-export interface CodeEditorProps {
+export function listLanguages() {
+    return hljs.listLanguages();
+}
+
+export interface HighlightEditorProps {
     language: string;
     text?: string;
     onChange?: (text:string)=>void;
     sx?: SxProps<Theme>;
 }
 
-export default function CodeEditor(props:CodeEditorProps) {
+export default function HighlightEditor(props:HighlightEditorProps) {
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const displayRef = useRef<HTMLDivElement>(null);
     const [code, setCode] = useState<string>(" ");
 
     // 生成高亮
     const highlight = (text:string) => {
-        const result = hljs.highlight(text, {language:props.language});
+        const result = hljs.highlight(text, {language:props.language, ignoreIllegals:true});
         setCode(result.value);
     }
 
     // 输入响应
-    const onInput = () => {
+    const refresh = () => {
         if (!inputRef.current) {
             return;
         }
@@ -44,7 +49,7 @@ export default function CodeEditor(props:CodeEditorProps) {
             inputRef.current.value = inputRef.current.value.substring(0, start) + "    " + inputRef.current.value.substring(end);
             inputRef.current.selectionStart = start + 4;
             inputRef.current.selectionEnd = start + 4;
-            onInput();
+            refresh();
             return;
         }
     }
@@ -53,9 +58,14 @@ export default function CodeEditor(props:CodeEditorProps) {
     useEffect(() => {
         if (props.text && inputRef.current) {
             inputRef.current.value = props.text;
-            highlight(props.text);
+            refresh();
         }
     }, [props.text]);
+
+    // props.language 变化，重新高亮
+    useEffect(() => {
+        refresh();
+    }, [props.language])
 
     const commonStyle:CSSProperties = {
         margin: 0,
@@ -71,7 +81,7 @@ export default function CodeEditor(props:CodeEditorProps) {
     return (
         <Box 
             className={`language-${props.language} hljs`} 
-            sx={props.sx ?? { position: 'relative', width: '100%'}}
+            sx={props.sx ?? { position: 'relative', width: '100%', overflow:'auto'}}
         >
             <div 
                 ref={displayRef}
@@ -110,7 +120,7 @@ export default function CodeEditor(props:CodeEditorProps) {
                     whiteSpace: 'nowrap',
                     scrollbarGutter: 'stable',
                 }}
-                onChange={onInput}
+                onChange={refresh}
                 onKeyDown={onKeyDown}
                 onScroll={() => {
                     if (displayRef.current && inputRef.current) {

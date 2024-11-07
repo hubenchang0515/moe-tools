@@ -9,6 +9,7 @@ interface RouteItem {
 const FramePage = React.lazy(()=>import("./pages/FramePage"));
 const GisTileDownload = React.lazy(()=>import("./pages/GisTileDownload"));
 const MarkdownEditor = React.lazy(()=>import("./pages/MarkdownEditor"));
+const CodeEditor = React.lazy(()=>import("./pages/CodeEditor"));
 
 const ROUTES: RouteItem[] = [
     {
@@ -39,6 +40,12 @@ const ROUTES: RouteItem[] = [
         name: 'apps.markdown-editor',
         url: '/markdown-editor',
         element: <MarkdownEditor/>
+    },
+
+    {
+        name: 'apps.code-editor',
+        url: '/code-editor',
+        element: <CodeEditor/>
     },
 
 ]

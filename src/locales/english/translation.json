@@ -52,7 +52,8 @@
         "todo": "To Do List",
         "qt-theme": "Qt Theme",
         "svg-icon": "Svg Icon",
-        "markdown-editor": "Markdown Editor"
+        "markdown-editor": "Markdown Editor",
+        "code-editor": "Code Editor"
     },
 
     "gis-tile-download": {
@@ -83,6 +84,10 @@
         "auto-refresh": "Auto Refresh",
         "lag-warning": "This feature may cause page lags",
         "info": "The [Export] function is implemented through the browser's printing interface, and some browsers may not be available. It is recommended to use the Chrome browser. When exporting PDF, it is recommended to select [Save as PDF] for the [Destination] option."
+    },
+
+    "code-editor": {
+        "language": "Language"
     },
 
     "components": {
