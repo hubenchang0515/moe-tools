@@ -1,9 +1,10 @@
-import { Alert, Box, Button, CircularProgress, Container, FormControlLabel, IconButton, Paper, Stack, Switch, TextField, Tooltip } from "@mui/material";
+import { Alert, Box, Button, CircularProgress, Container, FormControlLabel, IconButton, Paper, Stack, Switch, Tooltip } from "@mui/material";
 import { useEffect, useState } from "react";
 import Markdown, { printMarkdown } from "../components/Markdown";
 import { useTranslation } from "react-i18next";
 import HelpIcon from '@mui/icons-material/Help';
 import MessageBox from "../components/MessageBox";
+import CodeEditor from "../components/CodeEditor";
 
 export default function MarkdownEditor() {
     const { t } = useTranslation();
@@ -100,12 +101,7 @@ export default function MarkdownEditor() {
                     </Box>
                     
                     <Alert severity="info"> {t("markdown-editor.edit")} </Alert>
-                    <TextField
-                        multiline
-                        fullWidth
-                        value={data}
-                        onChange={(ev) => setData(ev.target.value)}
-                    />
+                    <CodeEditor language="markdown" text={data} onChange={(text)=>setData(text)}/>
                 </Stack>
                 
                 <Stack
