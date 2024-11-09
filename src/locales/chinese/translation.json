@@ -20,6 +20,8 @@
     "menu": {
         "home": "主页",
         "apps": "应用",
+        "qt": "Qt",
+        "gis": "GIS",
         "settings": "设置"
     },
 

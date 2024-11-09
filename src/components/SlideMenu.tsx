@@ -20,38 +20,40 @@ export type Theme = 'light'|'system'|'dark';
 export type Language = 'chinese'|'english';
 
 export interface SlideMenuItemProps {
-    title: string
-    url: string
+    label: string;
+    url: string;
+    icon?: JSX.Element;
 }
 
 export interface SlideMenuGroupProps {
-    title: string
-    items: SlideMenuItemProps[]
+    label: string;
+    items: SlideMenuItemProps[];
+    icon?: JSX.Element;
 }
 
 export type SlideMenuEntries = SlideMenuGroupProps[];
 
 
 export interface SlideMenuProps {
-    width: number | string
-    homeUrl?: string
-    aboutUrl?: string
-    advanceUrl?: string
+    width: number | string;
+    homeUrl?: string;
+    aboutUrl?: string;
+    advanceUrl?: string;
 
-    open?: boolean,
-    onOpenChanged?: (open:boolean) => void
+    open?: boolean;
+    onOpenChanged?: (open:boolean) => void;
 
-    expand?: boolean,
-    onExpandChanged?: (expand:boolean) => void
+    expand?: boolean;
+    onExpandChanged?: (expand:boolean) => void;
 
-    theme: Theme
-    onThemeChanged: (theme:Theme) => void
+    theme: Theme;
+    onThemeChanged: (theme:Theme) => void;
 
-    language: Language
-    onLanguageChanged: (language:Language) => void
+    language: Language;
+    onLanguageChanged: (language:Language) => void;
 
-    entries?: SlideMenuEntries
-    children?: JSX.Element
+    entries?: SlideMenuEntries;
+    children?: JSX.Element;
 }
 
 export default function SlideMenu(props:SlideMenuProps) {
@@ -128,9 +130,9 @@ export default function SlideMenu(props:SlideMenuProps) {
                                                     props.onExpandChanged?.(true);
                                                 }}>
                                                     <ListItemIcon>
-                                                        <AppsIcon/>
+                                                        {group.icon  ?? <AppsIcon/>}
                                                     </ListItemIcon>
-                                                    <ListItemText primary={group.title}/>
+                                                    <ListItemText primary={group.label}/>
                                                     {groupExpanded[index] ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                                                 </ListItemButton>
                                             </ListItem>
@@ -140,8 +142,10 @@ export default function SlideMenu(props:SlideMenuProps) {
                                                         group?.items.map((item, index) => (
                                                             <ListItem disablePadding key={index}>
                                                                 <ListItemButton sx={{ pl: 4 }} href={item.url}>
-                                                                    <ListItemIcon><ExtensionIcon /></ListItemIcon>
-                                                                    <ListItemText primary={item.title} />
+                                                                    <ListItemIcon>
+                                                                        {item.icon ?? <ExtensionIcon />}
+                                                                    </ListItemIcon>
+                                                                    <ListItemText primary={item.label} />
                                                                 </ListItemButton>
                                                             </ListItem>
                                                         ))

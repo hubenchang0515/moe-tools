@@ -54,17 +54,20 @@ export default function App() {
     const { t } = useTranslation();
 
     // 应用列表
-    const entries:SlideMenuEntries = [
-        {
-            title: t('menu.apps'),
-            items: ROUTES.map((item) => {
+    const entries:SlideMenuEntries = ROUTES.map((category) => {
+        return {
+            label: t(category.name),
+            icon: category.icon,
+            items: category.apps.map((app) => {
                 return {
-                    title: t(item.name),
-                    url: useHref(item.url),
+                    label: t(app.name),
+                    icon: app.icon,
+                    url: useHref(app.url),
                 }
             })
         }
-    ]
+    })
+
 
     // 搜索功能
     const onSearch = (text:string) => {
@@ -166,8 +169,10 @@ export default function App() {
                                 <Route key="home" path="/" element={<Home/>}/>
                                 <Route key="about" path="/about" element={<About/>}/>
                                 {
-                                    ROUTES.map((item) => {
-                                        return <Route key={item.name} path={item.url} element={item.element}/>
+                                    ROUTES.map((category) => {
+                                        return category.apps.map((app) => {
+                                            return <Route key={app.name} path={app.url} element={app.element}/>
+                                        })
                                     })
                                 }
                             </Routes>

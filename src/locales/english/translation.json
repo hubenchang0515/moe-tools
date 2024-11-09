@@ -20,6 +20,8 @@
     "menu": {
         "home": "Home",
         "apps": "Applications",
+        "qt": "Qt",
+        "gis": "GIS",
         "settings": "Settings"
     },
 
