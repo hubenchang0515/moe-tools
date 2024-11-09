@@ -6,6 +6,7 @@ const FramePage = React.lazy(()=>import("./pages/FramePage"));
 const GisTileDownload = React.lazy(()=>import("./pages/GisTileDownload"));
 const MarkdownEditor = React.lazy(()=>import("./pages/MarkdownEditor"));
 const CodeEditor = React.lazy(()=>import("./pages/CodeEditor"));
+const IpLocation = React.lazy(()=>import("./pages/IpLocation"));
 
 interface AppItem {
     name: string;
@@ -44,6 +45,13 @@ const ROUTES: CategoryItem[] = [
                 url: '/code-editor',
                 element: <CodeEditor/>,
                 keywords: ["code", "editor", "代码", "程序", "编辑", "编程"],
+            },
+
+            {
+                name: 'apps.ip-location',
+                url: '/ip-location',
+                element: <IpLocation/>,
+                keywords: ["ip", "location", "地址", "定位"],
             },
         ],
     },

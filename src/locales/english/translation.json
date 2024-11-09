@@ -59,7 +59,8 @@
         "qt-theme": "Qt Theme",
         "svg-icon": "Svg Icon",
         "markdown-editor": "Markdown Editor",
-        "code-editor": "Code Editor"
+        "code-editor": "Code Editor",
+        "ip-location": "IP Location"
     },
 
     "gis-tile-download": {
@@ -94,6 +95,16 @@
 
     "code-editor": {
         "language": "Language"
+    },
+
+    "ip-location": {
+        "query": "Query",
+        "api": "API",
+        "ip": "IP Address",
+        "country": "Country or Region",
+        "city": "City",
+        "lonlat": "Longitude & Latitude",
+        "isp": "ISP"
     },
 
     "components": {

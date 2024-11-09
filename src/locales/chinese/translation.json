@@ -59,7 +59,8 @@
         "qt-theme": "Qt 主题",
         "svg-icon": "Svg 图标",
         "markdown-editor": "Markdown 编辑器",
-        "code-editor": "代码编辑器"
+        "code-editor": "代码编辑器",
+        "ip-location": "IP 位置"
     },
 
     "gis-tile-download": {
@@ -94,6 +95,16 @@
 
     "code-editor": {
         "language": "语言"
+    },
+
+    "ip-location": {
+        "query": "查询",
+        "api": "API",
+        "ip": "IP 地址",
+        "country": "国家或地区",
+        "city": "城市",
+        "lonlat": "经纬度",
+        "isp": "网络业务提供商"
     },
 
     "components": {
