@@ -72,9 +72,10 @@ export default function App() {
 
     // 搜索功能
     const onSearch = (text:string) => {
+        const keywords = text.replace(/[,，;；\s]+/g, " ").trim().replace(/[,，;；\s]+/g, ",");
         navigate({
             pathname: "/search",
-            search: `?text=${text}`
+            search: `?text=${keywords}`
         });
     }
 

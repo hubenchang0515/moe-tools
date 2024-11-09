@@ -12,6 +12,7 @@ interface AppItem {
     icon?: JSX.Element;
     url: string;
     element: JSX.Element;
+    keywords?: string[];
 }
 
 interface CategoryItem {
@@ -28,18 +29,21 @@ const ROUTES: CategoryItem[] = [
                 name: 'apps.todo',
                 url: '/todo',
                 element: <FramePage url="https://hubenchang0515.github.io/todo/"/>,
+                keywords: ["todo", "to-do", "待办", "计划"],
             },
 
             {
                 name: 'apps.markdown-editor',
                 url: '/markdown-editor',
                 element: <MarkdownEditor/>,
+                keywords: ["markdown", "editor", "pdf", "编辑"],
             },
 
             {
                 name: 'apps.code-editor',
                 url: '/code-editor',
                 element: <CodeEditor/>,
+                keywords: ["code", "editor", "代码", "程序", "编辑", "编程"],
             },
         ],
     },
@@ -52,12 +56,14 @@ const ROUTES: CategoryItem[] = [
                 name: 'apps.qt-theme',
                 url: '/qt-theme',
                 element: <FramePage url="https://hubenchang0515.github.io/QtTheme/QtTheme.html"/>,
+                keywords: ["qt", "theme", "qss", "主题", "风格"],
             },
 
             {
                 name: 'apps.svg-icon',
                 url: '/svg-icon',
                 element: <FramePage url="https://hubenchang0515.github.io/SvgIcons/SvgIcon.html"/>,
+                keywords: ["qt", "svg", "icon", "图标"],
             },
         ],
     },
@@ -70,6 +76,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'apps.gis-tile-download',
                 url: "/gis-tile-download",
                 element: <GisTileDownload/>,
+                keywords: ["gis", "tile", "geography", "map", "地理", "地图", "图块", "瓦片"],
             },
             
         ],

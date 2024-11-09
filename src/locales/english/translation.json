@@ -44,6 +44,10 @@
         "collapse": "Collapse"
     },
 
+    "search": {
+        "keywords": "Keywords"
+    },
+
     "frame": {
         "warning-message": "This application is displayed via iframe, and some functions such as downloading may inaccessible. It is recommended to visite the original page.",
         "go-to-source-page": "GO"

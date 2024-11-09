@@ -11,7 +11,7 @@ export default function SearchInput(props:SearchInputProps) {
     return (
         <Paper sx={{display: "flex", pl:2, flexShrink: 1}} elevation={0}>
             <InputBase 
-                sx={{ minWidth: 0,flexShrink: 1}} 
+                sx={{ minWidth: 0,flexShrink: 1}}
                 value={text} 
                 onChange={(ev)=>setText(ev.target.value)}
                 onKeyDown={(ev) => {
