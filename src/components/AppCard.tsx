@@ -1,5 +1,6 @@
 import { Box, Card, CardContent, CardMedia, IconButton, Typography } from "@mui/material";
 import LaunchIcon from '@mui/icons-material/Launch';
+import { Link } from "react-router-dom";
 
 export interface AppCardProps {
     name: string;
@@ -31,7 +32,7 @@ export default function AppCard(props:AppCardProps) {
                 </Typography>
                 </CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent:'end', p: 1}}>
-                    <IconButton href={props.url}>
+                    <IconButton component={Link} to={props.url}>
                         <LaunchIcon/>
                     </IconButton>
                 </Box>

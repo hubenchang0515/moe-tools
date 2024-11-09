@@ -9,7 +9,7 @@ import React, { Suspense, useCallback, useEffect, useRef, useState } from "react
 import TitleBar from "./components/TitleBar";
 import SlideMenu, { Language, SlideMenuEntries, Theme } from "./components/SlideMenu";
 
-import { Route, Routes, useHref, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import ROUTES from "./routes";
 
 import i18n from 'i18next';
@@ -25,6 +25,7 @@ import '@fontsource/roboto/900.css';
 const Home = React.lazy(()=>import("./pages/Home"));
 const NotFound = React.lazy(()=>import("./pages/NotFound"));
 const About = React.lazy(()=>import("./pages/About"));
+const Search = React.lazy(()=>import("./pages/Search"));
 
 export default function App() {
     const [menuOpen, setMenuOpen] = useState<boolean>(true);
@@ -62,7 +63,7 @@ export default function App() {
                 return {
                     label: t(app.name),
                     icon: app.icon,
-                    url: useHref(app.url),
+                    url: app.url,
                 }
             })
         }
@@ -115,9 +116,9 @@ export default function App() {
                         width={320} 
                         open={menuOpen}
                         expand={menuExpand}
-                        homeUrl={useHref("/")}
-                        aboutUrl={useHref("/about")}
-                        advanceUrl={useHref("/advance")}
+                        homeUrl={"/"}
+                        aboutUrl={"/about"}
+                        advanceUrl={"/advance"}
                         theme={theme} 
                         language={language} 
                         entries={entries} 
@@ -168,6 +169,7 @@ export default function App() {
                                 <Route key="404" path="*" element={<NotFound/>}/>
                                 <Route key="home" path="/" element={<Home/>}/>
                                 <Route key="about" path="/about" element={<About/>}/>
+                                <Route key="about" path="/search" element={<Search/>}/>
                                 {
                                     ROUTES.map((category) => {
                                         return category.apps.map((app) => {

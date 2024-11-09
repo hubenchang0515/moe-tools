@@ -2,7 +2,6 @@ import { Container, Divider, Grid2 as Grid, Stack, Typography } from "@mui/mater
 import ROUTES from "../routes";
 import AppCard from "../components/AppCard";
 import { useTranslation } from "react-i18next";
-import { useHref } from "react-router-dom";
 import Markdown from "../components/Markdown";
 
 
@@ -26,7 +25,7 @@ export default function Home() {
                                         category.apps.map((app, index) => {
                                             return (
                                                 <Grid size={{xs:12, md: 6, lg: 3}} key={index}>
-                                                    <AppCard name={t(app.name)} url={useHref(app.url)} key={index} image={`https://www.dmoe.cc/random.php?key=${i++}`}/>
+                                                    <AppCard name={t(app.name)} url={app.url} key={index} image={`https://www.dmoe.cc/random.php?key=${i++}`}/>
                                                 </Grid>
                                             )
                                         })

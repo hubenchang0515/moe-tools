@@ -14,6 +14,7 @@ import TranslateIcon from '@mui/icons-material/Translate';
 import InfoIcon from '@mui/icons-material/Info';
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 export type SideMenuState = "hidden" | "collapse" | "expand";
 export type Theme = 'light'|'system'|'dark';
@@ -110,7 +111,7 @@ export default function SlideMenu(props:SlideMenuProps) {
                                 {
                                     props.homeUrl &&
                                     <ListItem disablePadding>
-                                        <ListItemButton href={props.homeUrl}>
+                                        <ListItemButton to={props.homeUrl} component={Link}>
                                             <ListItemIcon>
                                                 <HomeIcon/>
                                             </ListItemIcon>
@@ -141,7 +142,7 @@ export default function SlideMenu(props:SlideMenuProps) {
                                                     {
                                                         group?.items.map((item, index) => (
                                                             <ListItem disablePadding key={index}>
-                                                                <ListItemButton sx={{ pl: 4 }} href={item.url}>
+                                                                <ListItemButton sx={{ pl: 4 }} to={item.url} component={Link}>
                                                                     <ListItemIcon>
                                                                         {item.icon ?? <ExtensionIcon />}
                                                                     </ListItemIcon>
@@ -214,7 +215,7 @@ export default function SlideMenu(props:SlideMenuProps) {
                                         {
                                             props.aboutUrl &&
                                             <ListItem disablePadding>
-                                                <ListItemButton sx={{ pl: 4 }} href={props.aboutUrl}>
+                                                <ListItemButton sx={{ pl: 4 }} to={props.aboutUrl} component={Link}>
                                                     <ListItemIcon>
                                                         <InfoIcon />
                                                     </ListItemIcon>
@@ -226,7 +227,7 @@ export default function SlideMenu(props:SlideMenuProps) {
                                         {
                                             props.advanceUrl &&
                                             <ListItem disablePadding>
-                                                <ListItemButton sx={{ pl: 4 }} href={props.advanceUrl}>
+                                                <ListItemButton sx={{ pl: 4 }} to={props.advanceUrl} component={Link}>
                                                     <ListItemIcon>
                                                         <SettingsIcon />
                                                     </ListItemIcon>
