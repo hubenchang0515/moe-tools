@@ -120,6 +120,7 @@ export default function HighlightEditor(props:HighlightEditorProps) {
                     whiteSpace: 'nowrap',
                     scrollbarGutter: 'stable',
                 }}
+                autoFocus
                 onChange={refresh}
                 onKeyDown={onKeyDown}
                 onScroll={() => {
