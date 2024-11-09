@@ -1,1 +1,0 @@
-import{j as r}from"./index-BftqKwOi.js";import{M as o}from"./Markdown-C1UyCq5f.js";import{C as m}from"./Link-LBOt-UaF.js";import"./Alert-DLzT-3Kd.js";import"./dividerClasses-Bhph7Br7.js";import"./useThemeProps-D8HVhG40.js";function s(){return r.jsx(m,{maxWidth:"xl",children:r.jsx(o,{url:"markdown/home.md"})})}export{s as default};
