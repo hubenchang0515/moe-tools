@@ -2,12 +2,13 @@ import { marked, Token, Tokens } from "marked";
 import hljs from 'highlight.js';
 import 'highlight.js/styles/vs2015.min.css';
 import { useEffect, useState } from "react";
-import { Alert, AlertProps, Box, Chip, Divider, Link, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, TypographyProps } from "@mui/material";
+import { Alert, AlertProps, Box, Chip, Divider, Link, Paper, SxProps, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Theme, Typography, TypographyProps } from "@mui/material";
 
 export interface MarkdownProps {
     text?: string
     url?: string
     forceRefresh?: boolean
+    sx?: SxProps<Theme>
 }
 
 function escapeHTML(text:string) {
@@ -428,7 +429,7 @@ export default function Markdown(props:MarkdownProps) {
     }, [tokens])
 
     return (
-        <Box className="markdown-body" key={key}>
+        <Box className="markdown-body" key={key} sx={props.sx}>
             {
                 tokens.map((token, index) => {
                     return (
