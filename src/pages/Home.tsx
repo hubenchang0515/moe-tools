@@ -3,10 +3,18 @@ import ROUTES from "../routes";
 import AppCard from "../components/AppCard";
 import { useTranslation } from "react-i18next";
 import Markdown from "../components/Markdown";
+import { useEffect } from "react";
 
 
 export default function Home() {
     const { t } = useTranslation();
+    
+    // SEO
+    useEffect(() => {
+        document.title = `${t("title")} - ${t("pages.home")}`;
+        document.querySelector('meta[name="description"]')?.setAttribute("content", t("description.base"));
+    }, [t]);
+
     let i = 0;
     return (
         <Container maxWidth="xl" sx={{marginY:2}}>
@@ -25,7 +33,12 @@ export default function Home() {
                                         category.apps.map((app, index) => {
                                             return (
                                                 <Grid size={{xs:12, md: 6, lg: 3}} key={index}>
-                                                    <AppCard name={t(app.name)} url={app.url} key={index} image={`https://www.dmoe.cc/random.php?key=${i++}`}/>
+                                                    <AppCard 
+                                                        name={t(app.name)} 
+                                                        url={app.url} 
+                                                        key={index} 
+                                                        image={`https://www.dmoe.cc/random.php?key=${i++}`}
+                                                    />
                                                 </Grid>
                                             )
                                         })

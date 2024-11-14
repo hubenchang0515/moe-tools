@@ -27,28 +27,28 @@ const ROUTES: CategoryItem[] = [
         name: "menu.apps",
         apps: [
             {
-                name: 'apps.todo',
+                name: 'pages.todo',
                 url: '/todo',
-                element: <FramePage url="https://hubenchang0515.github.io/todo/"/>,
+                element: <FramePage url="https://hubenchang0515.github.io/todo/" title="pages.todo" description="description.todo"/>,
                 keywords: ["todo", "to-do", "待办", "计划"],
             },
 
             {
-                name: 'apps.markdown-editor',
+                name: 'pages.markdown-editor',
                 url: '/markdown-editor',
                 element: <MarkdownEditor/>,
                 keywords: ["markdown", "editor", "pdf", "编辑"],
             },
 
             {
-                name: 'apps.code-editor',
+                name: 'pages.code-editor',
                 url: '/code-editor',
                 element: <CodeEditor/>,
                 keywords: ["code", "editor", "代码", "程序", "编辑", "编程"],
             },
 
             {
-                name: 'apps.ip-location',
+                name: 'pages.ip-location',
                 url: '/ip-location',
                 element: <IpLocation/>,
                 keywords: ["ip", "location", "地址", "定位"],
@@ -61,16 +61,16 @@ const ROUTES: CategoryItem[] = [
         icon: <QtIcon/>,
         apps: [
             {
-                name: 'apps.qt-theme',
+                name: 'pages.qt-theme',
                 url: '/qt-theme',
-                element: <FramePage url="https://hubenchang0515.github.io/QtTheme/QtTheme.html"/>,
+                element: <FramePage url="https://hubenchang0515.github.io/QtTheme/QtTheme.html" title="pages.qt-theme" description="description.qt-theme"/>,
                 keywords: ["qt", "theme", "qss", "主题", "风格"],
             },
 
             {
-                name: 'apps.svg-icon',
+                name: 'pages.svg-icon',
                 url: '/svg-icon',
-                element: <FramePage url="https://hubenchang0515.github.io/SvgIcons/SvgIcon.html"/>,
+                element: <FramePage url="https://hubenchang0515.github.io/SvgIcons/SvgIcon.html" title="pages.svg-icon" description="description.svg-icon"/>,
                 keywords: ["qt", "svg", "icon", "图标"],
             },
         ],
@@ -81,7 +81,7 @@ const ROUTES: CategoryItem[] = [
         icon: <GeoIcon/>,
         apps: [
             {
-                name: 'apps.gis-tile-download',
+                name: 'pages.gis-tile-download',
                 url: "/gis-tile-download",
                 element: <GisTileDownload/>,
                 keywords: ["gis", "tile", "geography", "map", "地理", "地图", "图块", "瓦片"],

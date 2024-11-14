@@ -53,7 +53,12 @@
         "go-to-source-page": "前往"
     },
 
-    "apps": {
+    "pages": {
+        "home": "主页",
+        "about": "关于",
+        "advance": "高级设置",
+        "search": "搜索",
+        "not-found": "404",
         "gis-tile-download": "GIS 图块下载",
         "todo": "待办事项",
         "qt-theme": "Qt 主题",
@@ -61,6 +66,17 @@
         "markdown-editor": "Markdown 编辑器",
         "code-editor": "代码编辑器",
         "ip-location": "IP 位置"
+    },
+
+    "description": {
+        "base": "一个多功能的在线工具集",
+        "gis-tile-download": "GIS 图块下载，支持 Google 地图、高德地图、ArcGiS、Open Street Map、卫星影像以及自定义链接。",
+        "todo": "待办事项。",
+        "qt-theme": "Qt 主题，在线选择、预览 Qt 主题和下载资源包。",
+        "svg-icon": "Qt 兼容的 Svg 图标预览与下载。",
+        "markdown-editor": "在线的 Markdown 编辑器，支持实时预览、导出 PDF、打印等功能。",
+        "code-editor": "在线代码编辑器，支持 C、C++、Python、TypeScript、Lua 等一百多种语言的语法高亮。",
+        "ip-location": "IP 位置查询，支持查询本机的 IP 地址以及任意 IP 地址的属地。"
     },
 
     "gis-tile-download": {

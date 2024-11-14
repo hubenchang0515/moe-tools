@@ -128,6 +128,12 @@ const isGisUrl = (text:string) => {
 export default function GisTileDownload() {
     // i18n
     const { t } = useTranslation();
+
+    // SEO
+    useEffect(() => {
+        document.title = `${t("title")} - ${t("pages.gis-tile-download")}`;
+        document.querySelector('meta[name="description"]')?.setAttribute("content", t("description.gis-tile-download"));
+    }, [t]);
     
     const servers = useMemo<TileServerProps[]>(() => [
         {

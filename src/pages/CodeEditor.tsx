@@ -1,14 +1,20 @@
 import { Autocomplete, Box, Button, Container, TextField } from "@mui/material";
 import HighlightEditor, { listLanguages } from "../components/HighlightEditor";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const languages = listLanguages();
 
 export default function CodeEditor() {
     const { t } = useTranslation();
     const [data, setData] = useState("");
-    const [language, setLanguage] = useState("cpp");
+    const [language, setLanguage] = useState("cpp");// SEO
+    
+    // SEO
+    useEffect(() => {
+        document.title = `${t("title")} - ${t("pages.code-editor")}`;
+        document.querySelector('meta[name="description"]')?.setAttribute("content", t("description.code-editor"));
+    }, [t]);
 
     return (
         <Container

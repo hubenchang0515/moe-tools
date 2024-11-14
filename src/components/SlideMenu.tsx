@@ -24,6 +24,7 @@ export interface SlideMenuItemProps {
     label: string;
     url: string;
     icon?: JSX.Element;
+    onClick?: ()=>void;
 }
 
 export interface SlideMenuGroupProps {
@@ -37,9 +38,9 @@ export type SlideMenuEntries = SlideMenuGroupProps[];
 
 export interface SlideMenuProps {
     width: number | string;
-    homeUrl?: string;
-    aboutUrl?: string;
-    advanceUrl?: string;
+    home?: SlideMenuItemProps;
+    about?: SlideMenuItemProps;
+    advance?: SlideMenuItemProps;
 
     open?: boolean;
     onOpenChanged?: (open:boolean) => void;
@@ -109,14 +110,14 @@ export default function SlideMenu(props:SlideMenuProps) {
                         }}>
                             <List sx={{width: "100%"}}>
                                 {
-                                    props.homeUrl &&
+                                    props.home &&
                                     <ListItem disablePadding>
-                                        <ListItemButton to={props.homeUrl} component={Link}>
+                                        <ListItemButton to={props.home.url} component={Link} onClick={props.home.onClick}>
                                             <ListItemIcon>
-                                                <HomeIcon/>
+                                                {props.home.icon || <HomeIcon/>}
                                             </ListItemIcon>
                                             <ListItemText>
-                                                {t("menu.home")}
+                                                {props.home.label}
                                             </ListItemText>
                                         </ListItemButton>
                                     </ListItem>
@@ -142,7 +143,7 @@ export default function SlideMenu(props:SlideMenuProps) {
                                                     {
                                                         group?.items.map((item, index) => (
                                                             <ListItem disablePadding key={index}>
-                                                                <ListItemButton sx={{ pl: 4 }} to={item.url} component={Link}>
+                                                                <ListItemButton sx={{ pl: 4 }} to={item.url} component={Link} onClick={item.onClick}>
                                                                     <ListItemIcon>
                                                                         {item.icon ?? <ExtensionIcon />}
                                                                     </ListItemIcon>
@@ -213,25 +214,25 @@ export default function SlideMenu(props:SlideMenuProps) {
                                         </ListItem>
 
                                         {
-                                            props.aboutUrl &&
+                                            props.about &&
                                             <ListItem disablePadding>
-                                                <ListItemButton sx={{ pl: 4 }} to={props.aboutUrl} component={Link}>
+                                                <ListItemButton sx={{ pl: 4 }} to={props.about.url} component={Link} onClick={props.about.onClick}>
                                                     <ListItemIcon>
-                                                        <InfoIcon />
+                                                        {props.about.icon || <InfoIcon />}
                                                     </ListItemIcon>
-                                                    <ListItemText primary={t("settings.about")} />
+                                                    <ListItemText primary={props.about.label} />
                                                 </ListItemButton>
                                             </ListItem>
                                         }
 
                                         {
-                                            props.advanceUrl &&
+                                            props.advance &&
                                             <ListItem disablePadding>
-                                                <ListItemButton sx={{ pl: 4 }} to={props.advanceUrl} component={Link}>
+                                                <ListItemButton sx={{ pl: 4 }} to={props.advance.url} component={Link} onClick={props.advance.onClick}>
                                                     <ListItemIcon>
-                                                        <SettingsIcon />
+                                                        {props.advance.icon || <SettingsIcon />}
                                                     </ListItemIcon>
-                                                    <ListItemText primary={t("settings.advance")} />
+                                                    <ListItemText primary={props.advance.label} />
                                                 </ListItemButton>
                                             </ListItem>
                                         }

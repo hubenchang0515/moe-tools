@@ -53,7 +53,12 @@
         "go-to-source-page": "GO"
     },
 
-    "apps": {
+    "pages": {
+        "home": "Home",
+        "about": "About",
+        "advance": "Advance",
+        "search": "Search",
+        "not-found": "404",
         "gis-tile-download": "GIS Tile Download",
         "todo": "To Do List",
         "qt-theme": "Qt Theme",
@@ -61,6 +66,17 @@
         "markdown-editor": "Markdown Editor",
         "code-editor": "Code Editor",
         "ip-location": "IP Location"
+    },
+
+    "description": {
+        "base": "A versatile online toolset",
+        "gis-tile-download": "GIS Tile Download, Supports Google Maps, Amap, ArcGiS, Open Street Map, satellite images and custom links.",
+        "todo": "To-do list.",
+        "qt-theme": "Qt theme, select, preview Qt themes and download resource package online.",
+        "svg-icon": "Qt compatible Svg icon preview and download.",
+        "markdown-editor": "The online Markdown editor supports real-time preview, PDF export, and printing.",
+        "code-editor": "Online code editor that supports syntax highlighting for more than 100 languages such as C, C++, Python, TypeScript, and Lua.",
+        "ip-location": "IP location query supports querying the IP address of the machine and the location of any IP address."
     },
 
     "gis-tile-download": {

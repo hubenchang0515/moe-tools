@@ -33,6 +33,7 @@ export default function App() {
     const [theme, setTheme] = useState<Theme>('system');
     const [language, setLanguage] = useState<Language>(i18n.language as Language);
     const navigate = useNavigate();
+
     // 系统主题
     const systemDark = window.matchMedia("(prefers-color-scheme:dark)");
     const [systemTheme, setSystemTheme] = useState<'light'|'dark'>(systemDark.matches ? 'dark' : 'light'); 
@@ -67,8 +68,7 @@ export default function App() {
                 }
             })
         }
-    })
-
+    });
 
     // 搜索功能
     const onSearch = (text:string) => {
@@ -117,9 +117,9 @@ export default function App() {
                         width={320} 
                         open={menuOpen}
                         expand={menuExpand}
-                        homeUrl={"/"}
-                        aboutUrl={"/about"}
-                        advanceUrl={"/advance"}
+                        home={{label:t("menu.home"), url: "/", }}
+                        about={{label:t("settings.about"), url: "/about", }}
+                        advance={{label:t("settings.advance"), url: "/advance", }}
                         theme={theme} 
                         language={language} 
                         entries={entries} 

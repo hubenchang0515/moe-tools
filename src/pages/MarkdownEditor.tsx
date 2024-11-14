@@ -14,6 +14,12 @@ export default function MarkdownEditor() {
     const [messageOpen, setMessageOpen] = useState<boolean>(false);
     const [exporting, setExporting] = useState<boolean>(false);
 
+    // SEO
+    useEffect(() => {
+        document.title = `${t("title")} - ${t("pages.markdown-editor")}`;
+        document.querySelector('meta[name="description"]')?.setAttribute("content", t("description.markdown-editor"));
+    }, [t]);
+
     useEffect(() => {
         if (autoRefresh) {
             setMarkdown(data);

@@ -6,6 +6,7 @@ export interface AppCardProps {
     name: string;
     url: string;
     image: string;
+    onLaunch?: ()=>void;
 }
 
 export default function AppCard(props:AppCardProps) {
@@ -32,7 +33,7 @@ export default function AppCard(props:AppCardProps) {
                 </Typography>
                 </CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent:'end', p: 1}}>
-                    <IconButton component={Link} to={props.url}>
+                    <IconButton component={Link} to={props.url} onClick={props.onLaunch}>
                         <LaunchIcon/>
                     </IconButton>
                 </Box>

@@ -6,6 +6,8 @@ import { useTranslation } from "react-i18next";
 
 export interface FramePageProps {
     url: string;
+    title: string;
+    description: string;
 }
 
 export default function FramePage(props: FramePageProps) {
@@ -17,6 +19,12 @@ export default function FramePage(props: FramePageProps) {
     const openImmediately = () => ["warning", "error"].includes(severity);
     const [messageOpen, setMessageOpen] = useState<boolean>(openImmediately());
     useEffect(()=>setMessageOpen(openImmediately()), [props.url, severity]);
+
+    // SEO
+    useEffect(() => {
+        document.title = `${t("title")} - ${t(props.title)}`;
+        document.querySelector('meta[name="description"]')?.setAttribute("content", t(props.description));
+    }, [t, props.title, props.description]);
 
     return (
         <Box sx={{width: '100%', height: '100%'}}>

@@ -3,6 +3,7 @@ import ROUTES from "../routes";
 import AppCard from "../components/AppCard";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 
 export default function Home() {
@@ -12,6 +13,12 @@ export default function Home() {
     const text = params.get("text")??"";
     const keywords = Array.from(new Set(text.toLowerCase().split(/[,，;；\s]+/)));
     const navigate = useNavigate();
+
+    // SEO
+    useEffect(() => {
+        document.title = `${t("title")} - ${t("pages.search")}`;
+        document.querySelector('meta[name="description"]')?.setAttribute("content", t("description.base"));
+    }, [t]);
 
     const routes: (typeof ROUTES) = [];
     for (const CATEGORY of ROUTES) {

@@ -157,6 +157,12 @@ export default function IpLocation() {
     const [ip, setIp] = useState<string>("");
     const [rows, setRows] = useState<IpLocationApi[]>(API_LIST);
 
+    // SEO
+    useEffect(() => {
+        document.title = `${t("title")} - ${t("pages.ip-location")}`;
+        document.querySelector('meta[name="description"]')?.setAttribute("content", t("description.ip-location"));
+    }, [t]);
+
     useEffect(() => {
         for (const row of rows) {
             row.fetchData(ip).then(() => {
