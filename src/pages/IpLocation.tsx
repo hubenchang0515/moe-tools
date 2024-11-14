@@ -1,26 +1,22 @@
-import { Button, Container, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
+import { Button, CircularProgress, Container, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface DataRow {
-    api: string;
     ip: string;
     country: string;
     city: string;
     lonlat: string;
     isp: string;
-    success: boolean;
 }
 
 const makeDataRow = ():DataRow => {
     return {
-        api: "-",
         ip: "-",
         country: "-",
         city: "-",
         lonlat: "-",
         isp: "-",
-        success: false,
     }
 }
 
@@ -28,105 +24,143 @@ const lonlat = (lon:number, lat:number) => {
     return `${lon >= 0 ? lon : -lon}${lon >= 0 ? 'E' : 'W'}, ${lat >= 0 ? lat : -lat}${lat >= 0 ? 'N' : 'S'}`
 }
 
-const fetchApi1 = async (ip:string):Promise<DataRow> => {
-    try {
-        const response = await fetch(`https://api.vore.top/api/IPdata?ip=${ip}`);
-        const data = await response.json();
-        return {
-            ...makeDataRow(),
-            api: "api.vore.top",
-            ip: data.ipinfo.text,
-            city: data.ipdata.info2,
-            isp: data.ipdata.isp,
-            success: true,
-        }
-    } catch {
-        return {
-            ...makeDataRow(),
-            api: "api.vore.top",
+type ApiStatus = "success" | "failed" | "loading";
+
+abstract class IpLocationApi {
+    protected m_status: ApiStatus;
+    protected m_data: DataRow;
+
+    constructor() {
+        this.m_status = "loading";
+        this.m_data = makeDataRow();
+    }
+
+    abstract api(): string;
+
+    status(): ApiStatus {
+        return this.m_status;
+    }
+
+    data(): DataRow {
+        return this.m_data;
+    }
+
+    abstract fetchData(id:string): Promise<void>;
+};
+
+class Api1 extends IpLocationApi {
+    api(): string {
+        return "api.vore.top";
+    }
+
+    async fetchData(ip:string): Promise<void> {
+        try {
+            this.m_status = "loading";
+            const response = await fetch(`https://api.vore.top/api/IPdata?ip=${ip}`);
+            const data = await response.json();
+            this.m_data = {
+                ...makeDataRow(),
+                ip: data.ipinfo.text,
+                city: data.ipdata.info2,
+                isp: data.ipdata.isp,
+            }
+            this.m_status = "success";
+        } catch {
+            this.m_status = "failed";
+            this.m_data = makeDataRow();
         }
     }
 }
 
-const fetchApi2 = async (ip:string):Promise<DataRow> => {
-    try {
-        const response = await fetch(`https://api.ip.sb/geoip/${ip}`);
-        const data = await response.json();
-        return {
-            ...makeDataRow(),
-            api: "api.ip.sb",
-            ip: data.ip,
-            country: data.country,
-            isp: data.isp,
-            success: true,
-        }
-    } catch {
-        return {
-            ...makeDataRow(),
-            api: "api.ip.sb",
+class Api2 extends IpLocationApi {
+    api(): string {
+        return "api.ip.sb";
+    }
+
+    async fetchData(ip:string): Promise<void> {
+        try {
+            this.m_status = "loading";
+            const response = await fetch(`https://api.ip.sb/geoip/${ip}`);
+            const data = await response.json();
+            this.m_data = {
+                ...makeDataRow(),
+                ip: data.ip,
+                country: data.country,
+                isp: data.isp,
+            }
+            this.m_status = "success";
+        } catch {
+            this.m_status = "failed";
+            this.m_data = makeDataRow();
         }
     }
 }
 
-const fetchApi3 = async (ip:string):Promise<DataRow> => {
-    try {
-        if (!ip) {
-            ip = (await (await fetch("https://api.iplocation.net/?cmd=get-ip")).json()).ip;
-        }
-        const response = await fetch(`https://api.iplocation.net/?ip=${ip}`);
-        const data = await response.json();
-        return {
-            ...makeDataRow(),
-            api: "api.iplocation.net",
-            ip: data.ip,
-            country: data.country_name,
-            isp: data.isp,
-            success: true,
-        }
-    } catch {
-        return {
-            ...makeDataRow(),
-            api: "api.iplocation.net",
+class Api3 extends IpLocationApi {
+    api(): string {
+        return "api.iplocation.net";
+    }
+
+    async fetchData(ip:string): Promise<void> {
+        try {
+            this.m_status = "loading";
+            if (!ip) {
+                ip = (await (await fetch("https://api.iplocation.net/?cmd=get-ip")).json()).ip;
+            }
+            const response = await fetch(`https://api.iplocation.net/?ip=${ip}`);
+            const data = await response.json();
+            this.m_data =  {
+                ...makeDataRow(),
+                ip: data.ip,
+                country: data.country_name,
+                isp: data.isp,
+            }
+            this.m_status = "success";
+        } catch {
+            this.m_status = "failed";
+            this.m_data = makeDataRow();
         }
     }
 }
 
-const fetchApi4 = async (ip:string):Promise<DataRow> => {
-    try {
-        const response = await fetch(`http://ip-api.com/json/${ip}`);
-        const data = await response.json();
-        return {
-            ...makeDataRow(),
-            api: "ip-api.com",
-            ip: data.query,
-            country: data.country,
-            city: data.city,
-            isp: data.isp,
-            lonlat: lonlat(data.lon, data.lat),
-            success: true,
-        }
-    } catch {
-        return {
-            ...makeDataRow(),
-            api: "ip-api.com",
+class Api4 extends IpLocationApi {
+    api(): string {
+        return "api.iplocation.net";
+    }
+
+    async fetchData(ip:string): Promise<void> {
+        try {
+            this.m_status = "loading";
+            const response = await fetch(`http://ip-api.com/json/${ip}`);
+            const data = await response.json();
+            this.m_data = {
+                ...makeDataRow(),
+                ip: data.query,
+                country: data.country,
+                city: data.city,
+                isp: data.isp,
+                lonlat: lonlat(data.lon, data.lat),
+            }
+            this.m_status = "success";
+        } catch {
+            this.m_status = "failed";
+            this.m_data = makeDataRow();
         }
     }
 }
 
-const fetchApis = [fetchApi1, fetchApi2, fetchApi3, fetchApi4];
+const API_LIST = [new Api1, new Api2, new Api3, new Api4];
 
 export default function IpLocation() {
     const { t } = useTranslation();
     const [input, setInput] = useState<string>("");
     const [ip, setIp] = useState<string>("");
-    const [rows, setRows] = useState<DataRow[]>([]);
-    
+    const [rows, setRows] = useState<IpLocationApi[]>(API_LIST);
+
     useEffect(() => {
-        let newRows:DataRow[] = [];
-        for (const fetchApi of fetchApis) {
-            fetchApi(ip).then((data) => {
-                newRows = [...newRows, data];
-                setRows(newRows);
+        for (const row of rows) {
+            row.fetchData(ip).then(() => {
+                setRows([...API_LIST]);
             });
         }
     }, [ip]);
@@ -169,12 +203,12 @@ export default function IpLocation() {
                                 rows.map((row, index) => {
                                     return (
                                         <TableRow key={index}>
-                                            <TableCell><Typography color={row.success ? "success" : "error"}>{row.api}</Typography></TableCell>
-                                            <TableCell>{row.ip}</TableCell>
-                                            <TableCell>{row.country}</TableCell>
-                                            <TableCell>{row.city}</TableCell>
-                                            <TableCell>{row.lonlat}</TableCell>
-                                            <TableCell>{row.isp}</TableCell>
+                                            <TableCell><Typography color={row.status() === "success" ? "success" : row.status() === "failed" ? "error" : "inherit"}>{row.api()}</Typography></TableCell>
+                                            <TableCell>{row.status() === 'loading' ? <CircularProgress size="1em"/> : row.data().ip}</TableCell>
+                                            <TableCell>{row.status() === 'loading' ? <CircularProgress size="1em"/> : row.data().country}</TableCell>
+                                            <TableCell>{row.status() === 'loading' ? <CircularProgress size="1em"/> : row.data().city}</TableCell>
+                                            <TableCell>{row.status() === 'loading' ? <CircularProgress size="1em"/> : row.data().lonlat}</TableCell>
+                                            <TableCell>{row.status() === 'loading' ? <CircularProgress size="1em"/> : row.data().isp}</TableCell>
                                         </TableRow>
                                     )
                                 })
