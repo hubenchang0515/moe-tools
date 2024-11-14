@@ -404,7 +404,6 @@ export default function GisTileDownload() {
             });
 
             mapRef.current = map;
-            locate();
         } else {
             // 地图选项变化，切换url
             tileLayer.current?.getSource()?.setUrl(url);
