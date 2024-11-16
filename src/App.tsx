@@ -159,11 +159,6 @@ export default function App() {
                         overflow={"auto"} 
                         flexGrow={1} 
                         flexShrink={1} 
-                        onClick={() => {
-                            if (menuExpand) {
-                                setMenuExpand(false);
-                            }
-                        }}
                     >
                         <Suspense>
                             <Routes>
