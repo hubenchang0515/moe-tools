@@ -69,6 +69,7 @@ export default function SlideMenu(props:SlideMenuProps) {
         setGroupExpanded(values);
     }
 
+    const [childrenVisible, setChildrenVisible] = useState(false);
 
     useEffect(() => {
         if (!props.expand) {
@@ -98,7 +99,14 @@ export default function SlideMenu(props:SlideMenuProps) {
                 square
             >
                 <Collapse sx={{height: '100%'}} orientation="horizontal" in={props.open}>
-                    <Collapse sx={{height: '100%'}} orientation="horizontal" collapsedSize={56 /* 16 + 24 + 16 => 56 */} in={props.expand}>
+                    <Collapse 
+                        sx={{height: '100%'}} 
+                        orientation="horizontal" 
+                        collapsedSize={56 /* 16 + 24 + 16 => 56 */} 
+                        in={props.expand} 
+                        onEntered={()=>setChildrenVisible(true)}
+                        onExit={()=>setChildrenVisible(false)}
+                    >
                         <Box sx={{
                             width: width,
                             height: '100%',
@@ -245,7 +253,7 @@ export default function SlideMenu(props:SlideMenuProps) {
 
                             {
                                 props.children && 
-                                <Slide in={props.expand} direction="right">
+                                <Slide in={props.expand && childrenVisible} direction="up">
                                     {props.children}
                                 </Slide>
                             }
