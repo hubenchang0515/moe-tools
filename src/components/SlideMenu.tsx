@@ -253,7 +253,7 @@ export default function SlideMenu(props:SlideMenuProps) {
 
                             {
                                 props.children && 
-                                <Slide in={props.expand && childrenVisible} direction="up">
+                                <Slide in={props.expand && childrenVisible} direction="up" mountOnEnter unmountOnExit>
                                     {props.children}
                                 </Slide>
                             }
