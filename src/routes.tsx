@@ -1,12 +1,15 @@
 import React from "react";
 import GeoIcon from "./assets/GeoIcon";
 import QtIcon from "./assets/QtIcon";
+import MonitorIcon from '@mui/icons-material/Monitor';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 
 const FramePage = React.lazy(()=>import("./pages/FramePage"));
 const GisTileDownload = React.lazy(()=>import("./pages/GisTileDownload"));
 const MarkdownEditor = React.lazy(()=>import("./pages/MarkdownEditor"));
 const CodeEditor = React.lazy(()=>import("./pages/CodeEditor"));
 const IpLocation = React.lazy(()=>import("./pages/IpLocation"));
+const BadPixelDetection = React.lazy(()=>import("./pages/BadPixelDetection"));
 
 interface AppItem {
     name: string;
@@ -47,12 +50,6 @@ const ROUTES: CategoryItem[] = [
                 keywords: ["code", "editor", "代码", "程序", "编辑", "编程"],
             },
 
-            {
-                name: 'pages.ip-location',
-                url: '/ip-location',
-                element: <IpLocation/>,
-                keywords: ["ip", "location", "地址", "定位"],
-            },
         ],
     },
 
@@ -85,6 +82,34 @@ const ROUTES: CategoryItem[] = [
                 url: "/gis-tile-download",
                 element: <GisTileDownload/>,
                 keywords: ["gis", "tile", "geography", "map", "地理", "地图", "图块", "瓦片"],
+            },
+            
+        ],
+    },
+
+    {
+        name: "menu.info-query",
+        icon: <TravelExploreIcon/>,
+        apps: [
+            {
+                name: 'pages.ip-location',
+                url: '/ip-location',
+                element: <IpLocation/>,
+                keywords: ["ip", "location", "地址", "定位"],
+            },
+            
+        ],
+    },
+
+    {
+        name: "menu.screen-detection",
+        icon: <MonitorIcon/>,
+        apps: [
+            {
+                name: 'pages.bad-pixel-detection',
+                url: '/bad-pixel-detection',
+                element: <BadPixelDetection/>,
+                keywords: ["monitor", "display", "screen", "bad", "pixel", "detect", "屏幕", "显示器", "坏点", "检测"],
             },
             
         ],

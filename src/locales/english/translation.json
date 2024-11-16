@@ -22,6 +22,8 @@
         "apps": "Applications",
         "qt": "Qt",
         "gis": "GIS",
+        "screen-detection": "Screen Detection",
+        "info-query": "Info Query",
         "settings": "Settings"
     },
 
@@ -65,18 +67,20 @@
         "svg-icon": "Svg Icon",
         "markdown-editor": "Markdown Editor",
         "code-editor": "Code Editor",
-        "ip-location": "IP Location"
+        "ip-location": "IP Location",
+        "bad-pixel-detection": "Bad Pixel Detection"
     },
 
     "description": {
-        "base": "A versatile online toolset",
+        "base": "A versatile online toolset that provides Web front-end development resources, GIS development resources, Qt development resources, online code editing, Markdown editing and exporting PDF, information query, hardware detection, etc.",
         "gis-tile-download": "GIS Tile Download, Supports Google Maps, Amap, ArcGiS, Open Street Map, satellite images and custom links.",
         "todo": "To-do list.",
         "qt-theme": "Qt theme, select, preview Qt themes and download resource package online.",
         "svg-icon": "Qt compatible Svg icon preview and download.",
         "markdown-editor": "The online Markdown editor supports real-time preview, PDF export, and printing.",
         "code-editor": "Online code editor that supports syntax highlighting for more than 100 languages such as C, C++, Python, TypeScript, and Lua.",
-        "ip-location": "IP location query supports querying the IP address of the machine and the location of any IP address."
+        "ip-location": "IP location query supports querying the IP address of the machine and the location of any IP address.",
+        "bad-pixel-detection": "screen bad pixel detection"
     },
 
     "gis-tile-download": {
@@ -121,6 +125,10 @@
         "city": "City",
         "lonlat": "Longitude & Latitude",
         "isp": "ISP"
+    },
+
+    "bad-pixel-detection": {
+        "message": "Press ESC to exit full screen, click the mouse or press any key to switch colors."
     },
 
     "components": {
