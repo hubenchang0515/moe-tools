@@ -317,7 +317,7 @@ function MarkdownToken(props:{token:Token}):JSX.Element {
 
         case "image": {
             const token = props.token as Tokens.Image
-            return <img src={token.href} style={{maxWidth: '100%'}}/>;
+            return <img src={token.href} style={{maxWidth: '100%'}} title={token.title??""} alt={token.text}/>;
         }
 
         case "link": {
