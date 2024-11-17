@@ -1,6 +1,6 @@
 import React from "react";
-import GeoIcon from "./assets/GeoIcon";
-import QtIcon from "./assets/QtIcon";
+import GeoIcon from "./assets/icons/GeoIcon";
+import QtIcon from "./assets/icons/QtIcon";
 import MonitorIcon from '@mui/icons-material/Monitor';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 
