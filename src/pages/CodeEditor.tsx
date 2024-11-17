@@ -31,7 +31,7 @@ export default function CodeEditor() {
             }}
         >
 
-            <Box display={"flex"} gap={2}>
+            <Box display={"flex"} gap={2} flexWrap={'wrap'}>
                 <Box display={"flex"} flexDirection={"column"} justifyContent={"center"}>
                     <Button variant="contained" component="label">
                         {t("common.open")}
