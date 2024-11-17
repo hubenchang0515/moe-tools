@@ -1,7 +1,7 @@
 import { Box, SxProps, Theme } from "@mui/material";
 import hljs from "highlight.js";
 import { CSSProperties, KeyboardEvent, useEffect, useRef, useState } from "react";
-import 'highlight.js/styles/vs2015.min.css';
+import 'highlight.js/styles/nord.css';
 
 export function listLanguages() {
     return hljs.listLanguages();
