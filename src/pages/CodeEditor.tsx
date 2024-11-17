@@ -1,14 +1,16 @@
 import { Autocomplete, Box, Button, Container, TextField } from "@mui/material";
 import HighlightEditor, { listLanguages } from "../components/HighlightEditor";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import html2canvas from "html2canvas";
 
 const languages = listLanguages();
 
 export default function CodeEditor() {
     const { t } = useTranslation();
     const [data, setData] = useState("");
-    const [language, setLanguage] = useState("cpp");// SEO
+    const [language, setLanguage] = useState("cpp");
+    const codeRef = useRef<HTMLDivElement>(null);
     
     // SEO
     useEffect(() => {
@@ -58,16 +60,40 @@ export default function CodeEditor() {
                         onClick={()=>{
                             const blob = new Blob([data],{type: 'text/plain'});
                             const url = URL.createObjectURL(blob);
-                            const a = document.createElement('a');
-                            a.href = url;
-                            a.download = `file.${language}`;
-                            document.body.appendChild(a);
-                            a.click();
-                            document.body.removeChild(a);
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.download = `file.${language}`;
+                            link.click();
                             URL.revokeObjectURL(url);
                         }}
                     >
                         {t("common.save")}
+                    </Button>
+                </Box>
+
+                <Box display={"flex"} flexDirection={"column"} justifyContent={"center"}>
+                    <Button 
+                        variant="contained"
+                        onClick={()=>{
+                            if (codeRef.current) {
+                                const div = document.createElement("div");
+                                div.className = `language-${language} hljs`;
+                                div.innerHTML = codeRef.current.innerHTML;
+                                document.body.append(div);
+                                html2canvas(div).then(async (canvas) => {
+                                    const url = canvas.toDataURL('image/png');
+                                    const link = document.createElement('a');
+                                    link.download = 'code-image.png';
+                                    link.href = url;
+                                    link.click();
+                                    URL.revokeObjectURL(link.href);
+                                }).finally(() => {
+                                    document.body.removeChild(div);
+                                });
+                            }
+                        }}
+                    >
+                        {t("common.export")}
                     </Button>
                 </Box>
 
@@ -80,7 +106,7 @@ export default function CodeEditor() {
                 />
             </Box>
             
-            <HighlightEditor language={language} text={data} sx={{position:'relative', flexGrow:1, overflow:'auto'}}/>
+            <HighlightEditor ref={codeRef} language={language} text={data} onChange={setData} sx={{position:'relative', flexGrow:1, overflow:'auto'}}/>
         </Container>
     )
 }

@@ -72,13 +72,13 @@
     },
 
     "description": {
-        "base": "一个多功能的在线工具集，提供 Web 前端开发资源，GIS 开发资源，Qt 开发资源，在线代码编辑，Markdown 编辑导出 PDF，信息查询，硬件检测等。",
+        "base": "一个多功能的在线工具集，提供 Web 前端开发资源，GIS 开发资源，Qt 开发资源，在线代码编辑和图片导出功能，在线 Markdown 编辑和 PDF 导出功能，信息查询功能，硬件检测工具等。",
         "gis-tile-download": "GIS 图块下载，支持 Google 地图、高德地图、ArcGiS、Open Street Map、卫星影像以及自定义链接。",
         "todo": "待办事项。",
         "qt-theme": "Qt 主题，在线选择、预览 Qt 主题和下载资源包。",
         "svg-icon": "Qt 兼容的 Svg 图标预览与下载。",
         "markdown-editor": "在线的 Markdown 编辑器，支持实时预览、导出 PDF、打印等功能。",
-        "code-editor": "在线代码编辑器，支持 C、C++、Python、TypeScript、Lua 等一百多种语言的语法高亮。",
+        "code-editor": "在线代码编辑器，支持 C、C++、Python、TypeScript、Lua 等一百多种语言的语法高亮，支持将代码导出为图片。",
         "ip-location": "IP 位置查询，支持查询本机的 IP 地址以及任意 IP 地址的属地。",
         "bad-pixel-detection": "屏幕坏点检测"
     },

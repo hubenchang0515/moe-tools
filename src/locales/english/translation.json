@@ -72,13 +72,13 @@
     },
 
     "description": {
-        "base": "A versatile online toolset that provides Web front-end development resources, GIS development resources, Qt development resources, online code editing, Markdown editing and exporting PDF, information query, hardware detection, etc.",
+        "base": "A versatile online toolset that provides Web front-end development resources, GIS development resources, Qt development resources, online code editing and image export functions, online Markdown editing and PDF export functions, information query functions, hardware detection tools, etc.",
         "gis-tile-download": "GIS Tile Download, Supports Google Maps, Amap, ArcGiS, Open Street Map, satellite images and custom links.",
         "todo": "To-do list.",
         "qt-theme": "Qt theme, select, preview Qt themes and download resource package online.",
         "svg-icon": "Qt compatible Svg icon preview and download.",
         "markdown-editor": "The online Markdown editor supports real-time preview, PDF export, and printing.",
-        "code-editor": "Online code editor that supports syntax highlighting for more than 100 languages such as C, C++, Python, TypeScript, and Lua.",
+        "code-editor": "The online code editor supports syntax highlighting in more than 100 languages ​​such as C, C++, Python, TypeScript, and Lua, and supports exporting code as images.",
         "ip-location": "IP location query supports querying the IP address of the machine and the location of any IP address.",
         "bad-pixel-detection": "screen bad pixel detection"
     },

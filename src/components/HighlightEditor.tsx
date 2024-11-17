@@ -1,7 +1,8 @@
 import { Box, SxProps, Theme } from "@mui/material";
 import hljs from "highlight.js";
-import { CSSProperties, KeyboardEvent, useEffect, useRef, useState } from "react";
+import { CSSProperties, KeyboardEvent, Ref, useEffect, useImperativeHandle, useRef, useState } from "react";
 import 'highlight.js/styles/nord.css';
+import React from "react";
 
 export function listLanguages() {
     return hljs.listLanguages();
@@ -14,10 +15,12 @@ export interface HighlightEditorProps {
     sx?: SxProps<Theme>;
 }
 
-export default function HighlightEditor(props:HighlightEditorProps) {
+export function HighlightEditor(props:HighlightEditorProps, ref?:Ref<HTMLDivElement|null>) {
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const displayRef = useRef<HTMLDivElement>(null);
     const [code, setCode] = useState<string>(" ");
+
+    useImperativeHandle(ref, () => displayRef.current);
 
     // 生成高亮
     const highlight = (text:string) => {
@@ -133,3 +136,5 @@ export default function HighlightEditor(props:HighlightEditorProps) {
         </Box>
     );
 }
+
+export default React.forwardRef(HighlightEditor);
