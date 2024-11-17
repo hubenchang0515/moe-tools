@@ -1,6 +1,5 @@
 import { marked, Token, Tokens } from "marked";
 import hljs from 'highlight.js';
-import 'highlight.js/styles/vs2015.min.css';
 import { useEffect, useState } from "react";
 import { Alert, AlertProps, Box, Chip, Divider, Link, Paper, SxProps, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Theme, Typography, TypographyProps } from "@mui/material";
 

@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import HelpIcon from '@mui/icons-material/Help';
 import MessageBox from "../components/MessageBox";
 import HighlightEditor from "../components/HighlightEditor";
+import 'highlight.js/styles/nord.css';
 
 export default function MarkdownEditor() {
     const { t } = useTranslation();
