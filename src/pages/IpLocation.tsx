@@ -125,7 +125,7 @@ class Api3 extends IpLocationApi {
 
 class Api4 extends IpLocationApi {
     api(): string {
-        return "api.iplocation.net";
+        return "ip-api.com";
     }
 
     async fetchData(ip:string): Promise<void> {
