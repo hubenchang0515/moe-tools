@@ -12,7 +12,7 @@ import Stroke from 'ol/style/Stroke.js';
 import {fromLonLat, toLonLat, transformExtent} from 'ol/proj.js';
 import "ol/ol.css";
 import { Alert, Box, Button, Grid2 as Grid, IconButton, MenuItem, Paper, Select, SelectChangeEvent, Slide, Slider, Snackbar, Stack, TextField, Tooltip, Typography } from '@mui/material';
-import JSZip from 'jszip';
+import streamSaver from 'streamsaver';
 import Draw, { createBox } from 'ol/interaction/Draw';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
@@ -21,10 +21,11 @@ import { Coordinate } from 'ol/coordinate';
 import ProgressDialog from '../components/ProgressDialog';
 import { Feature } from 'ol';
 import { useTranslation } from 'react-i18next';
+import { CreateTarDataBlock, CreateTarEndBlock, CreateTarHeaderBlock } from '../features/Tar';
 
 
-type DownloadHandler = (x:number, y:number, z:number, response:Response)=>void;
-type ErrorHandler = (x:number, y:number, z:number, error:any)=>void;
+type DownloadHandler = (x:number, y:number, z:number, response:Response)=>Promise<void>;
+type ErrorHandler = (x:number, y:number, z:number, error:any)=>Promise<void>;
 class XYZDownloader {
     url: string;
     max: number;
@@ -75,9 +76,9 @@ class XYZDownloader {
             const url = this.url.replace('{z}', `${z}`).replace('{x}', `${x}`).replace('{y}', `${y}`);
             try {
                 const response = await fetch(url);
-                callback(x, y, z, response);
+                await callback(x, y, z, response);
             } catch (err) {
-                error(x, y, z, err);
+                await error(x, y, z, err);
             }
             this.current--;
         });
@@ -230,7 +231,6 @@ export default function GisTileDownload() {
     const download = async () => {
         const url = choice < servers.length ? servers[choice].url : customUrl;
         const FOLDER_NAME = "maps";
-        const PART_SIZE = 1000000;
         if (isNaN(area.current[0][0])) {
             setAlertMessage(t("gis-tile-download.message.please-select"));
             setShowAlert(true);
@@ -246,24 +246,26 @@ export default function GisTileDownload() {
         }
         setProgressMax(total);
 
+        const fileStream = streamSaver.createWriteStream('gis-tiles.tar');
+        const writer = fileStream.getWriter();
+
         let downloader = new XYZDownloader(url, concurrency);
-        let zip = new JSZip();
         let done = 0;
 
         const downloadHandler: DownloadHandler = async (x, y, z, response) => {
-            done++;
-            setProgressValue(done);
-            zip.folder(FOLDER_NAME)?.file(`${z}/${x}/${y}.png`, response.blob());
-            if (done % PART_SIZE === 0) {
-                let part = Math.floor(done / PART_SIZE).toString();
-                let partZip = zip;
-                zip = new JSZip();
-                let data = await partZip.generateAsync({type: "blob"}); // 异步生成时仍能添加文件，所以必须提前创建新的zip添加后续文件
-                let href = window.URL.createObjectURL(data);
-                let a = document.createElement("a");
-                a.href = href;
-                a.download = `gis-tile-${part}.zip`;
-                a.click();
+            const data = await response.body?.getReader().read();
+            const value = data?.value;
+
+            if (value) {
+                const path = `${FOLDER_NAME}/${z}/${x}/${y}.png`;
+                const header = CreateTarHeaderBlock(path, value.length || 0);
+                const content = CreateTarDataBlock(value);
+                const entry = new Uint8Array(header.length + content.length); // 合并头部块和数据块，避免并发乱序
+                entry.set(header);
+                entry.set(content, header.length);
+                await writer.write(entry);
+                done++;
+                setProgressValue(done);
             }
         }
 
@@ -278,7 +280,6 @@ export default function GisTileDownload() {
                 for (let y = Proj.latitudeToY(area.current[1][1], z); y <= Proj.latitudeToY(area.current[0][1], z); y++) {
                     if (!downloading.current) {
                         setShowProgress(false);
-                        zip.remove(FOLDER_NAME)
                         return;
                     }
 
@@ -288,14 +289,9 @@ export default function GisTileDownload() {
         }
 
         await downloader.done();
-        let data = await zip.generateAsync({type: "blob"});
-        let href = window.URL.createObjectURL(data);
-        let a = document.createElement("a");
-        a.href = href;
-        a.download = "gis-tile.zip";
-        a.click();
+        await writer.write(CreateTarEndBlock());
+        await writer.close();
         setShowProgress(false);
-        zip.remove(FOLDER_NAME);
     }
 
     const mapDivRef = useRef<HTMLDivElement>(null);
