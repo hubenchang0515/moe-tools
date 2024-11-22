@@ -272,17 +272,24 @@ export default function GisTileDownload() {
         const errorHandler: ErrorHandler = async (x, y, z, err) => {
             setAlertMessage(`${err}`);
             setShowAlert(true);
-            await downloader.addTask(x, y, z, downloadHandler, errorHandler); // 重试
+
+            // 失败重试
+            if (downloading.current) {
+                await downloader.addTask(x, y, z, downloadHandler, errorHandler); 
+            }
         }
 
         for (let z = zoomRange[0]; z <= zoomRange[1]; z++) {
             for (let x = Proj.longitudeToX(area.current[0][0], z); x <= Proj.longitudeToX(area.current[1][0], z); x++) {
                 for (let y = Proj.latitudeToY(area.current[1][1], z); y <= Proj.latitudeToY(area.current[0][1], z); y++) {
+
+                    // 取消下载
                     if (!downloading.current) {
+                        await writer.abort();
                         setShowProgress(false);
                         return;
                     }
-
+                    
                     await downloader.addTask(x, y, z, downloadHandler, errorHandler);
                 }
             }
