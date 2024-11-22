@@ -270,12 +270,15 @@ export default function GisTileDownload() {
         }
 
         const errorHandler: ErrorHandler = async (x, y, z, err) => {
-            setAlertMessage(`${err}`);
-            setShowAlert(true);
-
-            // 失败重试
             if (downloading.current) {
+                // 失败重试
+                setAlertMessage(`${err}`);
+                setShowAlert(true);
                 await downloader.addTask(x, y, z, downloadHandler, errorHandler); 
+            } else {
+                // 取消下载
+                setAlertMessage(t("common.cancel"));
+                setShowAlert(true);
             }
         }
 
