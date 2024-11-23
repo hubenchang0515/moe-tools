@@ -14,6 +14,12 @@ export default function Home() {
     const keywords = Array.from(new Set(text.toLowerCase().split(/[,，;；\s]+/)));
     const navigate = useNavigate();
 
+    if (text.trim() === "") {
+        navigate({
+            pathname: "/",
+        });
+    }
+
     // SEO
     useEffect(() => {
         document.title = `${t("title")} - ${t("pages.search")}`;
