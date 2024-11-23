@@ -34,11 +34,18 @@ export function Canvas(props: CanvasProps, ref?:Ref<HTMLCanvasElement|null>) {
 
         config();
         document.addEventListener('fullscreenchange', config);
-        window.addEventListener('resize', config);
+
+        const observer = new ResizeObserver(() => {
+            config();
+        });
+
+        if (canvasRef.current?.parentElement) {
+            observer.observe(canvasRef.current.parentElement);
+        }
 
         return () => {
             document.removeEventListener('fullscreenchange', config);
-            window.removeEventListener('resize', config);
+            observer.disconnect();
         }
     }, [canvasRef.current]);
 
