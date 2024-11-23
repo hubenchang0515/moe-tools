@@ -112,17 +112,18 @@ export function HighlightEditor(props:HighlightEditorProps, ref?:Ref<HTMLDivElem
                     position:"absolute", 
                     top: 0, 
                     left: 0,
-                    bottom: 0,
-                    right: 0, 
+                    width: '100%',
+                    height: '100%',
                     zIndex: 2,
                     color: 'transparent',
                     background: 'transparent',
                     caretColor: '#0f0',
                     border: 'none',
                     resize: 'none',
-                    whiteSpace: 'nowrap',
+                    whiteSpace: 'pre',
                     scrollbarGutter: 'stable',
                 }}
+                wrap="soft"
                 autoFocus
                 onChange={refresh}
                 onKeyDown={onKeyDown}
