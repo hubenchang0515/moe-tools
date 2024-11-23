@@ -79,14 +79,28 @@ export default function CodeEditor() {
                                 const div = document.createElement("div");
                                 div.className = `language-${language} hljs`;
                                 div.innerHTML = codeRef.current.innerHTML;
+                                div.style.margin = '0px';
+                                div.style.padding = '8px';
+                                div.style.border = 'none';
+                                div.style.display = 'inline-block';
+                                div.style.fontFamily = 'monospace';
+                                div.style.fontSize = '16px';
+                                div.style.lineHeight = 'normal';
+                                div.style.letterSpacing = 'normal';
+                                div.style.wordSpacing = 'normal';
                                 document.body.append(div);
-                                html2canvas(div).then(async (canvas) => {
-                                    const url = canvas.toDataURL('image/png');
-                                    const link = document.createElement('a');
-                                    link.download = 'code-image.png';
-                                    link.href = url;
-                                    link.click();
-                                    URL.revokeObjectURL(link.href);
+                                html2canvas(div, {backgroundColor: '#2E342E'}).then((canvas) => {
+                                    canvas.toBlob((blob) => {
+                                        if (!blob) {
+                                            return;
+                                        }
+                                        const url = URL.createObjectURL(blob);
+                                        const link = document.createElement('a');
+                                        link.href = url;
+                                        link.download = `code-image.png`;
+                                        link.click();
+                                        URL.revokeObjectURL(url);
+                                    }, 'image/png');
                                 }).finally(() => {
                                     document.body.removeChild(div);
                                 });
