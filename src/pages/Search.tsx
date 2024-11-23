@@ -1,4 +1,4 @@
-import { Chip, Container, Divider, Grid2 as Grid, Stack, Typography } from "@mui/material";
+import { Box, Chip, Container, Divider, Grid2 as Grid, Stack, Typography } from "@mui/material";
 import ROUTES from "../routes";
 import AppCard from "../components/AppCard";
 import { useTranslation } from "react-i18next";
@@ -52,7 +52,7 @@ export default function Home() {
         <Container maxWidth="xl" sx={{marginY:2}}>
             <Stack spacing={2}>
                 <Typography variant="overline">{t("search.keywords")}</Typography>
-                <Stack direction={'row'} spacing={2} sx={{ flexWrap: 'wrap' }}>
+                <Box display={'flex'} gap={1} flexWrap={'wrap'}>
                 {
                     keywords.map((keyword, index) => {
                         return <Chip key={index} label={keyword} onDelete={() => {
@@ -66,7 +66,7 @@ export default function Home() {
                         }}/>
                     })
                 }
-                </Stack>
+                </Box>
                 {
                     routes.map((category, index) => {
                         return (
