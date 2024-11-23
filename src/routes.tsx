@@ -10,6 +10,7 @@ const MarkdownEditor = React.lazy(()=>import("./pages/MarkdownEditor"));
 const CodeEditor = React.lazy(()=>import("./pages/CodeEditor"));
 const IpLocation = React.lazy(()=>import("./pages/IpLocation"));
 const BadPixelDetection = React.lazy(()=>import("./pages/BadPixelDetection"));
+const FrameRateDetection = React.lazy(()=>import("./pages/FrameRateDetection"));
 
 interface AppItem {
     name: string;
@@ -112,6 +113,12 @@ const ROUTES: CategoryItem[] = [
                 keywords: ["monitor", "display", "screen", "bad", "pixel", "detect", "屏幕", "显示器", "坏点", "检测"],
             },
             
+            {
+                name: 'pages.frame-rate-detection',
+                url: '/frame-rate-detection',
+                element: <FrameRateDetection/>,
+                keywords: ["frame", "skip", "refresh", "rate", "fps", "detect", "屏幕", "显示器", "帧", "刷新", "检测"],
+            },
         ],
     }
 ]

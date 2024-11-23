@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Container } from "@mui/material";
+import { Alert, AlertTitle, Box, Button, Container } from "@mui/material";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Canvas from "../components/Canvas";
@@ -48,8 +48,11 @@ export default function BadPixelDetection() {
                 <Box flexGrow={1}>
                     <Canvas ref={canvasRef} onLoad={onLoad} onDraw={onDraw} onUpdate={onUpdate} onClick={onInput} onKeyDown={onInput}/>
                 </Box>
-                <Button variant="contained" onClick={() => {canvasRef.current?.requestFullscreen(); }}>开始检测</Button>
-                <Alert severity="info">{t("bad-pixel-detection.message")}</Alert>
+                <Button variant="contained" onClick={() => {canvasRef.current?.requestFullscreen(); }}>{t("common.fullscreen")}</Button>
+                <Alert severity="info">
+                    <AlertTitle><strong>{t("common.explain")}</strong></AlertTitle>
+                    {t("bad-pixel-detection.message")}
+                </Alert>
             </Box>
         </Container>
     )

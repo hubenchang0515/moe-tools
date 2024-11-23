@@ -7,6 +7,7 @@
         "close": "Close",
         "save": "Save",
         "notice": "Notice",
+        "explain": "Expain",
         "cancel": "Cancel",
         "custom": "Custom",
         "edit": "Edit",
@@ -14,7 +15,8 @@
         "preview": "Preview",
         "print": "Print",
         "import": "Import",
-        "export": "Export"
+        "export": "Export",
+        "fullscreen": "Full Screen"
     },
 
     "menu": {
@@ -68,7 +70,8 @@
         "markdown-editor": "Markdown Editor",
         "code-editor": "Code Editor",
         "ip-location": "IP Location",
-        "bad-pixel-detection": "Bad Pixel Detection"
+        "bad-pixel-detection": "Bad Pixel Detection",
+        "frame-rate-detection": "Frame Rate Detection"
     },
 
     "description": {
@@ -80,7 +83,8 @@
         "markdown-editor": "The online Markdown editor supports real-time preview, PDF export, and printing.",
         "code-editor": "The online code editor supports syntax highlighting in more than 100 languages ​​such as C, C++, Python, TypeScript, and Lua, and supports exporting code as images.",
         "ip-location": "IP location query supports querying the IP address of the machine and the location of any IP address.",
-        "bad-pixel-detection": "screen bad pixel detection"
+        "bad-pixel-detection": "screen bad pixel detection",
+        "frame-rate-detection": "screen refresh rate detection"
     },
 
     "gis-tile-download": {
@@ -129,7 +133,13 @@
     },
 
     "bad-pixel-detection": {
-        "message": "Press ESC to exit full screen, click the mouse or press any key to switch colors."
+        "message": "Click the [Full Screen] button to start the test, click the mouse or press any key to switch colors, observe whether there are spots with different colors on the monitor. Press [ESC] to exit full screen to end the test."
+    },
+
+    "frame-rate-detection": {
+        "frame-rate": "Frame Rate",
+        "refresh-rate": "Refresh Rate",
+        "message": "The white squares in the screen should move continuously. If the movement is discontinuous (a black square is skipped), it means that the monitor has a frame skip. You can take photos with a camera with a shutter speed of 1/10 second or more. If you capture less than 3 white squares, please extend the shutter speed and try again. When there are black squares between the white squares in the shot, it means that the display is skipping frames."
     },
 
     "components": {

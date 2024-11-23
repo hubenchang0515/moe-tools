@@ -7,6 +7,7 @@
         "close": "关闭",
         "save": "保存",
         "notice": "注意",
+        "explain": "说明",
         "cancel": "取消",
         "custom": "自定义",
         "edit": "编辑",
@@ -14,7 +15,8 @@
         "preview": "预览",
         "print": "打印",
         "import": "导入",
-        "export": "导出"
+        "export": "导出",
+        "fullscreen": "全屏"
     },
 
     "menu": {
@@ -68,7 +70,8 @@
         "markdown-editor": "Markdown 编辑器",
         "code-editor": "代码编辑器",
         "ip-location": "IP 位置",
-        "bad-pixel-detection": "坏点检测"
+        "bad-pixel-detection": "坏点检测",
+        "frame-rate-detection": "帧率检测"
     },
 
     "description": {
@@ -80,7 +83,8 @@
         "markdown-editor": "在线的 Markdown 编辑器，支持实时预览、导出 PDF、打印等功能。",
         "code-editor": "在线代码编辑器，支持 C、C++、Python、TypeScript、Lua 等一百多种语言的语法高亮，支持将代码导出为图片。",
         "ip-location": "IP 位置查询，支持查询本机的 IP 地址以及任意 IP 地址的属地。",
-        "bad-pixel-detection": "屏幕坏点检测"
+        "bad-pixel-detection": "显示器坏点检测",
+        "frame-rate-detection": "显示器刷新率检测"
     },
 
     "gis-tile-download": {
@@ -129,7 +133,13 @@
     },
 
     "bad-pixel-detection": {
-        "message": "按ESC退出全屏，点击鼠标或按任意键切换颜色。"
+        "message": "点击【全屏】按钮开始测试，点击鼠标或按任意键切换颜色，观察显示器是否存在颜色不同的点。按【ESC】退出全屏结束测试。"
+    },
+
+    "frame-rate-detection": {
+        "frame-rate": "帧率",
+        "refresh-rate": "刷新率",
+        "message": "画面里的白色方块应当连续移动，如果移动不连续（跳过了某个黑色方块），则说明显示器存在跳帧。可用使用快门速度 1/10 秒以上的相机拍摄，如果拍摄到小于 3 个白色方块请延长快门重新拍摄。当拍摄到的白色方块间存在黑色方块则说明显示器存在跳帧。"
     },
 
     "components": {
