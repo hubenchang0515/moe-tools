@@ -270,15 +270,17 @@ export default function GisTileDownload() {
         }
 
         const errorHandler: ErrorHandler = async (x, y, z, err) => {
-            if (downloading.current) {
-                // 失败重试
+            if (err) {
                 setAlertMessage(`${err}`);
                 setShowAlert(true);
-                await downloader.addTask(x, y, z, downloadHandler, errorHandler); 
             } else {
-                // 取消下载
-                setAlertMessage(t("common.cancel"));
+                setAlertMessage(t("gis-tile-download.message.unknown-error"));
                 setShowAlert(true);
+            }
+
+            // 失败重试
+            if (downloading.current) {
+                await downloader.addTask(x, y, z, downloadHandler, errorHandler); 
             }
         }
 
@@ -288,7 +290,7 @@ export default function GisTileDownload() {
 
                     // 取消下载
                     if (!downloading.current) {
-                        await writer.abort();
+                        await writer.abort(t("common.cancel"));
                         setShowProgress(false);
                         return;
                     }

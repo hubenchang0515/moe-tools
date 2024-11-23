@@ -101,7 +101,8 @@
         "message": {
             "please-select": "Please select the area in map to download.",
             "please-keep": "Please keep this page visible to avoid being frozen by the browser.",
-            "enter-to-confirm": "Press Enter to confirm"
+            "enter-to-confirm": "Press Enter to confirm",
+            "unknown-error": "Unknown error, may be a compatibility issue, it is recommended to use the desktop Chrome browser."
         }
     },
 

@@ -101,7 +101,8 @@
         "message": {
             "please-select": "请在地图上选择下载范围。",
             "please-keep": "请保持此页面可见，避免被浏览器冻结。",
-            "enter-to-confirm": "按回车键（Enter）确认"
+            "enter-to-confirm": "按回车键（Enter）确认",
+            "unknown-error": "未知错误，可能是兼容性问题，建议使用桌面端 Chrome 浏览器。"
         }
     },
 
