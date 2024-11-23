@@ -112,7 +112,7 @@ export default function CodeEditor() {
                 </Box>
 
                 <Autocomplete
-                    fullWidth
+                    sx={{flexGrow: 1}}
                     options={languages}
                     value={language}
                     onChange={(_, value) => setLanguage(value??"plaintext")}
