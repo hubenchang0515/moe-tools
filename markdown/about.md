@@ -17,6 +17,7 @@
 | html2canvas                 | Niklas von Hertzen niklasvh@gmail.com https://hertzen.com            | MIT          | git+ssh://git@github.com/niklasvh/html2canvas.git                   |
 | i18next                     | Jan Mühlemann <jan.muehlemann@gmail.com> (https://github.com/jamuhl) | MIT          | git+https://github.com/i18next/i18next.git                          |
 | marked                      | Christopher Jeffrey                                                  | MIT          | git://github.com/markedjs/marked.git                                |
+| mime-types                  | n/a                                                                  | MIT          | git+https://github.com/jshttp/mime-types.git                        |
 | ol                          | n/a                                                                  | BSD-2-Clause | git://github.com/openlayers/openlayers.git                          |
 | react                       | n/a                                                                  | MIT          | git+https://github.com/facebook/react.git                           |
 | react-dom                   | n/a                                                                  | MIT          | git+https://github.com/facebook/react.git                           |
@@ -24,6 +25,7 @@
 | react-router-dom            | Remix Software <hello@remix.run>                                     | MIT          | git+https://github.com/remix-run/react-router.git                   |
 | streamsaver                 | Jimmy Wärting <jimmy@warting.se>                                     | MIT          | git+https://jimmywarting@github.com/jimmywarting/StreamSaver.js.git |
 | @eslint/js                  | n/a                                                                  | MIT          | git+https://github.com/eslint/eslint.git                            |
+| @types/mime-types           | n/a                                                                  | MIT          | https://github.com/DefinitelyTyped/DefinitelyTyped.git              |
 | @types/react                | n/a                                                                  | MIT          | https://github.com/DefinitelyTyped/DefinitelyTyped.git              |
 | @types/react-dom            | n/a                                                                  | MIT          | https://github.com/DefinitelyTyped/DefinitelyTyped.git              |
 | @types/streamsaver          | n/a                                                                  | MIT          | https://github.com/DefinitelyTyped/DefinitelyTyped.git              |
