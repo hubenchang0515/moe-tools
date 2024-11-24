@@ -22,6 +22,7 @@ import ProgressDialog from '../components/ProgressDialog';
 import { Feature } from 'ol';
 import { useTranslation } from 'react-i18next';
 import { CreateTarDataBlock, CreateTarEndBlock, CreateTarHeaderBlock } from '../features/Tar';
+import * as mime from 'mime-types'
 
 
 type DownloadHandler = (x:number, y:number, z:number, response:Response)=>Promise<void>;
@@ -68,11 +69,14 @@ class XYZDownloader {
     }
 
     // Promise 表示任务添加成功，而不是下载完毕
-    addTask(x:number, y:number, z:number, callback:DownloadHandler, error:ErrorHandler): Promise<void> {
+    addTask(x:number, y:number, z:number, callback:DownloadHandler, error:ErrorHandler, retry:boolean=false): Promise<void> {
         return new Promise(async resolve => {
-            await this.available();
-            this.current++;
+            if (!retry) {
+                await this.available();
+                this.current++;
+            }
             resolve();
+
             const url = this.url.replace('{z}', `${z}`).replace('{x}', `${x}`).replace('{y}', `${y}`);
             try {
                 const response = await fetch(url);
@@ -80,7 +84,10 @@ class XYZDownloader {
             } catch (err) {
                 await error(x, y, z, err);
             }
-            this.current--;
+
+            if (!retry) {
+                this.current--;
+            }
         });
     }
 }
@@ -257,7 +264,8 @@ export default function GisTileDownload() {
             const value = data?.value;
 
             if (value) {
-                const path = `${FOLDER_NAME}/${z}/${x}/${y}.png`;
+                const ext = mime.extension(response.headers.get("content-type") || "image/png") || "png";
+                const path = `${FOLDER_NAME}/${z}/${x}/${y}.${ext}`;
                 const header = CreateTarHeaderBlock(path, value.length || 0);
                 const content = CreateTarDataBlock(value);
                 const entry = new Uint8Array(header.length + content.length); // 合并头部块和数据块，避免并发乱序
@@ -280,7 +288,7 @@ export default function GisTileDownload() {
 
             // 失败重试
             if (downloading.current) {
-                await downloader.addTask(x, y, z, downloadHandler, errorHandler); 
+                await downloader.addTask(x, y, z, downloadHandler, errorHandler, true); 
             }
         }
 
