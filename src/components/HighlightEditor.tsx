@@ -119,6 +119,7 @@ export function HighlightEditor(props:HighlightEditorProps, ref?:Ref<HTMLDivElem
                     background: 'transparent',
                     caretColor: '#0f0',
                     border: 'none',
+                    outline: 'none',
                     resize: 'none',
                     whiteSpace: 'pre',
                     scrollbarGutter: 'stable',
