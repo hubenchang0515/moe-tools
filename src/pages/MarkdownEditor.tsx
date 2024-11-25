@@ -161,7 +161,7 @@ export default function MarkdownEditor() {
                         }}
                         square
                     >
-                        <Markdown text={markdown} forceRefresh/>
+                        <Markdown text={markdown} sx={{overflow:'auto'}}/>
                     </Paper>
                 </Stack>
             </Box>

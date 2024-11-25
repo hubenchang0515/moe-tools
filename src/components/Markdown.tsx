@@ -6,7 +6,6 @@ import { Alert, AlertProps, Box, Chip, Divider, Link, Paper, SxProps, Table, Tab
 export interface MarkdownProps {
     text?: string
     url?: string
-    forceRefresh?: boolean
     sx?: SxProps<Theme>
 }
 
@@ -82,7 +81,9 @@ function MarkdownToken(props:{token:Token}):JSX.Element {
         
         case "code": {
             const token = props.token as Tokens.Code;
-            return <pre><code className={`language-${token.lang||"plaintext"}`}>{token.text}</code></pre>; 
+            const language = token.lang && hljs.getLanguage(token.lang || "plaintext") ? token.lang : "plaintext";
+            const code = hljs.highlight(token.text, {language: language, ignoreIllegals:true}).value;
+            return <pre className={`language-${language} hljs`} style={{overflow:'auto', padding: '8px'}}><code dangerouslySetInnerHTML={{__html: code}}></code></pre>; 
         }
 
         case "heading": {
@@ -130,7 +131,7 @@ function MarkdownToken(props:{token:Token}):JSX.Element {
                                             <TableCell key={index} align={item.align??undefined}>
                                                 {
                                                     item.tokens.map((token, index) => {
-                                                        return <MarkdownToken key={index} token={token}/>
+                                                        return <strong key={index}><MarkdownToken token={token}/></strong>
                                                     })
                                                 }
                                             </TableCell>
@@ -401,13 +402,9 @@ function MarkdownToken(props:{token:Token}):JSX.Element {
 }
 
 export default function Markdown(props:MarkdownProps) {
-    const [key, setKey] = useState(0);
     const [tokens, setTokens] = useState<Token[]>([]);
 
     useEffect(() => {
-        if (props.forceRefresh) {
-            setKey((key + 1) % 100);
-        }
         if (props.text !== undefined) {
             const tokens = marked.lexer(props.text, {gfm:true});
             setTokens(tokens);
@@ -423,12 +420,8 @@ export default function Markdown(props:MarkdownProps) {
         }
     }, [props.text, props.url]);
 
-    useEffect(() => {
-        hljs.highlightAll();
-    }, [tokens])
-
     return (
-        <Box className="markdown-body" key={key} sx={props.sx}>
+        <Box className="markdown-body" sx={props.sx}>
             {
                 tokens.map((token, index) => {
                     return (
