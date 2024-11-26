@@ -331,106 +331,125 @@ export default function GisTileDownload() {
     }, [theme.palette.mode, servers, choice]);
 
     // 切换地图服务器选项
+    const loading = useRef(0);
     useEffect(() => {
-        const url = choice < servers.length ? servers[choice].url : customUrl;
+        if (!mapDivRef.current) {
+            return;
+        }
 
-        // 首次初始化
-        if (mapDivRef.current && !mapRef.current) {
-            // 地图块图层
-            tileLayer.current = new TileLayer({
-                source: new XYZ({  
-                    url: url,       
+        const url = choice < servers.length ? servers[choice].url : customUrl;
+        const center = mapRef.current?.getView().getCenter() ?? fromLonLat([0, 0]);
+
+        if (mapRef.current) {
+            if (loading.current > 0) {
+                mapRef.current.dispose();
+                loading.current = 0;
+            } else {
+                tileLayer.current?.getSource()?.setUrl(url);
+                return;
+            }
+        }
+        
+        // 地图块图层
+        tileLayer.current = new TileLayer({
+            source: new XYZ({  
+                url: url,       
+                wrapX: true,
+            }),
+        });
+
+        // 渲染前设置黑暗滤镜
+        tileLayer.current?.on('prerender', (ev) => {
+            if (ev.context) {
+                const ctx = ev.context as CanvasRenderingContext2D;
+                ctx.filter = filter.current;
+            }
+        });
+
+        // 渲染后删除滤镜，避免影响其他图层
+        tileLayer.current?.on('postrender', (ev) => {
+            if (ev.context) {
+                const ctx = ev.context as CanvasRenderingContext2D;
+                ctx.filter = 'none';
+            }
+        });
+
+        // loading 计数
+        tileLayer.current?.getSource()?.on('tileloadstart', () => {
+            loading.current += 1;
+        });
+
+        tileLayer.current?.getSource()?.on('tileloadend', () => {
+            loading.current -= 1;
+        });
+
+        // 矢量源-用于绘图
+        vectorSource.current = new VectorSource();
+
+        // 矢量图层-用于显示矢量源
+        vectorLayer.current = new VectorLayer({
+            source: vectorSource.current,
+        });
+
+        let map = new Map({
+            target: mapDivRef.current,
+
+            layers: [
+                // 地图图块
+                tileLayer.current,
+
+                // 经纬度网格
+                new Graticule({
+                    strokeStyle: new Stroke({
+                        color: 'gray',
+                        width: 2,
+                        lineDash: [0.5, 4],
+                    }),
+                    showLabels: true,
                     wrapX: true,
                 }),
-            });
 
-            // 渲染前设置黑暗滤镜
-            tileLayer.current?.on('prerender', (ev) => {
-                if (ev.context) {
-                    const ctx = ev.context as CanvasRenderingContext2D;
-                    ctx.filter = filter.current;
-                }
-            });
+                // 绘图矢量图层
+                vectorLayer.current,
+            ],
 
-            // 渲染后删除滤镜，避免影响其他图层
-            tileLayer.current?.on('postrender', (ev) => {
-                if (ev.context) {
-                    const ctx = ev.context as CanvasRenderingContext2D;
-                    ctx.filter = 'none';
-                }
-            });
+            view: new View({
+                center: center,
+                zoom: 4,
+            }),
+        });
 
-            // 矢量源-用于绘图
-            vectorSource.current = new VectorSource();
+        let draw = new Draw({
+            source: vectorSource.current,
+            type: "Circle", 
+            geometryFunction: createBox(),
+            condition: (e) => e.originalEvent.buttons === 1,
+        });
 
-            // 矢量图层-用于显示矢量源
-            vectorLayer.current = new VectorLayer({
-                source: vectorSource.current,
-            });
+        // 清除绘制的图形
+        draw.on('drawstart', () => {
+            cleanDraw();
+        });
 
-            let map = new Map({
-                target: mapDivRef.current,
+        draw.on('drawabort', () => {
+            cleanDraw();
+        });
 
-                layers: [
-                    // 地图图块
-                    tileLayer.current,
+        draw.on('drawend', (ev) => {
+            const geometry = ev.feature.getGeometry() as Polygon;
+            const extent = geometry.getExtent();
+            area.current = [toLonLat([extent[0], extent[1]]), toLonLat([extent[2], extent[3]])];
+        });
 
-                    // 经纬度网格
-                    new Graticule({
-                        strokeStyle: new Stroke({
-                            color: 'gray',
-                            width: 2,
-                            lineDash: [0.5, 4],
-                        }),
-                        showLabels: true,
-                        wrapX: true,
-                    }),
+        map.addInteraction(draw);
 
-                    // 绘图矢量图层
-                    vectorLayer.current,
-                ],
+        // 右键取消绘图选取
+        map.getViewport().addEventListener('contextmenu', function (evt) {
+            evt.preventDefault(); // 阻止浏览器的默认右键菜单
+            draw.abortDrawing();  // 取消当前的绘图
+        });
 
-                view: new View({
-                    center: fromLonLat([0, 0]),
-                    zoom: 4,
-                }),
-            });
-
-            let draw = new Draw({
-                source: vectorSource.current,
-                type: "Circle", 
-                geometryFunction: createBox(),
-                condition: (e) => e.originalEvent.buttons === 1,
-            });
-
-            // 清除绘制的图形
-            draw.on('drawstart', () => {
-                cleanDraw();
-            });
-
-            draw.on('drawabort', () => {
-                cleanDraw();
-            });
-
-            draw.on('drawend', (ev) => {
-                const geometry = ev.feature.getGeometry() as Polygon;
-                const extent = geometry.getExtent();
-                area.current = [toLonLat([extent[0], extent[1]]), toLonLat([extent[2], extent[3]])];
-            });
-
-            map.addInteraction(draw);
-
-            // 右键取消绘图选取
-            map.getViewport().addEventListener('contextmenu', function (evt) {
-                evt.preventDefault(); // 阻止浏览器的默认右键菜单
-                draw.abortDrawing();  // 取消当前的绘图
-            });
-
-            mapRef.current = map;
-        } else {
-            // 地图选项变化，切换url
-            tileLayer.current?.getSource()?.setUrl(url);
-        }
+        mapRef.current = map;
     }, [servers, choice, customUrl]);
 
     // 清除框选
