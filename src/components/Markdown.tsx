@@ -22,7 +22,7 @@ function unescapeHTML(text:string) {
 }
 
 export function printMarkdown(markdown:string, iframe:HTMLIFrameElement) {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
         const renderer = new marked.Renderer();
 
         renderer.heading = ({ text, depth }) => {
@@ -52,14 +52,25 @@ export function printMarkdown(markdown:string, iframe:HTMLIFrameElement) {
                 const otherStyle = iframe.contentDocument!.createElement('style');
                 otherStyle.textContent = "code * {white-space:pre-wrap; }";
                 iframe.contentDocument!.head.append(otherStyle);
-                
-                hljsScript.onload = () => {
+
+                const resources = iframe?.contentDocument?.querySelectorAll('img, script, link');
+                const promises: Promise<void>[] = [];
+                for (const resource of resources ?? []) {
+                    promises.push(new Promise<void>((resolve, reject) => {
+                        (resource as any).onload = () => {resolve();}
+                        (resource as any).onerror = () => {reject();}
+                    }));
+                }
+
+                Promise.all(promises).then(() => {
                     const highlightAllScript = iframe.contentDocument!.createElement('script');
                     highlightAllScript.textContent = "hljs.highlightAll();";
                     iframe.contentDocument!.body.append(highlightAllScript);
                     iframe.contentWindow!.print();
-                    resolve(null);
-                }
+                    resolve();
+                }).catch((e) => {
+                    reject(e);
+                });
             } catch (e) {
                 reject(e);
             }
