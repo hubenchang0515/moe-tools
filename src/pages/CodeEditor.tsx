@@ -40,8 +40,13 @@ export default function CodeEditor() {
                             style={{
                                 clip: 'rect(0 0 0 0)',
                                 clipPath: 'inset(50%)',
-                                width: 0,
-                                height: 0,
+                                height: 1,
+                                overflow: 'hidden',
+                                position: 'absolute',
+                                bottom: 0,
+                                left: 0,
+                                whiteSpace: 'nowrap',
+                                width: 1,
                             }}
                             onChange={async (ev) =>{
                                 if (ev.target.files && ev.target.files.length > 0) {

@@ -298,7 +298,7 @@ export default function GisTileDownload() {
 
                     // 取消下载
                     if (!downloading.current) {
-                        await writer.abort(t("common.cancel"));
+                        writer.abort(t("common.cancel"));
                         setShowProgress(false);
                         return;
                     }
@@ -312,6 +312,7 @@ export default function GisTileDownload() {
         await writer.write(CreateTarEndBlock());
         await writer.close();
         setShowProgress(false);
+        downloading.current = false;
     }
 
     const mapDivRef = useRef<HTMLDivElement>(null);
