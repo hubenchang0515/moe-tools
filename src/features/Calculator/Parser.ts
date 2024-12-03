@@ -58,12 +58,11 @@ export default class Parser {
             return null;
         }
 
-        if (this.token()?.type() === 'Operator' && ['+', '-'].includes((this.token() as OperatorToken).value())) {
+        if (this.token()?.type() === 'Operator' && ['+', '-'].includes((this.token() as OperatorToken).value())) {const operator = (this.token() as OperatorToken).value();
             this.next();
-            const operator = (this.token() as OperatorToken).value();
-            const operand = this.parseItem();
+            const operand = this.parseItem() || new NumberNode(0);
             
-            return operand ? new UnaryOperationNode(operator as UnaryOperator, operand) : null;
+            return new UnaryOperationNode(operator as UnaryOperator, operand);
         }
 
         return this.parseItem();
