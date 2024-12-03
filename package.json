@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "test": "vitest"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -17,7 +18,6 @@
     "@mui/icons-material": "^6.1.4",
     "@mui/material": "^6.1.4",
     "@types/css-modules": "^1.0.5",
-    "gh-pages": "^6.2.0",
     "highlight.js": "^11.10.0",
     "html2canvas": "^1.4.1",
     "i18next": "^23.16.0",
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
+    "@types/jest": "^29.5.14",
     "@types/mime-types": "^2.1.4",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
@@ -40,9 +41,11 @@
     "eslint": "^9.11.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
+    "gh-pages": "^6.2.0",
     "globals": "^15.9.0",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.7.0",
-    "vite": "^5.4.8"
+    "vite": "^5.4.8",
+    "vitest": "^2.1.6"
   }
 }

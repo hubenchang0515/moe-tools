@@ -16,7 +16,8 @@
         "print": "打印",
         "import": "导入",
         "export": "导出",
-        "fullscreen": "全屏"
+        "fullscreen": "全屏",
+        "advance": "高级"
     },
 
     "menu": {
@@ -71,7 +72,8 @@
         "code-editor": "代码编辑器",
         "ip-location": "IP 位置",
         "bad-pixel-detection": "坏点检测",
-        "frame-rate-detection": "帧率检测"
+        "frame-rate-detection": "帧率检测",
+        "calculator": "计算器"
     },
 
     "description": {
@@ -84,7 +86,8 @@
         "code-editor": "在线代码编辑器，支持 C、C++、Python、TypeScript、Lua 等一百多种语言的语法高亮，支持将代码导出为图片。",
         "ip-location": "IP 位置查询，支持查询本机的 IP 地址以及任意 IP 地址的属地。",
         "bad-pixel-detection": "显示器坏点检测",
-        "frame-rate-detection": "显示器刷新率检测"
+        "frame-rate-detection": "显示器刷新率检测",
+        "calculator": "计算器，支持 sin, cos, tan, asin, acos, atan, lg, ln, abs, power, root, factorial, ceil, floor 和 round"
     },
 
     "gis-tile-download": {

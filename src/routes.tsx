@@ -11,6 +11,7 @@ const CodeEditor = React.lazy(()=>import("./pages/CodeEditor"));
 const IpLocation = React.lazy(()=>import("./pages/IpLocation"));
 const BadPixelDetection = React.lazy(()=>import("./pages/BadPixelDetection"));
 const FrameRateDetection = React.lazy(()=>import("./pages/FrameRateDetection"));
+const Calculator = React.lazy(()=>import("./pages/Calculator"));
 
 interface AppItem {
     name: string;
@@ -49,6 +50,13 @@ const ROUTES: CategoryItem[] = [
                 url: '/code-editor',
                 element: <CodeEditor/>,
                 keywords: ["code", "editor", "代码", "程序", "编辑", "编程"],
+            },
+
+            {
+                name: 'pages.calculator',
+                url: '/calculator',
+                element: <Calculator/>,
+                keywords: ["calc", "calculator", "sci", "science", "计算", "计算器", "科学"],
             },
 
         ],

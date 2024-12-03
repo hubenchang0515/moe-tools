@@ -1,0 +1,23 @@
+(* 表达式 *)
+expression = product, {("+"|"-"), product};
+
+(* 乘、除 *)
+product = power, {("*"|"/"), power};
+
+(* 乘方 *)
+power = root, {"^", root};
+
+(* 开方 *)
+root = [factorial], {"√", factorial};
+
+(* 阶乘 *)
+factorial = sign, {"!"};
+
+(* 正负号 *)
+sign = ({"+"|"-"}, item);
+
+(* 基本项 *)
+item = (NUMBER, [item]) | SYMBOL | ("(", expression, ")") | invoke;
+
+(* 函数调用 *)
+invoke = SYMBOL, "(", [expression], {",", expression}, ")";
