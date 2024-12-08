@@ -41,7 +41,11 @@
         "theme": "主题",
         "language": "语言",
         "advance": "高级设置",
-        "reset": "恢复初始设置"
+        "reset": "恢复初始设置",
+        "install": "安装 (PWA)",
+        "message": {
+            "pwa-not-supported": "不支持渐进式 Web 应用程序 (PWA)"
+        }
     },
     
     "theme": {

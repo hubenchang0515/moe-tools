@@ -35,6 +35,7 @@ export default function App() {
     const [theme, setTheme] = useState<string>(GlobalSettings.theme());
     const [language, setLanguage] = useState<string>(GlobalSettings.language());
     const [themeMode, setThememMode] = useState(createTheme({palette:{mode:GlobalSettings.finalTheme() as PaletteMode}}));
+    const [installPrompt, setInstallPrompt] = useState<any>(null);
     const navigate = useNavigate();
 
     const settingsChanged = (m:SettingsManager) => {
@@ -47,10 +48,19 @@ export default function App() {
 
     GlobalSettings.setChangedCallback(settingsChanged);
 
+    // 设置改变
     useEffect(() => {
         GlobalSettings.setTheme(theme as Theme);
         GlobalSettings.setLanguage(language as Language);
     }, [theme, language]);
+
+    // 获取 PWA 安装提示
+    useEffect(() => {
+        window.addEventListener("beforeinstallprompt", (event) => {
+            event.preventDefault();
+            setInstallPrompt(event);
+        });
+    }, []);
 
     // i18n
     const { t } = useTranslation();
@@ -166,7 +176,7 @@ export default function App() {
                                 <Route key="home" path="/" element={<Home/>}/>
                                 <Route key="about" path="/about" element={<About/>}/>
                                 <Route key="search" path="/search" element={<Search/>}/>
-                                <Route key="settings" path="/settings" element={<Settings/>}/>
+                                <Route key="settings" path="/settings" element={<Settings installPrompt={installPrompt}/>}/>
                                 {
                                     ROUTES.map((category) => {
                                         return category.apps.map((app) => {

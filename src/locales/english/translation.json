@@ -41,7 +41,11 @@
         "theme": "Theme",
         "language": "Language",
         "advance": "Advance",
-        "reset": "Restore Initial Settings"
+        "reset": "Restore Initial Settings",
+        "install": "Install (PWA)",
+        "message": {
+            "pwa-not-supported": "Progressive Web App (PWA) is not supported"
+        }
     },
     
     "theme": {
