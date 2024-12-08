@@ -17,8 +17,6 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export type SideMenuState = "hidden" | "collapse" | "expand";
-export type Theme = 'light'|'system'|'dark';
-export type Language = 'chinese'|'english';
 
 export interface SlideMenuItemProps {
     label: string;
@@ -48,11 +46,11 @@ export interface SlideMenuProps {
     expand?: boolean;
     onExpandChanged?: (expand:boolean) => void;
 
-    theme: Theme;
-    onThemeChanged: (theme:Theme) => void;
+    theme: string;
+    toggleTheme: (theme?:string) => void;
 
-    language: Language;
-    onLanguageChanged: (language:Language) => void;
+    language: string;
+    toggleLanguage: (language?:string) => void;
 
     entries?: SlideMenuEntries;
     children?: JSX.Element;
@@ -78,14 +76,6 @@ export default function SlideMenu(props:SlideMenuProps) {
             setSettingsExpanded(false);
         }
     }, [props.expand])
-
-    const toggleTheme = () => {
-        props.onThemeChanged(props.theme === 'light' ? 'system' : props.theme === 'system' ? 'dark' : 'light');
-    }
-
-    const toggleLanguage = () => {
-        props.onLanguageChanged(props.language === 'chinese' ? 'english' : 'chinese');
-    }
 
     const width = typeof props.width === 'string' ? props.width : `${props.width}px`
 
@@ -183,25 +173,25 @@ export default function SlideMenu(props:SlideMenuProps) {
                                 <Collapse in={props.expand && settingsExpanded} timeout="auto" unmountOnExit>
                                     <List component="div" disablePadding>
                                         <ListItem disablePadding>
-                                            <ListItemButton sx={{ pl: 4 }} onClick={toggleTheme}>
+                                            <ListItemButton sx={{ pl: 4 }} onClick={()=>props.toggleTheme()}>
                                                 <ListItemIcon>
                                                     <Brightness4Icon />
                                                 </ListItemIcon>
                                                 <ListItemText primary={t("settings.theme")} />
                                                     <Tooltip title={t("theme.light")} placement="top" arrow>
-                                                        <IconButton color={props.theme === 'light' ? 'primary' : 'inherit'} onClick={(ev) => {props.onThemeChanged('light'); ev.stopPropagation();}}>
+                                                        <IconButton color={props.theme === 'light' ? 'primary' : 'inherit'} onClick={(ev) => {props.toggleTheme('light'); ev.stopPropagation();}}>
                                                             <LightModeIcon/>
                                                         </IconButton>
                                                     </Tooltip>
 
-                                                    <Tooltip title={t("theme.system")} placement="top" arrow>
-                                                        <IconButton color={props.theme === 'system' ? 'primary' : 'inherit'} onClick={(ev) => {props.onThemeChanged('system'); ev.stopPropagation();}}>
+                                                    <Tooltip title={t("theme.auto")} placement="top" arrow>
+                                                        <IconButton color={props.theme === 'auto' ? 'primary' : 'inherit'} onClick={(ev) => {props.toggleTheme('auto'); ev.stopPropagation();}}>
                                                             <BrightnessAutoIcon/>
                                                         </IconButton>
                                                     </Tooltip>
 
                                                     <Tooltip title={t("theme.dark")} placement="top" arrow>
-                                                        <IconButton color={props.theme === 'dark' ? 'primary' : 'inherit'} onClick={(ev) => {props.onThemeChanged('dark'); ev.stopPropagation();}}>
+                                                        <IconButton color={props.theme === 'dark' ? 'primary' : 'inherit'} onClick={(ev) => {props.toggleTheme('dark'); ev.stopPropagation();}}>
                                                             <DarkModeIcon/>
                                                         </IconButton>
                                                     </Tooltip>
@@ -210,13 +200,13 @@ export default function SlideMenu(props:SlideMenuProps) {
                                         </ListItem>
 
                                         <ListItem disablePadding>
-                                            <ListItemButton sx={{ pl: 4 }} onClick={toggleLanguage}>
+                                            <ListItemButton sx={{ pl: 4 }} onClick={()=>props.toggleLanguage()}>
                                                 <ListItemIcon>
                                                     <TranslateIcon />
                                                 </ListItemIcon>
                                                 <ListItemText primary={t("settings.language")} />
                                                 <Typography>
-                                                    {props.language === 'chinese' ? "简体中文" : "English"}
+                                                    {t(`language.${props.language}`)}
                                                 </Typography>
                                             </ListItemButton>
                                         </ListItem>

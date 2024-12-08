@@ -20,6 +20,12 @@
         "advance": "Advance"
     },
 
+    "language": {
+        "chinese": "Chinese",
+        "english": "English",
+        "auto": "Auto"
+    },
+
     "menu": {
         "home": "Home",
         "apps": "Applications",
@@ -39,7 +45,7 @@
     
     "theme": {
         "light": "Light",
-        "system": "System",
+        "auto": "Auto",
         "dark": "Dark"
     },
 

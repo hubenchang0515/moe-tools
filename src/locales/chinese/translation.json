@@ -20,6 +20,12 @@
         "advance": "高级"
     },
 
+    "language": {
+        "chinese": "简体中文",
+        "english": "英文",
+        "auto": "自动"
+    },
+
     "menu": {
         "home": "主页",
         "apps": "应用",
@@ -39,7 +45,7 @@
     
     "theme": {
         "light": "明亮",
-        "system": "系统",
+        "auto": "自动",
         "dark": "黑暗"
     },
 

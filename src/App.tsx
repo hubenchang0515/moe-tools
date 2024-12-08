@@ -1,4 +1,4 @@
-import { Box, ButtonGroup, CssBaseline,ThemeProvider, Tooltip, createTheme, Button, Fab, Slide } from "@mui/material";
+import { Box, ButtonGroup, CssBaseline,ThemeProvider, Tooltip, createTheme, Button, Fab, Slide, PaletteMode } from "@mui/material";
 import CloudSyncIcon from '@mui/icons-material/CloudSync';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import BugReportIcon from '@mui/icons-material/BugReport';
@@ -7,7 +7,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import React, { Suspense, useCallback, useEffect, useRef, useState } from "react";
 
 import TitleBar from "./components/TitleBar";
-import SlideMenu, { Language, SlideMenuEntries, Theme } from "./components/SlideMenu";
+import SlideMenu, { SlideMenuEntries } from "./components/SlideMenu";
 
 import { Route, Routes, useNavigate } from "react-router-dom";
 import ROUTES from "./routes";
@@ -21,6 +21,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import '@fontsource/roboto/900.css';
+import GlobalSettings, { Language, SettingsManager, Theme } from "./settings";
 
 const Home = React.lazy(()=>import("./pages/Home"));
 const NotFound = React.lazy(()=>import("./pages/NotFound"));
@@ -30,27 +31,25 @@ const Search = React.lazy(()=>import("./pages/Search"));
 export default function App() {
     const [menuOpen, setMenuOpen] = useState<boolean>(true);
     const [menuExpand, setMenuExpand] = useState<boolean>(false);
-    const [theme, setTheme] = useState<Theme>('system');
-    const [language, setLanguage] = useState<Language>(i18n.language as Language);
+    const [theme, setTheme] = useState<string>(GlobalSettings.theme());
+    const [language, setLanguage] = useState<string>(GlobalSettings.language());
+    const [themeMode, setThememMode] = useState(createTheme({palette:{mode:GlobalSettings.finalTheme() as PaletteMode}}));
     const navigate = useNavigate();
 
-    // 系统主题
-    const systemDark = window.matchMedia("(prefers-color-scheme:dark)");
-    const [systemTheme, setSystemTheme] = useState<'light'|'dark'>(systemDark.matches ? 'dark' : 'light'); 
-    systemDark.addEventListener("change", (ev) => {setSystemTheme(ev.matches ? 'dark' : 'light')});
+    const settingsChanged = (m:SettingsManager) => {
+        setTheme(m.theme());
+        setLanguage(m.language());
 
-    // 主题配置
-    const themeMode = createTheme({
-        palette: {
-          mode: theme === 'dark' ? 'dark' : theme === 'light' ? 'light' : systemTheme,
-        },
-    });
-
-    // 语言切换
-    const setLanguageI18n = (language:Language) => {
-        setLanguage(language);
-        i18n.changeLanguage(language);
+        i18n.changeLanguage(m.finalLanguage());
+        setThememMode(createTheme({palette:{mode:m.finalTheme() as PaletteMode}}));
     }
+
+    GlobalSettings.setChangedCallback(settingsChanged);
+
+    useEffect(() => {
+        GlobalSettings.setTheme(theme as Theme);
+        GlobalSettings.setLanguage(language as Language);
+    }, [theme, language]);
 
     // i18n
     const { t } = useTranslation();
@@ -125,8 +124,8 @@ export default function App() {
                         entries={entries} 
                         onOpenChanged={(open) => setMenuOpen(open)}
                         onExpandChanged={(expand) => setMenuExpand(expand)}
-                        onThemeChanged={(theme) => setTheme(theme)} 
-                        onLanguageChanged={(language) => setLanguageI18n(language)}
+                        toggleTheme={(theme)=>GlobalSettings.toggleTheme(theme as Theme)} 
+                        toggleLanguage={(language) => GlobalSettings.toggleLanguage(language as Language)}
                     >
                         <ButtonGroup fullWidth color="inherit">
                             <Tooltip title={t('menu-bottom.sync')} placement="top" arrow>

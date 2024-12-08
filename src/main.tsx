@@ -9,6 +9,8 @@ import { initReactI18next } from 'react-i18next';
 import translationEN from './locales/english/translation.json';
 import translationZH from './locales/chinese/translation.json';
 
+import GlobalSettings from './settings';
+
 i18n.use(initReactI18next).init({
   resources: {
       english: {
@@ -18,7 +20,7 @@ i18n.use(initReactI18next).init({
           translation: translationZH,
       }
   },
-  lng: navigator.language === 'zh-CN' ? 'chinese' : 'english',
+  lng: GlobalSettings.finalLanguage(),
 });
 
 const root = ReactDOM.createRoot(
