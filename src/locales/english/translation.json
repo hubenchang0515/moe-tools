@@ -40,7 +40,8 @@
         "about": "About",
         "theme": "Theme",
         "language": "Language",
-        "advance": "Advance"
+        "advance": "Advance",
+        "reset": "Restore Initial Settings"
     },
     
     "theme": {
@@ -67,7 +68,7 @@
     "pages": {
         "home": "Home",
         "about": "About",
-        "advance": "Advance",
+        "settings": "Settings",
         "search": "Search",
         "not-found": "404",
         "gis-tile-download": "GIS Tile Download",

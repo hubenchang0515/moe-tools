@@ -11,6 +11,8 @@ export interface Settings {
 
 export type SettingsChangedCallback = (m:SettingsManager)=>void;
 
+const ITEM_KEY = "settings";
+
 export class SettingsManager {
     m_settings: Settings;
     m_matchMedia: MediaQueryList;
@@ -28,16 +30,22 @@ export class SettingsManager {
     }
 
     store() {
-        localStorage.setItem("settings", JSON.stringify(this.m_settings));
+        localStorage.setItem(ITEM_KEY, JSON.stringify(this.m_settings));
     }
 
     load() {
-        const settings = localStorage.getItem("settings");
+        const settings = localStorage.getItem(ITEM_KEY);
         if (settings) {
             this.m_settings = JSON.parse(settings);
-        }
-
+        } 
         this.setDefault();
+    }
+
+    reset() {
+        localStorage.removeItem(ITEM_KEY);
+        this.m_settings = {} as Settings;
+        this.setDefault();
+        this.m_changedCallback?.(this);
     }
 
     setDefault() {

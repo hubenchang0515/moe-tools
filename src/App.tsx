@@ -27,6 +27,7 @@ const Home = React.lazy(()=>import("./pages/Home"));
 const NotFound = React.lazy(()=>import("./pages/NotFound"));
 const About = React.lazy(()=>import("./pages/About"));
 const Search = React.lazy(()=>import("./pages/Search"));
+const Settings = React.lazy(()=>import("./pages/Settings"));
 
 export default function App() {
     const [menuOpen, setMenuOpen] = useState<boolean>(true);
@@ -118,7 +119,7 @@ export default function App() {
                         expand={menuExpand}
                         home={{label:t("menu.home"), url: "/", }}
                         about={{label:t("settings.about"), url: "/about", }}
-                        advance={{label:t("settings.advance"), url: "/advance", }}
+                        advance={{label:t("settings.advance"), url: "/settings", }}
                         theme={theme} 
                         language={language} 
                         entries={entries} 
@@ -164,7 +165,8 @@ export default function App() {
                                 <Route key="404" path="*" element={<NotFound/>}/>
                                 <Route key="home" path="/" element={<Home/>}/>
                                 <Route key="about" path="/about" element={<About/>}/>
-                                <Route key="about" path="/search" element={<Search/>}/>
+                                <Route key="search" path="/search" element={<Search/>}/>
+                                <Route key="settings" path="/settings" element={<Settings/>}/>
                                 {
                                     ROUTES.map((category) => {
                                         return category.apps.map((app) => {
