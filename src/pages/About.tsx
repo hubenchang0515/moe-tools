@@ -2,6 +2,7 @@ import { Container } from "@mui/material";
 import Markdown from "../components/Markdown";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import about from "../assets/markdown/about.md?raw";
 
 export default function About() {
     const { t } = useTranslation();
@@ -14,7 +15,7 @@ export default function About() {
     
     return (
         <Container maxWidth="xl">
-            <Markdown url="markdown/about.md"/>
+            <Markdown text={about}/>
         </Container>
     )
 }

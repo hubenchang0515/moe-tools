@@ -4,7 +4,7 @@ import AppCard from "../components/AppCard";
 import { useTranslation } from "react-i18next";
 import Markdown from "../components/Markdown";
 import { useEffect } from "react";
-
+import home from "../assets/markdown/home.md?raw";
 
 export default function Home() {
     const { t } = useTranslation();
@@ -19,7 +19,7 @@ export default function Home() {
     return (
         <Container maxWidth="xl" sx={{marginY:2}}>
             <Stack spacing={2}>
-                <Markdown url="markdown/home.md" sx={{maxHeight:'50vh', overflow:'hidden'}}/>
+                <Markdown text={home} sx={{maxHeight:'50vh', overflow:'hidden'}}/>
                 {
                     ROUTES.map((category, index) => {
                         return (
