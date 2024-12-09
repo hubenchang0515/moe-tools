@@ -24,6 +24,8 @@ function unescapeHTML(text:string) {
 export function printMarkdown(markdown:string, iframe:HTMLIFrameElement) {
     return new Promise<void>((resolve, reject) => {
         const renderer = new marked.Renderer();
+        iframe.contentDocument!.head.innerHTML = "";
+        iframe.contentDocument!.body.innerHTML = "";
 
         renderer.heading = ({ text, depth }) => {
             const id = unescapeHTML(text).replace(/\s+/g, "-");
