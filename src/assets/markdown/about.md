@@ -37,4 +37,6 @@
 | typescript                  | Microsoft Corp.                                                      | Apache-2.0   | git+https://github.com/microsoft/TypeScript.git                     |
 | typescript-eslint           | n/a                                                                  | MIT          | git+https://github.com/typescript-eslint/typescript-eslint.git      |
 | vite                        | Evan You                                                             | MIT          | git+https://github.com/vitejs/vite.git                              |
+| vite-plugin-pwa             | antfu <anthonyfu117@hotmail.com>                                     | MIT          | git+https://github.com/vite-pwa/vite-plugin-pwa.git                 |
+| vitest                      | Anthony Fu <anthonyfu117@hotmail.com>                                | MIT          | git+https://github.com:vitest-dev/vitest.git                        |
 
