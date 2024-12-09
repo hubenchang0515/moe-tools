@@ -44,6 +44,12 @@ export default function App() {
 
         i18n.changeLanguage(m.finalLanguage());
         setThememMode(createTheme({palette:{mode:m.finalTheme() as PaletteMode}}));
+
+        if (m.finalLanguage() === 'chinese') {
+            document.querySelector("html")?.setAttribute("lang", "zh");
+        } else {
+            document.querySelector("html")?.setAttribute("lang", "en");
+        }
     }
 
     GlobalSettings.setChangedCallback(settingsChanged);
