@@ -29,6 +29,7 @@
     "menu": {
         "home": "主页",
         "apps": "应用",
+        "math": "数学",
         "qt": "Qt",
         "gis": "GIS",
         "screen-detection": "屏幕检测",

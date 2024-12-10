@@ -29,6 +29,7 @@
     "menu": {
         "home": "Home",
         "apps": "Applications",
+        "math": "Math",
         "qt": "Qt",
         "gis": "GIS",
         "screen-detection": "Screen Detection",
