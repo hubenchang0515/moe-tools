@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 
-export default function Home() {
+export default function Search() {
     const { t } = useTranslation();
     const location = useLocation();
     const params = new URLSearchParams(location.search);
@@ -14,17 +14,17 @@ export default function Home() {
     const keywords = Array.from(new Set(text.toLowerCase().split(/[,，;；\s]+/)));
     const navigate = useNavigate();
 
-    if (text.trim() === "") {
-        navigate({
-            pathname: "/",
-        });
-    }
-
     // SEO
     useEffect(() => {
         document.title = `${t("title")} - ${t("pages.search")}`;
         document.querySelector('meta[name="description"]')?.setAttribute("content", t("description.base"));
     }, [t]);
+
+    if (text.trim() === "") {
+        navigate({
+            pathname: "/",
+        });
+    }
 
     const routes: (typeof ROUTES) = [];
     for (const CATEGORY of ROUTES) {
