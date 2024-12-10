@@ -1,4 +1,4 @@
-import { Box, Collapse, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Slide, Tooltip, Typography } from "@mui/material";
+import { Box, Collapse, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Slide, Tooltip, Typography } from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
 import AppsIcon from '@mui/icons-material/Apps';
 import ExtensionIcon from '@mui/icons-material/Extension';
@@ -35,7 +35,6 @@ export type SlideMenuEntries = SlideMenuGroupProps[];
 
 
 export interface SlideMenuProps {
-    width: number | string;
     home?: SlideMenuItemProps;
     about?: SlideMenuItemProps;
     advance?: SlideMenuItemProps;
@@ -75,9 +74,7 @@ export default function SlideMenu(props:SlideMenuProps) {
             setGroupExpanded(values);
             setSettingsExpanded(false);
         }
-    }, [props.expand])
-
-    const width = typeof props.width === 'string' ? props.width : `${props.width}px`
+    }, [props.expand]);
 
     return (
             <Paper 
@@ -98,8 +95,8 @@ export default function SlideMenu(props:SlideMenuProps) {
                         onExit={()=>setChildrenVisible(false)}
                     >
                         <Box sx={{
-                            width: width,
                             height: '100%',
+                            width: {xs: '100vw', sm: '320px'},
                             display:"flex", 
                             flexDirection:"column", 
                             justifyContent: "flex-start", 
@@ -120,6 +117,8 @@ export default function SlideMenu(props:SlideMenuProps) {
                                         </ListItemButton>
                                     </ListItem>
                                 }
+
+                                <Divider/>
 
                                 {
                                     props.entries?.map((group, index) => (
@@ -157,6 +156,8 @@ export default function SlideMenu(props:SlideMenuProps) {
                                     ))
                                 }
 
+                                <Divider/>
+
                                 <ListItem disablePadding>
                                     <ListItemButton onClick={() => {
                                         setSettingsExpanded(!settingsExpanded);
@@ -178,19 +179,19 @@ export default function SlideMenu(props:SlideMenuProps) {
                                                     <Brightness4Icon />
                                                 </ListItemIcon>
                                                 <ListItemText primary={t("settings.theme")} />
-                                                    <Tooltip title={t("theme.light")} placement="top" arrow>
+                                                    <Tooltip title={t("settings.themes.light")} placement="top" arrow>
                                                         <IconButton color={props.theme === 'light' ? 'primary' : 'inherit'} onClick={(ev) => {props.toggleTheme('light'); ev.stopPropagation();}}>
                                                             <LightModeIcon/>
                                                         </IconButton>
                                                     </Tooltip>
 
-                                                    <Tooltip title={t("theme.auto")} placement="top" arrow>
+                                                    <Tooltip title={t("settings.themes.auto")} placement="top" arrow>
                                                         <IconButton color={props.theme === 'auto' ? 'primary' : 'inherit'} onClick={(ev) => {props.toggleTheme('auto'); ev.stopPropagation();}}>
                                                             <BrightnessAutoIcon/>
                                                         </IconButton>
                                                     </Tooltip>
 
-                                                    <Tooltip title={t("theme.dark")} placement="top" arrow>
+                                                    <Tooltip title={t("settings.themes.dark")} placement="top" arrow>
                                                         <IconButton color={props.theme === 'dark' ? 'primary' : 'inherit'} onClick={(ev) => {props.toggleTheme('dark'); ev.stopPropagation();}}>
                                                             <DarkModeIcon/>
                                                         </IconButton>
@@ -206,7 +207,7 @@ export default function SlideMenu(props:SlideMenuProps) {
                                                 </ListItemIcon>
                                                 <ListItemText primary={t("settings.language")} />
                                                 <Typography>
-                                                    {t(`language.${props.language}`)}
+                                                    {t(`settings.languages.${props.language}`)}
                                                 </Typography>
                                             </ListItemButton>
                                         </ListItem>

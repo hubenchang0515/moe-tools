@@ -1,12 +1,15 @@
 export const Themes = ["light", "auto", "dark"] as const;
 export const Languages = ["chinese", "auto", "english"] as const;
+export const SideMenuBehaviors = ['none', 'auto-collapse', 'auto-close'] as const;
 
 export type Theme = typeof Themes[number];
 export type Language = typeof Languages[number];
+export type SideMenuBehavior = typeof SideMenuBehaviors[number];
 
 export interface Settings {
     theme: Theme;
     language: Language;
+    sideMenuBehavior: SideMenuBehavior;
 }
 
 export type SettingsChangedCallback = (m:SettingsManager)=>void;
@@ -22,10 +25,7 @@ export class SettingsManager {
 
     constructor() {
         this.m_matchMedia = window.matchMedia("(prefers-color-scheme:dark)");
-        this.m_settings = {
-            theme: "auto",
-            language: "auto",
-        };
+        this.m_settings = {} as Settings;
         this.load();
     }
 
@@ -55,6 +55,10 @@ export class SettingsManager {
 
         if (!Languages.includes(this.m_settings.language)) {
             this.m_settings.language = "auto";
+        }
+
+        if (!SideMenuBehaviors.includes(this.m_settings.sideMenuBehavior)) {
+            this.m_settings.sideMenuBehavior = "auto-collapse";
         }
     }
 
@@ -140,6 +144,27 @@ export class SettingsManager {
             this.setLanguage(Languages[to]);
         }
     }
+
+    sideMenuBehavior(): SideMenuBehavior {
+        return this.m_settings.sideMenuBehavior;
+    }
+
+    setSideMenuBehavior(sideMenuBehavior:SideMenuBehavior) {
+        this.m_settings.sideMenuBehavior = sideMenuBehavior;
+        this.m_changedCallback?.(this);
+        this.store();
+    }
+
+    toggleSideMenuBehavior(sideMenuBehavior?:SideMenuBehavior) {
+        if (sideMenuBehavior) {
+            this.setSideMenuBehavior(sideMenuBehavior)
+        } else {
+            const from = SideMenuBehaviors.indexOf(this.m_settings.sideMenuBehavior);
+            const to = (from + 1) % SideMenuBehaviors.length;
+            this.setSideMenuBehavior(SideMenuBehaviors[to]);
+        }
+    }
+        
 }
 
 const GlobalSettings: SettingsManager = new SettingsManager();

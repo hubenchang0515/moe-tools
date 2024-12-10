@@ -20,12 +20,6 @@
         "advance": "Advance"
     },
 
-    "language": {
-        "chinese": "Chinese",
-        "english": "English",
-        "auto": "Auto"
-    },
-
     "menu": {
         "home": "Home",
         "apps": "Applications",
@@ -42,17 +36,32 @@
         "theme": "Theme",
         "language": "Language",
         "advance": "Advance",
+        "side-menu-behavior": "Side Menu Behavior",
         "reset": "Restore Initial Settings",
         "install": "Install (PWA)",
-        "message": {
-            "pwa-not-supported": "Progressive Web App (PWA) is not supported"
+
+        "themes": {
+            "light": "Light",
+            "auto": "Auto",
+            "dark": "Dark"
+        },
+
+        "languages": {
+            "chinese": "Chinese",
+            "english": "English",
+            "auto": "Auto"
+        },
+
+        "side-menu-behaviors": {
+            "none": "None",
+            "auto-collapse": "Auto Collapse",
+            "auto-close": "Auto Close"
+        },
+
+        "messages": {
+            "pwa": "After installation, it can be used offline, and the browser needs to be granted permission to create desktop icons.",
+            "pwa-not-supported": "Progressive Web App (PWA) is not supported by current browser."
         }
-    },
-    
-    "theme": {
-        "light": "Light",
-        "auto": "Auto",
-        "dark": "Dark"
     },
 
     "menu-bottom": {

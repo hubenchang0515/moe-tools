@@ -20,12 +20,6 @@
         "advance": "高级"
     },
 
-    "language": {
-        "chinese": "简体中文",
-        "english": "英文",
-        "auto": "自动"
-    },
-
     "menu": {
         "home": "主页",
         "apps": "应用",
@@ -42,18 +36,35 @@
         "theme": "主题",
         "language": "语言",
         "advance": "高级设置",
+        "side-menu-behavior": "侧边菜单行为",
         "reset": "恢复初始设置",
         "install": "安装 (PWA)",
-        "message": {
-            "pwa-not-supported": "不支持渐进式 Web 应用程序 (PWA)"
+
+        "themes": {
+            "light": "明亮",
+            "auto": "自动",
+            "dark": "黑暗"
+        },
+
+        "languages": {
+            "chinese": "简体中文",
+            "english": "英文",
+            "auto": "自动"
+        },
+
+        "side-menu-behaviors": {
+            "none": "无",
+            "auto-collapse": "自动折叠",
+            "auto-close": "自动关闭"
+        },
+
+        "messages": {
+            "pwa": "安装后可离线使用，需要授权浏览器创建桌面图标。",
+            "pwa-not-supported": "当前浏览器不支持渐进式 Web 应用程序 (PWA)。"
         }
     },
     
-    "theme": {
-        "light": "明亮",
-        "auto": "自动",
-        "dark": "黑暗"
-    },
+    
 
     "menu-bottom": {
         "sync": "同步",

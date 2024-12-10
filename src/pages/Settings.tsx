@@ -8,6 +8,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import TranslateIcon from '@mui/icons-material/Translate';
 import RestoreIcon from '@mui/icons-material/Restore';
 import InstallDesktopIcon from '@mui/icons-material/InstallDesktop';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import GlobalSettings from "../settings";
 
 export interface SettingsProps {
@@ -33,19 +34,19 @@ export default function Settings(props:SettingsProps) {
                                 <Brightness4Icon />
                             </ListItemIcon>
                             <ListItemText primary={t("settings.theme")} />
-                                <Tooltip title={t("theme.light")} placement="bottom" arrow>
+                                <Tooltip title={t("settings.themes.light")} placement="bottom" arrow>
                                     <IconButton color={GlobalSettings.theme() === 'light' ? 'primary' : 'inherit'} onClick={(ev) => {GlobalSettings.toggleTheme('light'); ev.stopPropagation();}}>
                                         <LightModeIcon/>
                                     </IconButton>
                                 </Tooltip>
 
-                                <Tooltip title={t("theme.auto")} placement="bottom" arrow>
+                                <Tooltip title={t("settings.themes.auto")} placement="bottom" arrow>
                                     <IconButton color={GlobalSettings.theme() === 'auto' ? 'primary' : 'inherit'} onClick={(ev) => {GlobalSettings.toggleTheme('auto'); ev.stopPropagation();}}>
                                         <BrightnessAutoIcon/>
                                     </IconButton>
                                 </Tooltip>
 
-                                <Tooltip title={t("theme.dark")} placement="bottom" arrow>
+                                <Tooltip title={t("settings.themes.dark")} placement="bottom" arrow>
                                     <IconButton color={GlobalSettings.theme() === 'dark' ? 'primary' : 'inherit'} onClick={(ev) => {GlobalSettings.toggleTheme('dark'); ev.stopPropagation();}}>
                                         <DarkModeIcon/>
                                     </IconButton>
@@ -60,7 +61,19 @@ export default function Settings(props:SettingsProps) {
                             </ListItemIcon>
                             <ListItemText primary={t("settings.language")} />
                             <Typography>
-                                {t(`language.${GlobalSettings.language()}`)}
+                                {t(`settings.languages.${GlobalSettings.language()}`)}
+                            </Typography>
+                        </ListItemButton>
+                    </ListItem>
+
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={()=>GlobalSettings.toggleSideMenuBehavior()}>
+                            <ListItemIcon>
+                                <MenuOpenIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={t("settings.side-menu-behavior")} />
+                            <Typography>
+                                {t(`settings.side-menu-behaviors.${GlobalSettings.sideMenuBehavior()}`)}
                             </Typography>
                         </ListItemButton>
                     </ListItem>
@@ -81,7 +94,7 @@ export default function Settings(props:SettingsProps) {
                             <ListItemIcon>
                                 <InstallDesktopIcon/>
                             </ListItemIcon>
-                            <ListItemText primary={props.installPrompt ? t("settings.install") : t("settings.message.pwa-not-supported")} />
+                            <ListItemText primary={t("settings.install")} secondary={props.installPrompt? t("settings.messages.pwa") : t("settings.messages.pwa-not-supported")} />
                         </ListItemButton>
                     </ListItem>
                 </List>

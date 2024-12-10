@@ -1,4 +1,4 @@
-import { Box, ButtonGroup, CssBaseline,ThemeProvider, Tooltip, createTheme, Button, Fab, Slide, PaletteMode } from "@mui/material";
+import { Box, ButtonGroup, CssBaseline,ThemeProvider, Tooltip, createTheme, Button, Fab, Slide, PaletteMode, useTheme, useMediaQuery } from "@mui/material";
 import CloudSyncIcon from '@mui/icons-material/CloudSync';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import BugReportIcon from '@mui/icons-material/BugReport';
@@ -9,7 +9,7 @@ import React, { Suspense, useCallback, useEffect, useRef, useState } from "react
 import TitleBar from "./components/TitleBar";
 import SlideMenu, { SlideMenuEntries } from "./components/SlideMenu";
 
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import ROUTES from "./routes";
 
 import i18n from 'i18next';
@@ -30,18 +30,18 @@ const Search = React.lazy(()=>import("./pages/Search"));
 const Settings = React.lazy(()=>import("./pages/Settings"));
 
 export default function App() {
-    const [menuOpen, setMenuOpen] = useState<boolean>(true);
-    const [menuExpand, setMenuExpand] = useState<boolean>(false);
-    const [theme, setTheme] = useState<string>(GlobalSettings.theme());
-    const [language, setLanguage] = useState<string>(GlobalSettings.language());
-    const [themeMode, setThememMode] = useState(createTheme({palette:{mode:GlobalSettings.finalTheme() as PaletteMode}}));
-    const [installPrompt, setInstallPrompt] = useState<any>(null);
+    const location = useLocation();
     const navigate = useNavigate();
 
-    const settingsChanged = (m:SettingsManager) => {
-        setTheme(m.theme());
-        setLanguage(m.language());
+    const theme = useTheme();
+    
+    const [menuOpen, setMenuOpen] = useState<boolean>(true);
+    const [menuExpand, setMenuExpand] = useState<boolean>(false);
+    const [themeMode, setThememMode] = useState(createTheme({palette:{mode:GlobalSettings.finalTheme() as PaletteMode}}));
+    const [installPrompt, setInstallPrompt] = useState<any>(null);
 
+    // 设置变更回调
+    const settingsChanged = (m:SettingsManager) => {
         i18n.changeLanguage(m.finalLanguage());
         setThememMode(createTheme({palette:{mode:m.finalTheme() as PaletteMode}}));
 
@@ -54,12 +54,6 @@ export default function App() {
 
     GlobalSettings.setChangedCallback(settingsChanged);
 
-    // 设置改变
-    useEffect(() => {
-        GlobalSettings.setTheme(theme as Theme);
-        GlobalSettings.setLanguage(language as Language);
-    }, [theme, language]);
-
     // 获取 PWA 安装提示
     useEffect(() => {
         window.addEventListener("beforeinstallprompt", (event) => {
@@ -67,6 +61,19 @@ export default function App() {
             setInstallPrompt(event);
         });
     }, []);
+
+    // 小于 small 时切换页面触发侧边栏行为
+    const upsm = useMediaQuery(theme.breakpoints.up('sm'));
+    useEffect(() => {
+        if (upsm) {
+            return;
+        }
+
+        switch (GlobalSettings.sideMenuBehavior()) {
+            case "auto-collapse": return setMenuExpand(false);
+            case "auto-close": return setMenuOpen(false);
+        }
+    }, [location]);
 
     // i18n
     const { t } = useTranslation();
@@ -130,14 +137,13 @@ export default function App() {
 
                 <Box display="flex" height={`calc(100% - ${titleHeight}px)`} flexGrow={1}>
                     <SlideMenu
-                        width={320} 
                         open={menuOpen}
                         expand={menuExpand}
                         home={{label:t("menu.home"), url: "/", }}
                         about={{label:t("settings.about"), url: "/about", }}
                         advance={{label:t("settings.advance"), url: "/settings", }}
-                        theme={theme} 
-                        language={language} 
+                        theme={GlobalSettings.theme()} 
+                        language={GlobalSettings.language()} 
                         entries={entries} 
                         onOpenChanged={(open) => setMenuOpen(open)}
                         onExpandChanged={(expand) => setMenuExpand(expand)}
@@ -175,6 +181,12 @@ export default function App() {
                         overflow={"auto"} 
                         flexGrow={1} 
                         flexShrink={1} 
+                        onClick={() => {
+                            switch (GlobalSettings.sideMenuBehavior()) {
+                                case "auto-collapse": return setMenuExpand(false);
+                                case "auto-close": return setMenuOpen(false);
+                            }
+                        }}
                     >
                         <Suspense>
                             <Routes>
@@ -197,7 +209,10 @@ export default function App() {
                             <Fab 
                                 color="primary" 
                                 sx={{
-                                    position:'fixed', right:32, bottom:32
+                                    position:'fixed', 
+                                    right:32, 
+                                    bottom:32,
+                                    zIndex:10,
                                 }}
                                 onClick={()=>{
                                     mainRef.current?.scrollTo({top:0, behavior:"smooth"});
