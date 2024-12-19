@@ -260,8 +260,23 @@ export default function GisTileDownload() {
         let done = 0;
 
         const downloadHandler: DownloadHandler = async (x, y, z, response) => {
-            const data = await response.body?.getReader().read();
-            const value = data?.value;
+            const reader = response.body?.getReader();
+            let readDone = false;
+            let value = new Uint8Array();
+            while (!readDone) {
+                const data = await reader?.read();
+                if (data) {
+                    readDone = data?.done
+                    if (data.value) {
+                        const newValue = new Uint8Array(value.length + data.value.length);
+                        newValue.set(value);
+                        newValue.set(data.value, value.length);
+                        value = newValue;
+                    }
+                } else {
+                    throw "Read failed."
+                }
+            }
 
             if (value) {
                 const ext = mime.extension(response.headers.get("content-type") || "image/png") || "png";
