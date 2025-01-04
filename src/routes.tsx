@@ -99,6 +99,14 @@ const ROUTES: CategoryItem[] = [
                 element: <FramePage url="https://hubenchang0515.github.io/SvgIcons/SvgIcon.html" title="pages.svg-icon" description="description.svg-icon"/>,
                 keywords: ["qt", "svg", "icon", "图标"],
             },
+
+            {
+                name: 'pages.qt-standard-icon',
+                url: '/qt-standard-icon',
+                icon: <QtIcon/>,
+                element: <FramePage url="https://hubenchang0515.github.io/QSPP/QSPP.html" title="pages.qt-standard-icon" description="description.qt-standard-icon"/>,
+                keywords: ["qt", "standard", "pixmap", "icon", "标准", "图标"],
+            },
         ],
     },
 
