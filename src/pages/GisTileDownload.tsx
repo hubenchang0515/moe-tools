@@ -3,6 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import Map from 'ol/Map';
 import XYZ from 'ol/source/XYZ';
 import TileLayer from 'ol/layer/Tile';
@@ -569,6 +570,14 @@ export default function GisTileDownload() {
                             <Paper sx={{width: "fit-content", display: "inline-block"}} >
                                 <IconButton onClick={cleanDraw}>
                                     <CleaningServicesIcon/>
+                                </IconButton>
+                            </Paper>
+                        </Tooltip>
+
+                        <Tooltip title={t("gis-tile-download.help")}  arrow>
+                            <Paper sx={{width: "fit-content", display: "inline-block"}} >
+                                <IconButton href="https://www.bilibili.com/video/BV1jRkyYAEKT/" target="_blank">
+                                    <QuestionMarkIcon/>
                                 </IconButton>
                             </Paper>
                         </Tooltip>

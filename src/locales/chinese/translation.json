@@ -129,6 +129,7 @@
         "locate": "定位",
         "select-all": "全选",
         "clear": "清空",
+        "help": "帮助",
         "download": "下载",
         "message": {
             "please-select": "请在地图上选择下载范围。",

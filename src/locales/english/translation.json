@@ -127,6 +127,7 @@
         "locate": "Locate",
         "select-all": "Select All",
         "clear": "Clear",
+        "help": "Help",
         "download": "Download",
         "message": {
             "please-select": "Please select the area in map to download.",
