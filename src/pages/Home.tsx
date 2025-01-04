@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import Markdown from "../components/Markdown";
 import { useEffect } from "react";
 import home from "../assets/markdown/home.md?raw";
+import { visibility } from "html2canvas/dist/types/css/property-descriptors/visibility";
 
 export default function Home() {
     const { t } = useTranslation();
@@ -48,6 +49,9 @@ export default function Home() {
                         ) 
                     })
                 }
+                <Grid size={{xs:12, md: 6, lg: 3}} style={{visibility:'hidden'}}>
+                    <AppCard name="" url="" image=""/>
+                </Grid>
             </Stack>
         </Container>
     )

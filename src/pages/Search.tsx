@@ -90,6 +90,9 @@ export default function Search() {
                         ) 
                     })
                 }
+                <Grid size={{xs:12, md: 6, lg: 3}} style={{visibility:'hidden'}}>
+                    <AppCard name="" url="" image=""/>
+                </Grid>
             </Stack>
         </Container>
     )
