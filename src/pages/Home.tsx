@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import Markdown from "../components/Markdown";
 import { useEffect } from "react";
 import home from "../assets/markdown/home.md?raw";
-import { visibility } from "html2canvas/dist/types/css/property-descriptors/visibility";
 
 export default function Home() {
     const { t } = useTranslation();
