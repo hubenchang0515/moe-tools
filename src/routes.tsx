@@ -11,6 +11,8 @@ import IpIcon from "./assets/icons/IpIcon";
 import SpeedIcon from "./assets/icons/SpeedIcon";
 import ImageSearchIcon from '@mui/icons-material/ImageSearch';
 import MathIcon from "./assets/icons/MathIcon";
+import ProgrammingIcon from "./assets/icons/ProgrammingIcon";
+import RunIcon from "./assets/icons/RunIcon";
 
 const FramePage = React.lazy(()=>import("./pages/FramePage"));
 const GisTileDownload = React.lazy(()=>import("./pages/GisTileDownload"));
@@ -46,7 +48,7 @@ const ROUTES: CategoryItem[] = [
                 element: <FramePage url="https://hubenchang0515.github.io/todo/" title="pages.todo" description="description.todo"/>,
                 keywords: ["todo", "to-do", "待办", "计划"],
             },
-
+            
             {
                 name: 'pages.markdown-editor',
                 url: '/markdown-editor',
@@ -54,15 +56,29 @@ const ROUTES: CategoryItem[] = [
                 element: <MarkdownEditor/>,
                 keywords: ["markdown", "editor", "pdf", "编辑"],
             },
+        ],
+    },
 
+    {
+        name: 'menu.programming',
+        icon: <ProgrammingIcon/>,
+        apps: [
             {
                 name: 'pages.code-editor',
                 url: '/code-editor',
                 icon: <CodeIcon/>,
                 element: <CodeEditor/>,
-                keywords: ["code", "editor", "代码", "程序", "编辑", "编程"],
+                keywords: ["code", "editor", "c", "python", "lua", "代码", "程序", "编辑", "编程", "开发"],
             },
-        ],
+
+            {
+                name: 'pages.code-interpreter',
+                url: '/code-interpreter',
+                icon: <RunIcon/>,
+                element: <FramePage url="https://hubenchang0515.github.io/shift/" title="pages.code-interpreter" description="description.code-interpreter"/>,
+                keywords: ["code", "editor", "run", "exe", "c", "python", "lua", "代码", "程序", "编辑", "编程", "开发", "运行", "执行", "解释"],
+            },
+        ]
     },
 
     {

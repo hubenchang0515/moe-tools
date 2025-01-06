@@ -23,6 +23,7 @@
     "menu": {
         "home": "Home",
         "apps": "Applications",
+        "programming": "Programming",
         "math": "Math",
         "qt": "Qt",
         "gis": "GIS",
@@ -92,6 +93,7 @@
         "qt-standard-icon": "Qt Standard Icon",
         "markdown-editor": "Markdown Editor",
         "code-editor": "Code Editor",
+        "code-interpreter": "Code Interpreter",
         "ip-location": "IP Location",
         "bad-pixel-detection": "Bad Pixel Detection",
         "frame-rate-detection": "Frame Rate Detection",
@@ -107,6 +109,7 @@
         "qt-standard-icon": "Qt Standard Icon",
         "markdown-editor": "The online Markdown editor supports real-time preview, PDF export, and printing.",
         "code-editor": "The online code editor supports syntax highlighting in more than 100 languages such as C, C++, Python, TypeScript, and Lua, and supports exporting code as images.",
+        "code-interpreter": "Edit and run code script online",
         "ip-location": "IP location query supports querying the IP address of the machine and the location of any IP address.",
         "bad-pixel-detection": "screen bad pixel detection",
         "frame-rate-detection": "screen refresh rate detection",
