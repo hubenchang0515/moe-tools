@@ -173,7 +173,7 @@ const ROUTES: CategoryItem[] = [
                 url: '/frame-rate-detection',
                 icon: <SpeedIcon/>,
                 element: <FrameRateDetection/>,
-                keywords: ["frame", "skip", "refresh", "rate", "fps", "detect", "屏幕", "显示器", "帧", "刷新", "检测"],
+                keywords: ["monitor", "display", "screen", "frame", "skip", "refresh", "rate", "fps", "detect", "屏幕", "显示器", "帧", "刷新", "检测"],
             },
         ],
     }

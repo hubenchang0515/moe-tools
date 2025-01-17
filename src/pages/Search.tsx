@@ -34,10 +34,12 @@ export default function Search() {
         };
 
         for (const app of CATEGORY.apps) {
-            for (const keyword of keywords) {
-                if (app.keywords?.includes(keyword)) {
-                    category.apps.push(app);
-                    break;
+            KEYWORD: for (const keyword of keywords) {
+                for (const appKeyword of app.keywords ?? []) {
+                    if (appKeyword.includes(keyword)) {
+                        category.apps.push(app);
+                        break KEYWORD;
+                    }
                 }
             }
         }
