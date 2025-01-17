@@ -65,13 +65,14 @@ export function printMarkdown(markdown:string, iframe:HTMLIFrameElement) {
                 }
 
                 Promise.all(promises).then(() => {
+                    resolve();
+                }).catch((e) => {
+                    reject(e);
+                }).finally(() => {
                     const highlightAllScript = iframe.contentDocument!.createElement('script');
                     highlightAllScript.textContent = "hljs.highlightAll();";
                     iframe.contentDocument!.body.append(highlightAllScript);
                     iframe.contentWindow!.print();
-                    resolve();
-                }).catch((e) => {
-                    reject(e);
                 });
             } catch (e) {
                 reject(e);
