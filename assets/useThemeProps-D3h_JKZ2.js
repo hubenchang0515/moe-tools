@@ -1,1 +1,0 @@
-import{aL as o,aK as u,aM as m,aN as n,aO as h}from"./index-BsZ_TQp7.js";const p=o();function T({props:s,name:a,defaultTheme:r,themeId:t}){let e=u(r);return t&&(e=e[t]||e),m({theme:e,name:a,props:s})}function c({props:s,name:a}){return T({props:s,name:a,defaultTheme:n,themeId:h})}export{c as a,p as s,T as u};
