@@ -14,7 +14,7 @@ export interface FabMessageProps {
     onClose?: MessageBoxProps['onClose'];
     sx?: FabProps['sx'];
     fabSx?: FabProps['sx'];
-    children?: JSX.Element;
+    children?: React.ReactNode;
 }
 
 export default function FabMessage(props:FabMessageProps) {

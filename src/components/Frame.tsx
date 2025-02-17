@@ -2,7 +2,7 @@ import { Box, useTheme } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 export interface FrameProps {
     url: string;
-    children?: JSX.Element;
+    children?: React.ReactNode;
 }
 
 

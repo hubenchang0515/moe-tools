@@ -52,7 +52,7 @@ export interface SlideMenuProps {
     toggleLanguage: (language?:string) => void;
 
     entries?: SlideMenuEntries;
-    children?: JSX.Element;
+    children?: React.ReactNode;
 }
 
 export default function SlideMenu(props:SlideMenuProps) {
@@ -245,7 +245,9 @@ export default function SlideMenu(props:SlideMenuProps) {
                             {
                                 props.children && 
                                 <Slide in={props.expand && childrenVisible} direction="up" mountOnEnter unmountOnExit>
-                                    {props.children}
+                                    <Box>
+                                        {props.children}
+                                    </Box>
                                 </Slide>
                             }
                             

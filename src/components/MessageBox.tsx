@@ -6,7 +6,7 @@ export interface MessageBoxProps {
     open: boolean;
     variant?: AlertProps['variant'];
     severity?: AlertProps['severity'];
-    children?: JSX.Element;
+    children?: React.ReactNode;
     onClose: AlertProps['onClose'];
 }
 
