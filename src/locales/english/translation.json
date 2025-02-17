@@ -135,6 +135,7 @@
         "message": {
             "please-select": "Please select the area in map to download.",
             "please-keep": "Please keep this page visible to avoid being frozen by the browser.",
+            "copyright-alert": "This site only provides the download function. The tile resources are from third-party public interfaces or open source platforms. They are for learning purposes only. Please do not use them for any infringing purposes.",
             "enter-to-confirm": "Press Enter to confirm",
             "unknown-error": "Unknown error, may be a compatibility issue, it is recommended to use the desktop Chrome browser."
         }

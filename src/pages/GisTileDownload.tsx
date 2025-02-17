@@ -587,7 +587,10 @@ export default function GisTileDownload() {
                 </Stack>
             </Box>
 
-            <ProgressDialog open={showProgress} value={progressValue} max={progressMax} message={t('gis-tile-download.message.please-keep')} onCancel={() => {downloading.current=false;}}/>
+            <ProgressDialog open={showProgress} value={progressValue} max={progressMax} onCancel={() => {downloading.current=false;}}>
+                <Alert severity="info" sx={{pt:0, pb:0, mr:2}}>{t('gis-tile-download.message.please-keep')}</Alert>
+                <Alert severity="warning" sx={{pt:0, pb:0, mr:2}}>{t('gis-tile-download.message.copyright-alert')}</Alert>
+            </ProgressDialog>
             
             <Slide in={showAlert} direction="up">
                 <Snackbar open={showAlert}  autoHideDuration={2000} onClose={closeSnakebar}>
