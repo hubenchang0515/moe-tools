@@ -13,6 +13,8 @@ import ImageSearchIcon from '@mui/icons-material/ImageSearch';
 import MathIcon from "./assets/icons/MathIcon";
 import ProgrammingIcon from "./assets/icons/ProgrammingIcon";
 import RunIcon from "./assets/icons/RunIcon";
+import ImageIcon from "./assets/icons/ImageIcon";
+import ExchangeIcon from "./assets/icons/ExchangeIcon";
 
 const FramePage = React.lazy(()=>import("./pages/FramePage"));
 const GisTileDownload = React.lazy(()=>import("./pages/GisTileDownload"));
@@ -22,6 +24,7 @@ const IpLocation = React.lazy(()=>import("./pages/IpLocation"));
 const BadPixelDetection = React.lazy(()=>import("./pages/BadPixelDetection"));
 const FrameRateDetection = React.lazy(()=>import("./pages/FrameRateDetection"));
 const Calculator = React.lazy(()=>import("./pages/Calculator"));
+const ImageConvert = React.lazy(()=>import("./pages/ImageConvert"));
 
 interface AppItem {
     name: string;
@@ -176,6 +179,20 @@ const ROUTES: CategoryItem[] = [
                 keywords: ["monitor", "display", "screen", "frame", "skip", "refresh", "rate", "fps", "detect", "屏幕", "显示器", "帧", "刷新", "检测"],
             },
         ],
+    },
+
+    {
+        name: "menu.image-and-color",
+        icon: <ImageIcon/>,
+        apps: [
+            {
+                name: 'pages.image-format-convert',
+                url: '/image-format-convert',
+                icon: <ExchangeIcon/>,
+                element: <ImageConvert/>,
+                keywords: ["picture", "image", "format", "convert", "jpg", "jpeg", "png", "webp", "图片", "格式", "转换"]
+            }
+        ]
     }
 ]
 

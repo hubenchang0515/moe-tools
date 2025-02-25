@@ -17,7 +17,9 @@
         "import": "导入",
         "export": "导出",
         "fullscreen": "全屏",
-        "advance": "高级"
+        "advance": "高级",
+        "upload": "上传",
+        "download": "下载"
     },
 
     "menu": {
@@ -28,6 +30,7 @@
         "qt": "Qt",
         "gis": "GIS",
         "screen-detection": "屏幕检测",
+        "image-and-color": "图片与颜色",
         "info-query": "信息查询",
         "settings": "设置"
     },
@@ -99,7 +102,8 @@
         "ip-location": "IP 位置",
         "bad-pixel-detection": "坏点检测",
         "frame-rate-detection": "帧率检测",
-        "calculator": "计算器"
+        "calculator": "计算器",
+        "image-format-convert": "图片格式转换"
     },
 
     "description": {

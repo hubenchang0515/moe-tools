@@ -17,7 +17,9 @@
         "import": "Import",
         "export": "Export",
         "fullscreen": "Full Screen",
-        "advance": "Advance"
+        "advance": "Advance",
+        "upload": "Upload",
+        "download": "Download"
     },
 
     "menu": {
@@ -28,6 +30,7 @@
         "qt": "Qt",
         "gis": "GIS",
         "screen-detection": "Screen Detection",
+        "image-and-color": "Image & Color",
         "info-query": "Info Query",
         "settings": "Settings"
     },
@@ -97,7 +100,8 @@
         "ip-location": "IP Location",
         "bad-pixel-detection": "Bad Pixel Detection",
         "frame-rate-detection": "Frame Rate Detection",
-        "calculator": "Calculator"
+        "calculator": "Calculator",
+        "image-format-convert": "Image Format Convert"
     },
 
     "description": {
