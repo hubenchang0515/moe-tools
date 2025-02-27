@@ -2,6 +2,7 @@ import { Box, Button, Container, Paper, Table, TableBody, TableCell, TableContai
 import UploadButton from "../components/UploadButton";
 import { ChangeEvent, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { CreateIcon } from "../features/WinIcon";
 
 export default function ImageConvert() {
     const { t } = useTranslation();
@@ -36,16 +37,37 @@ export default function ImageConvert() {
                 return;
             }
 
-            canvasRef.current.toBlob((blob) => {
-                if (!blob) {
-                    return;
-                }
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = `image.${format}`;
-                link.click();
-            }, `image/${format}`, 1);
+            if (format === 'ico') {
+                canvasRef.current.toBlob((blob) => {
+                    if (!blob) {
+                        return;
+                    }
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                        const buffer:ArrayBuffer = ev.target?.result as ArrayBuffer;
+                        const ico = CreateIcon(new Uint8Array(buffer));
+                        const icoBlob = new Blob([ico]);
+                        const url = URL.createObjectURL(icoBlob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = 'image.ico';
+                        link.click();
+                    };                    
+                    
+                    reader.readAsArrayBuffer(blob);
+                }, 'image/png', 1);
+            } else {
+                canvasRef.current.toBlob((blob) => {
+                    if (!blob) {
+                        return;
+                    }
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `image.${format}`;
+                    link.click();
+                }, `image/${format}`, 1);
+            }
         }
     }, [canvasRef]);
 
@@ -86,7 +108,7 @@ export default function ImageConvert() {
                                     </Button>
                                 </TableCell>
                                 <TableCell align="center">
-                                    <Button variant='text' onClick={makeDownload('ico')} disabled>
+                                    <Button variant='text' onClick={makeDownload('ico')}>
                                         {t("common.download")}
                                     </Button>
                                 </TableCell>
