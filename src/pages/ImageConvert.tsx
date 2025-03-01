@@ -1,6 +1,6 @@
 import { Box, Button, Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import UploadButton from "../components/UploadButton";
-import { ChangeEvent, useCallback, useRef } from "react";
+import { ChangeEvent, useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { CreateIcon } from "../features/WinIcon";
 
@@ -8,6 +8,12 @@ export default function ImageConvert() {
     const { t } = useTranslation();
     const imgRef = useRef<HTMLImageElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    // SEO
+    useEffect(() => {
+        document.title = `${t("title")} - ${t("pages.image-format-convert")}`;
+        document.querySelector('meta[name="description"]')?.setAttribute("content", t("description.image-format-convert"));
+    }, [t]);
 
     const openImage = useCallback((ev:ChangeEvent<HTMLInputElement>) => {
         if (!ev.target.files || ev.target.files.length == 0) {

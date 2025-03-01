@@ -117,7 +117,8 @@
         "ip-location": "IP location query supports querying the IP address of the machine and the location of any IP address.",
         "bad-pixel-detection": "screen bad pixel detection",
         "frame-rate-detection": "screen refresh rate detection",
-        "calculator": "Calculator supports sin, cos, tan, asin, acos, atan, lg, ln, abs, power, root, factorial, ceil, floor and round"
+        "calculator": "Calculator supports sin, cos, tan, asin, acos, atan, lg, ln, abs, power, root, factorial, ceil, floor and round",
+        "image-format-convert": "Image format conversion tool, supports png, jpeg, webp and icon formats."
     },
 
     "gis-tile-download": {

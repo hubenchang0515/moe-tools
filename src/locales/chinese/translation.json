@@ -119,7 +119,8 @@
         "ip-location": "IP 位置查询，支持查询本机的 IP 地址以及任意 IP 地址的属地。",
         "bad-pixel-detection": "显示器坏点检测",
         "frame-rate-detection": "显示器刷新率检测",
-        "calculator": "计算器，支持 sin, cos, tan, asin, acos, atan, lg, ln, abs, power, root, factorial, ceil, floor 和 round"
+        "calculator": "计算器，支持 sin, cos, tan, asin, acos, atan, lg, ln, abs, power, root, factorial, ceil, floor 和 round",
+        "image-format-convert": "图片格式转换工具，支持 png，jpeg，webp 和 icon 格式。"
     },
 
     "gis-tile-download": {
