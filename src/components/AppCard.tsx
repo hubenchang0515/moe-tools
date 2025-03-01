@@ -14,7 +14,6 @@ export default function AppCard(props:AppCardProps) {
         <Card 
             sx={{ 
                 display: 'flex', 
-                height:'100%',
                 ':hover': {
                     boxShadow: 12,
                 }
@@ -22,7 +21,7 @@ export default function AppCard(props:AppCardProps) {
         >
             <CardMedia
                 component="img"
-                sx={{ width: '50%', imageRendering:'pixelated' }}
+                sx={{ width: '50%', aspectRatio:4/3, imageRendering:'pixelated', objectFit:'cover'}}
                 image={props.image}
                 alt="Live from space album cover"
             />
