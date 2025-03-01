@@ -19,7 +19,7 @@ export default function Home() {
     return (
         <Container maxWidth="xl" sx={{marginY:2}}>
             <Stack spacing={2}>
-                <Markdown text={home} sx={{maxHeight:'50vh', overflow:'hidden'}}/>
+                <Markdown text={home}/>
                 {
                     ROUTES.map((category, index) => {
                         return (
