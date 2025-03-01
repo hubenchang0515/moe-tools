@@ -19,7 +19,8 @@
         "fullscreen": "全屏",
         "advance": "高级",
         "upload": "上传",
-        "download": "下载"
+        "download": "下载",
+        "copy": "复制"
     },
 
     "menu": {
@@ -103,7 +104,8 @@
         "bad-pixel-detection": "坏点检测",
         "frame-rate-detection": "帧率检测",
         "calculator": "计算器",
-        "image-format-convert": "图片格式转换"
+        "image-format-convert": "图片格式转换",
+        "color-convert": "颜色转换"
     },
 
     "description": {
@@ -120,7 +122,8 @@
         "bad-pixel-detection": "显示器坏点检测",
         "frame-rate-detection": "显示器刷新率检测",
         "calculator": "计算器，支持 sin, cos, tan, asin, acos, atan, lg, ln, abs, power, root, factorial, ceil, floor 和 round",
-        "image-format-convert": "图片格式转换工具，支持 png，jpeg，webp 和 icon 格式。"
+        "image-format-convert": "图片格式转换工具，支持 png，jpeg，webp 和 icon 格式。",
+        "color-convert": "颜色转换工具，支持 RGB、HSL、HSV、YUV、HEX 转换，并附带常用颜色表。"
     },
 
     "gis-tile-download": {
@@ -178,6 +181,14 @@
         "frame-rate": "帧率",
         "refresh-rate": "刷新率",
         "message": "画面里的白色方块应当连续移动，如果移动不连续（跳过了某个黑色方块），则说明显示器存在跳帧。可用使用快门速度 1/10 秒以上的相机拍摄，如果拍摄到小于 3 个白色方块请延长快门重新拍摄。当拍摄到的白色方块间存在黑色方块则说明显示器存在跳帧。"
+    },
+
+    "color-convert": {
+        "hint": "点击上方色块可打开色彩选取界面，色彩选取界面中可使用拾色器。",
+        "preview": "预览",
+        "name": "名称",
+        "rgb": "RGB",
+        "hex": "#十六进制"
     },
 
     "components": {

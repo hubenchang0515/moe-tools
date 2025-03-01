@@ -15,6 +15,7 @@ import ProgrammingIcon from "./assets/icons/ProgrammingIcon";
 import RunIcon from "./assets/icons/RunIcon";
 import ImageIcon from "./assets/icons/ImageIcon";
 import ExchangeIcon from "./assets/icons/ExchangeIcon";
+import PaletteIcon from "./assets/icons/PaletteIcon";
 
 const FramePage = React.lazy(()=>import("./pages/FramePage"));
 const GisTileDownload = React.lazy(()=>import("./pages/GisTileDownload"));
@@ -25,6 +26,7 @@ const BadPixelDetection = React.lazy(()=>import("./pages/BadPixelDetection"));
 const FrameRateDetection = React.lazy(()=>import("./pages/FrameRateDetection"));
 const Calculator = React.lazy(()=>import("./pages/Calculator"));
 const ImageConvert = React.lazy(()=>import("./pages/ImageConvert"));
+const ColorConvert = React.lazy(()=>import("./pages/ColorConvert"));
 
 interface AppItem {
     name: string;
@@ -191,6 +193,14 @@ const ROUTES: CategoryItem[] = [
                 icon: <ExchangeIcon/>,
                 element: <ImageConvert/>,
                 keywords: ["picture", "image", "format", "convert", "jpg", "jpeg", "png", "webp", "图片", "格式", "转换"]
+            },
+
+            {
+                name: 'pages.color-convert',
+                url: '/color-convert',
+                icon: <PaletteIcon/>,
+                element: <ColorConvert/>,
+                keywords: ["color", "colour", "format", "convert", "rgb", "rgba", "颜色", "转换"]
             }
         ]
     }
