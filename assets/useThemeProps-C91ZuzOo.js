@@ -1,0 +1,1 @@
+import{aO as o,al as u,aP as m,aQ as n,aR as h}from"./index-BoPahCKA.js";const l=o();function T({props:s,name:a,defaultTheme:r,themeId:t}){let e=u(r);return t&&(e=e[t]||e),m({theme:e,name:a,props:s})}function p({props:s,name:a}){return T({props:s,name:a,defaultTheme:n,themeId:h})}export{p as a,l as s,T as u};
