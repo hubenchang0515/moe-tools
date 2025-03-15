@@ -50,7 +50,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.todo',
                 url: '/todo',
                 icon: <TodoIcon/>,
-                element: <FramePage url="https://hubenchang0515.github.io/todo/" title="pages.todo" description="description.todo"/>,
+                element: <FramePage url="https://xplanc.org/todo/" title="pages.todo" description="description.todo"/>,
                 keywords: ["todo", "to-do", "待办", "计划"],
             },
             
@@ -80,7 +80,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.code-interpreter',
                 url: '/code-interpreter',
                 icon: <RunIcon/>,
-                element: <FramePage url="https://hubenchang0515.github.io/shift/" title="pages.code-interpreter" description="description.code-interpreter"/>,
+                element: <FramePage url="https://xplanc.org/shift/" title="pages.code-interpreter" description="description.code-interpreter"/>,
                 keywords: ["code", "editor", "run", "exe", "c", "python", "lua", "代码", "程序", "编辑", "编程", "开发", "运行", "执行", "解释"],
             },
         ]
@@ -109,7 +109,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.qt-theme',
                 url: '/qt-theme',
                 icon: <QtIcon/>,
-                element: <FramePage url="https://hubenchang0515.github.io/QtTheme/QtTheme.html" title="pages.qt-theme" description="description.qt-theme"/>,
+                element: <FramePage url="https://xplanc.org/QtTheme/QtTheme.html" title="pages.qt-theme" description="description.qt-theme"/>,
                 keywords: ["qt", "theme", "qss", "主题", "风格"],
             },
 
@@ -117,7 +117,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.svg-icon',
                 url: '/svg-icon',
                 icon: <QtIcon/>,
-                element: <FramePage url="https://hubenchang0515.github.io/SvgIcons/SvgIcon.html" title="pages.svg-icon" description="description.svg-icon"/>,
+                element: <FramePage url="https://xplanc.org/SvgIcons/SvgIcon.html" title="pages.svg-icon" description="description.svg-icon"/>,
                 keywords: ["qt", "svg", "icon", "图标"],
             },
 
@@ -125,7 +125,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.qt-standard-icon',
                 url: '/qt-standard-icon',
                 icon: <QtIcon/>,
-                element: <FramePage url="https://hubenchang0515.github.io/QSPP/QSPP.html" title="pages.qt-standard-icon" description="description.qt-standard-icon"/>,
+                element: <FramePage url="https://xplanc.org/QSPP/QSPP.html" title="pages.qt-standard-icon" description="description.qt-standard-icon"/>,
                 keywords: ["qt", "standard", "pixmap", "icon", "标准", "图标"],
             },
         ],
