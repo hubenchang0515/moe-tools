@@ -1,0 +1,15 @@
+https://xplanc.org/moe-tools/
+https://xplanc.org/moe-tools/#/todo
+https://xplanc.org/moe-tools/#/markdown-editor
+https://xplanc.org/moe-tools/#/code-editor
+https://xplanc.org/moe-tools/
+https://xplanc.org/moe-tools/#/calculator
+https://xplanc.org/moe-tools/#/qt-theme
+https://xplanc.org/moe-tools/#/svg-icon
+https://xplanc.org/moe-tools/#/qt-standard-icon
+https://xplanc.org/moe-tools/#/gis-tile-download
+https://xplanc.org/moe-tools/#/ip-location
+https://xplanc.org/moe-tools/#/bad-pixel-detection
+https://xplanc.org/moe-tools/#/frame-rate-detection
+https://xplanc.org/moe-tools/#/image-format-convert
+https://xplanc.org/moe-tools/#/color-convert
