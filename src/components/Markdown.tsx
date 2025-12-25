@@ -2,6 +2,7 @@ import { marked, Token, Tokens } from "marked";
 import hljs from 'highlight.js';
 import { useEffect, useState } from "react";
 import { Alert, AlertProps, Box, Chip, Divider, Link, Paper, SxProps, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Theme, Typography, TypographyProps } from "@mui/material";
+import QrCode from "./QrCode";
 
 export interface MarkdownProps {
     text?: string
@@ -390,6 +391,10 @@ function MarkdownToken(props:{token:Token}):JSX.Element {
 
         case "codespan": {
             const token = props.token as Tokens.Codespan;
+            if (token.text.startsWith("!qrcode:")) {
+                return <QrCode content={token.text.slice(8)}/>
+            }
+
             return (
                 <Chip component="span" variant="outlined" color="secondary" size="small" label={unescapeHTML(token.text)}></Chip >
             );

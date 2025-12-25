@@ -40,3 +40,8 @@ code {
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+.html2canvas-div,
+.html2canvas-div * {
+  box-shadow: none !important;
+}

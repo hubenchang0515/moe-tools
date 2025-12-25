@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import HelpIcon from '@mui/icons-material/Help';
 import MessageBox from "../components/MessageBox";
 import HighlightEditor from "../components/HighlightEditor";
+import html2canvas from "html2canvas";
 import 'highlight.js/styles/nord.css';
 
 export default function MarkdownEditor() {
@@ -109,7 +110,7 @@ export default function MarkdownEditor() {
                 </Box>
                 
                 <Alert severity="info"> {t("markdown-editor.edit")} </Alert>
-                <HighlightEditor language="markdown" sx={{position: 'relative', width: '100%', overflow:'auto', flexGrow:1, flexShrink:1}} text={data} onChange={(text)=>setData(text)}/>
+                <HighlightEditor language="markdown" sx={{position: 'relative', width: '100%', overflow:'auto', flexGrow:1, flexShrink:1}} text={data} onChange={(text:string)=>setData(text)}/>
             </Box>
                 
             <Box
@@ -135,6 +136,29 @@ export default function MarkdownEditor() {
                         {t("common.refresh")}
                     </Button>
                     <Button 
+                        variant="contained"
+                        onClick={()=>{
+                            const node = document.getElementById('preview')!;
+                            node.classList.add('html2canvas-div');
+                            html2canvas(node, {backgroundColor: '#fff'}).then((canvas) => {
+                                canvas.toBlob((blob) => {
+                                    if (!blob) {
+                                        return;
+                                    }
+                                    const url = URL.createObjectURL(blob);
+                                    const link = document.createElement('a');
+                                    link.href = url;
+                                    link.download = `markdown-image.png`;
+                                    link.click();
+                                    URL.revokeObjectURL(url);
+                                    node.classList.remove('html2canvas-div');
+                                }, 'image/png');
+                            })
+                        }}
+                    >
+                        {t("png")}
+                    </Button>
+                    <Button 
                         disabled={typeof window.print !== 'function'}
                         variant="contained"
                         startIcon={exporting && <CircularProgress size={'16px'} color="inherit" />}
@@ -144,7 +168,7 @@ export default function MarkdownEditor() {
                             printMarkdown(markdown, iframe).finally(() => {setExporting(false)});
                         }}
                     >
-                        {t("common.export")}
+                        {t("pdf")}
                         
                     </Button>
 
@@ -167,7 +191,9 @@ export default function MarkdownEditor() {
                     }}
                     square
                 >
-                    <Markdown text={markdown} sx={{overflow:'auto'}}/>
+                    <Box id="preview">
+                        <Markdown text={markdown} sx={{overflow:'auto'}}/>
+                    </Box>
                 </Paper>
             </Box>
 
