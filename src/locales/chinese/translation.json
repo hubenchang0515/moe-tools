@@ -28,11 +28,13 @@
         "programming": "编程开发",
         "apps": "应用",
         "math": "数学",
+        "pdf": "PDF",
         "qt": "Qt",
         "gis": "GIS",
+        "info-query": "信息查询",
         "screen-detection": "屏幕检测",
         "image-and-color": "图片与颜色",
-        "info-query": "信息查询",
+        "test": "测试",
         "settings": "设置"
     },
 
@@ -94,6 +96,10 @@
         "not-found": "404",
         "gis-tile-download": "GIS 图块下载",
         "todo": "待办事项",
+        "pdf-download": "PDF 下载",
+        "pdf-split": "PDF 拆分",
+        "pdf-merge": "PDF 合并",
+        "pdf-to-png": "PDF 转图片",
         "qt-theme": "Qt 主题",
         "svg-icon": "Svg 图标",
         "qt-standard-icon": "Qt 标准图标",
@@ -105,13 +111,19 @@
         "frame-rate-detection": "帧率检测",
         "calculator": "计算器",
         "image-format-convert": "图片格式转换",
-        "color-convert": "颜色转换"
+        "color-convert": "颜色转换",
+        "schulte-table": "舒尔特表格",
+        "class-schedule": "制作课程表"
     },
 
     "description": {
         "base": "一个多功能的在线工具集，提供 Web 前端开发资源，GIS 开发资源，Qt 开发资源，在线代码编辑和图片导出功能，在线 Markdown 编辑和 PDF 导出功能，信息查询功能，硬件检测工具等。",
         "gis-tile-download": "GIS 图块下载，支持 Google 地图、高德地图、ArcGiS、Open Street Map、卫星影像以及自定义链接。",
         "todo": "待办事项。",
+        "pdf-download": "完全免费的 PDF 分享站点，无条件下载到本地，也可以在线预览。",
+        "pdf-split": "PDF 在线拆分，纯浏览器本地处理，同时将书签目录换算后拆分到对应的部分。",
+        "pdf-merge": "PDF 在线合并，纯浏览器本地处理，同时将书签目录换算后进行合并。",
+        "pdf-to-png": "PDF 按页拆分转换成 PNG 图片。",
         "qt-theme": "Qt 主题，在线选择、预览 Qt 主题和下载资源包。",
         "svg-icon": "Qt 兼容的 Svg 图标预览与下载。",
         "qt-standard-icon": "Qt 标准图标",
@@ -123,7 +135,8 @@
         "frame-rate-detection": "显示器刷新率检测",
         "calculator": "计算器，支持 sin, cos, tan, asin, acos, atan, lg, ln, abs, power, root, factorial, ceil, floor 和 round",
         "image-format-convert": "图片格式转换工具，支持 png，jpeg，webp 和 icon 格式。",
-        "color-convert": "颜色转换工具，支持 RGB、HSL、HSV、YUV、HEX 转换，并附带常用颜色表。"
+        "color-convert": "颜色转换工具，支持 RGB、HSL、HSV、YUV、HEX 转换，并附带常用颜色表。",
+        "schulte-table": "一种常见的注意力与视觉搜索训练工具，广泛应用于儿童专注力测试、成年人认知能力测试以及老年人大脑保健中"
     },
 
     "gis-tile-download": {

@@ -8,6 +8,7 @@ export interface MarkdownProps {
     text?: string
     url?: string
     sx?: SxProps<Theme>
+    wrap?: boolean
 }
 
 function escapeHTML(text:string) {
@@ -424,6 +425,8 @@ export default function Markdown(props:MarkdownProps) {
     const [tokens, setTokens] = useState<Token[]>([]);
 
     useEffect(() => {
+        if (props.wrap) return;
+
         if (props.text !== undefined) {
             const tokens = marked.lexer(props.text, {gfm:true});
             setTokens(tokens);
@@ -437,11 +440,12 @@ export default function Markdown(props:MarkdownProps) {
                 }
             });
         }
-    }, [props.text, props.url]);
+    }, [props.wrap, props.text, props.url]);
 
     return (
         <Box className="markdown-body" sx={props.sx}>
             {
+                props.wrap ? <div dangerouslySetInnerHTML={{__html: marked.parse(props.text??'')}}/> :
                 tokens.map((token, index) => {
                     return (
                         <MarkdownToken key={index} token={token}/>

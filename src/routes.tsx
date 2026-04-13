@@ -16,6 +16,10 @@ import RunIcon from "./assets/icons/RunIcon";
 import ImageIcon from "./assets/icons/ImageIcon";
 import ExchangeIcon from "./assets/icons/ExchangeIcon";
 import PaletteIcon from "./assets/icons/PaletteIcon";
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import TestIcon from '@mui/icons-material/Speed';
+import Grid3x3Icon from '@mui/icons-material/Grid3x3';
+import SchoolIcon from '@mui/icons-material/School';
 
 const FramePage = React.lazy(()=>import("./pages/FramePage"));
 const GisTileDownload = React.lazy(()=>import("./pages/GisTileDownload"));
@@ -50,7 +54,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.todo',
                 url: '/todo',
                 icon: <TodoIcon/>,
-                element: <FramePage url="https://xplanc.org/todo/" title="pages.todo" description="description.todo"/>,
+                element: <FramePage url="https://hubenchang0515.github.io/todo/" title="pages.todo" description="description.todo"/>,
                 keywords: ["todo", "to-do", "待办", "计划"],
             },
             
@@ -60,6 +64,14 @@ const ROUTES: CategoryItem[] = [
                 icon: <MarkdownIcon/>,
                 element: <MarkdownEditor/>,
                 keywords: ["markdown", "editor", "pdf", "编辑"],
+            },
+
+            {
+                name: 'pages.class-schedule',
+                url: '/class-schedule',
+                icon: <SchoolIcon/>,
+                element: <FramePage url="https://misc.xplanc.org/drag-class" title="pages.class-schedule" description="description.class-schedule"/>,
+                keywords: ["class", "course", "schedule", "table", "list", "课程", "表"],
             },
         ],
     },
@@ -80,7 +92,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.code-interpreter',
                 url: '/code-interpreter',
                 icon: <RunIcon/>,
-                element: <FramePage url="https://xplanc.org/shift/" title="pages.code-interpreter" description="description.code-interpreter"/>,
+                element: <FramePage url="https://hubenchang0515.github.io/shift" title="pages.code-interpreter" description="description.code-interpreter"/>,
                 keywords: ["code", "editor", "run", "exe", "c", "python", "lua", "代码", "程序", "编辑", "编程", "开发", "运行", "执行", "解释"],
             },
         ]
@@ -102,6 +114,44 @@ const ROUTES: CategoryItem[] = [
     },
 
     {
+        name: "menu.pdf",
+        icon: <PictureAsPdfIcon/>,
+        apps: [
+            {
+                name: 'pages.pdf-download',
+                url: '/pdf-download',
+                icon: <PictureAsPdfIcon/>,
+                element: <FramePage url="https://pdf-shelf.pages.dev/" title="pages.pdf-download" description="description.pdf-download"/>,
+                keywords: ["pdf", "doc", "view", "download", "文档", "预览", "下载"],
+            },
+
+            {
+                name: 'pages.pdf-split',
+                url: '/pdf-split',
+                icon: <PictureAsPdfIcon/>,
+                element: <FramePage url="https://misc.xplanc.org/pdf-split" title="pages.pdf-split" description="description.pdf-split"/>,
+                keywords: ["pdf", "doc", "split", "文档", "拆分"],
+            },
+
+            {
+                name: 'pages.pdf-merge',
+                url: '/pdf-merge',
+                icon: <PictureAsPdfIcon/>,
+                element: <FramePage url="https://misc.xplanc.org/pdf-merge" title="pages.pdf-merge" description="description.pdf-merge"/>,
+                keywords: ["pdf", "doc", "merge", "concat", "文档", "连接", "拼接", "合并"],
+            },
+
+            {
+                name: 'pages.pdf-to-png',
+                url: '/pdf-to-png',
+                icon: <PictureAsPdfIcon/>,
+                element: <FramePage url="https://misc.xplanc.org/pdf-to-png" title="pages.pdf-to-png" description="description.pdf-to-png"/>,
+                keywords: ["pdf", "doc", "convert", "png", "文档", "拆分", "转换", "图片"],
+            },
+        ],
+    },
+
+    {
         name: "menu.qt",
         icon: <QtIcon/>,
         apps: [
@@ -109,7 +159,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.qt-theme',
                 url: '/qt-theme',
                 icon: <QtIcon/>,
-                element: <FramePage url="https://xplanc.org/QtTheme/QtTheme.html" title="pages.qt-theme" description="description.qt-theme"/>,
+                element: <FramePage url="https://hubenchang0515.github.io/QtTheme" title="pages.qt-theme" description="description.qt-theme"/>,
                 keywords: ["qt", "theme", "qss", "主题", "风格"],
             },
 
@@ -117,7 +167,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.svg-icon',
                 url: '/svg-icon',
                 icon: <QtIcon/>,
-                element: <FramePage url="https://xplanc.org/SvgIcons/SvgIcon.html" title="pages.svg-icon" description="description.svg-icon"/>,
+                element: <FramePage url="https://hubenchang0515.github.io/SvgIcons/SvgIcon.html" title="pages.svg-icon" description="description.svg-icon"/>,
                 keywords: ["qt", "svg", "icon", "图标"],
             },
 
@@ -125,7 +175,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.qt-standard-icon',
                 url: '/qt-standard-icon',
                 icon: <QtIcon/>,
-                element: <FramePage url="https://xplanc.org/QSPP/QSPP.html" title="pages.qt-standard-icon" description="description.qt-standard-icon"/>,
+                element: <FramePage url="https://hubenchang0515.github.io/QSPP/QSPP.html" title="pages.qt-standard-icon" description="description.qt-standard-icon"/>,
                 keywords: ["qt", "standard", "pixmap", "icon", "标准", "图标"],
             },
         ],
@@ -202,6 +252,20 @@ const ROUTES: CategoryItem[] = [
                 element: <ColorConvert/>,
                 keywords: ["color", "colour", "format", "convert", "rgb", "rgba", "颜色", "转换"]
             }
+        ]
+    },
+
+    {
+        name: "menu.test",
+        icon: <TestIcon/>,
+        apps: [
+            {
+                name: 'pages.schulte-table',
+                url: '/schulte-table',
+                icon: <Grid3x3Icon/>,
+                element: <FramePage url="https://misc.xplanc.org/schulte-grid" title="pages.schulte-table" description="description.schulte-table"/>,
+                keywords: ["schulte", "table", "test", "舒尔特", "表格", "测试"],
+            },
         ]
     }
 ]

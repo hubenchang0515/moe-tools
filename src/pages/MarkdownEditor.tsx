@@ -192,7 +192,7 @@ export default function MarkdownEditor() {
                     square
                 >
                     <Box id="preview">
-                        <Markdown text={markdown} sx={{overflow:'auto'}}/>
+                        <Markdown text={markdown} sx={{overflow:'auto'}} wrap/>
                     </Box>
                 </Paper>
             </Box>
