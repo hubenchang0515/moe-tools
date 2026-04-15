@@ -62,7 +62,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.markdown-editor',
                 url: '/markdown-editor',
                 icon: <MarkdownIcon/>,
-                element: <MarkdownEditor/>,
+                element: <FramePage url="https://hubenchang0515.github.io/markdown-editor/" title="pages.markdown-editor" description="description.markdown-editor"/>,
                 keywords: ["markdown", "editor", "pdf", "编辑"],
             },
 

@@ -127,7 +127,7 @@
         "qt-theme": "Qt 主题，在线选择、预览 Qt 主题和下载资源包。",
         "svg-icon": "Qt 兼容的 Svg 图标预览与下载。",
         "qt-standard-icon": "Qt 标准图标",
-        "markdown-editor": "在线的 Markdown 编辑器，支持实时预览、导出 PDF、打印等功能。",
+        "markdown-editor": "在线的 Markdown 编辑器，支持实时预览、复制 HTML、导出 PDF、打印等功能。",
         "code-editor": "在线代码编辑器，支持 C、C++、Python、TypeScript、Lua 等一百多种语言的语法高亮，支持将代码导出为图片。",
         "code-interpreter": "在线编辑和运行代码脚本",
         "ip-location": "IP 位置查询，支持查询本机的 IP 地址以及任意 IP 地址的属地。",
