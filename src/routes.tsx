@@ -23,7 +23,7 @@ import SchoolIcon from '@mui/icons-material/School';
 
 const FramePage = React.lazy(()=>import("./pages/FramePage"));
 const GisTileDownload = React.lazy(()=>import("./pages/GisTileDownload"));
-const MarkdownEditor = React.lazy(()=>import("./pages/MarkdownEditor"));
+// const MarkdownEditor = React.lazy(()=>import("./pages/MarkdownEditor"));
 const CodeEditor = React.lazy(()=>import("./pages/CodeEditor"));
 const IpLocation = React.lazy(()=>import("./pages/IpLocation"));
 const BadPixelDetection = React.lazy(()=>import("./pages/BadPixelDetection"));
