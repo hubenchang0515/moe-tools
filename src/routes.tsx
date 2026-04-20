@@ -20,6 +20,7 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import TestIcon from '@mui/icons-material/Speed';
 import Grid3x3Icon from '@mui/icons-material/Grid3x3';
 import SchoolIcon from '@mui/icons-material/School';
+import CompressIcon from '@mui/icons-material/Compress';
 
 const FramePage = React.lazy(()=>import("./pages/FramePage"));
 const GisTileDownload = React.lazy(()=>import("./pages/GisTileDownload"));
@@ -237,6 +238,14 @@ const ROUTES: CategoryItem[] = [
         name: "menu.image-and-color",
         icon: <ImageIcon/>,
         apps: [
+            {
+                name: 'pages.compression-to-image',
+                url: '/compression-to-image',
+                icon: <CompressIcon/>,
+                element: <FramePage url="https://hubenchang0515.github.io/ai-misc/compression-image.html" title="pages.compression-to-image" description="description.compression-to-image"/>,
+                keywords: ["picture", "image", "compression", "zip", "rar", "7z", "png", "jpg", "gif", "压缩", "伪装", "图片"],
+            },
+
             {
                 name: 'pages.image-format-convert',
                 url: '/image-format-convert',

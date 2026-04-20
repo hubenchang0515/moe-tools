@@ -113,7 +113,8 @@
         "image-format-convert": "图片格式转换",
         "color-convert": "颜色转换",
         "schulte-table": "舒尔特表格",
-        "class-schedule": "制作课程表"
+        "class-schedule": "制作课程表",
+        "compression-to-image": "压缩包伪装图片"
     },
 
     "description": {
@@ -136,7 +137,8 @@
         "calculator": "计算器，支持 sin, cos, tan, asin, acos, atan, lg, ln, abs, power, root, factorial, ceil, floor 和 round",
         "image-format-convert": "图片格式转换工具，支持 png，jpeg，webp 和 icon 格式。",
         "color-convert": "颜色转换工具，支持 RGB、HSL、HSV、YUV、HEX 转换，并附带常用颜色表。",
-        "schulte-table": "一种常见的注意力与视觉搜索训练工具，广泛应用于儿童专注力测试、成年人认知能力测试以及老年人大脑保健中"
+        "schulte-table": "一种常见的注意力与视觉搜索训练工具，广泛应用于儿童专注力测试、成年人认知能力测试以及老年人大脑保健中",
+        "compression-to-image": "将压缩包压缩包伪装成图片"
     },
 
     "gis-tile-download": {
