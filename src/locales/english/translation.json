@@ -102,7 +102,7 @@
         "svg-icon": "Svg Icon",
         "qt-standard-icon": "Qt Standard Icon",
         "markdown-editor": "Markdown Editor",
-        "code-editor": "Code Editor",
+        "code-editor": "Code to Image",
         "code-interpreter": "Code Interpreter",
         "ip-location": "IP Location",
         "bad-pixel-detection": "Bad Pixel Detection",
@@ -112,7 +112,7 @@
         "color-convert": "Color Convert",
         "schulte-table": "Schulte Table",
         "class-schedule": "Class Schedule",
-        "compression-to-image": "Compression To Image"
+        "compression-to-image": "Compression to Image"
     },
 
     "description": {
