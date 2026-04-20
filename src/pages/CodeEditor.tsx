@@ -32,7 +32,7 @@ export default function CodeEditor() {
         >
 
             <Box display={"flex"} gap={2} flexWrap={'wrap'}>
-                <Box display={"flex"} flexDirection={"column"} justifyContent={"center"}>
+                <Box display={"flex"} justifyContent={"center"} alignItems={"center"} gap={1}>
                     <Button variant="contained" component="label">
                         {t("common.open")}
                         <input 
@@ -57,9 +57,6 @@ export default function CodeEditor() {
                             }}
                         />
                     </Button>
-                </Box>
-                
-                <Box display={"flex"} flexDirection={"column"} justifyContent={"center"}>
                     <Button 
                         variant="contained"
                         onClick={()=>{
@@ -74,11 +71,9 @@ export default function CodeEditor() {
                     >
                         {t("common.save")}
                     </Button>
-                </Box>
-
-                <Box display={"flex"} flexDirection={"column"} justifyContent={"center"}>
                     <Button 
                         variant="contained"
+                        color="success"
                         onClick={()=>{
                             if (codeRef.current) {
                                 const div = document.createElement("div");
@@ -113,6 +108,43 @@ export default function CodeEditor() {
                         }}
                     >
                         {t("common.export")}
+                    </Button>
+                    <Button 
+                        variant="contained"
+                        color="success"
+                        onClick={()=>{
+                            if (codeRef.current) {
+                                const div = document.createElement("div");
+                                div.className = `language-${language} hljs`;
+                                div.innerHTML = codeRef.current.innerHTML;
+                                div.style.margin = '0px';
+                                div.style.padding = '8px';
+                                div.style.border = 'none';
+                                div.style.display = 'inline-block';
+                                div.style.fontFamily = 'monospace';
+                                div.style.fontSize = '16px';
+                                div.style.lineHeight = 'normal';
+                                div.style.letterSpacing = 'normal';
+                                div.style.wordSpacing = 'normal';
+                                document.body.append(div);
+                                html2canvas(div, {backgroundColor: '#2E342E'}).then((canvas) => {
+                                    canvas.toBlob((blob) => {
+                                        if (!blob) {
+                                            return;
+                                        }
+                                        navigator.clipboard.write([
+                                            new ClipboardItem({
+                                                [blob.type]: blob,
+                                            })
+                                        ]);
+                                    }, 'image/png');
+                                }).finally(() => {
+                                    document.body.removeChild(div);
+                                });
+                            }
+                        }}
+                    >
+                        {t("common.copy")}
                     </Button>
                 </Box>
 
