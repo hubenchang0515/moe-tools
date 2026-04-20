@@ -116,7 +116,8 @@
         "schulte-table": "舒尔特表格",
         "class-schedule": "制作课程表",
         "compression-to-image": "压缩包伪装图片",
-        "metronome": "节拍器"
+        "metronome": "节拍器",
+        "mirage-image": "幻影坦克"
     },
 
     "description": {
@@ -141,7 +142,8 @@
         "color-convert": "颜色转换工具，支持 RGB、HSL、HSV、YUV、HEX 转换，并附带常用颜色表。",
         "schulte-table": "一种常见的注意力与视觉搜索训练工具，广泛应用于儿童专注力测试、成年人认知能力测试以及老年人大脑保健中",
         "compression-to-image": "将压缩包压缩包伪装成图片",
-        "metronome": "Metronome, supporting tempo adjustment and measure division."
+        "metronome": "节拍器，支持速率调节和小节划分",
+        "mirage-image": "利用色阶分割与对角线像素排列，实现不同背景下的隐藏图片效果"
     },
 
     "gis-tile-download": {

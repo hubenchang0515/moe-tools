@@ -22,6 +22,7 @@ import Grid3x3Icon from '@mui/icons-material/Grid3x3';
 import SchoolIcon from '@mui/icons-material/School';
 import CompressIcon from '@mui/icons-material/Compress';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import LayersIcon from '@mui/icons-material/Layers';
 
 const FramePage = React.lazy(()=>import("./pages/FramePage"));
 const GisTileDownload = React.lazy(()=>import("./pages/GisTileDownload"));
@@ -245,6 +246,14 @@ const ROUTES: CategoryItem[] = [
                 icon: <CompressIcon/>,
                 element: <FramePage url="https://hubenchang0515.github.io/ai-misc/compression-image.html" title="pages.compression-to-image" description="description.compression-to-image"/>,
                 keywords: ["picture", "image", "compression", "zip", "rar", "7z", "png", "jpg", "gif", "压缩", "伪装", "图片"],
+            },
+
+            {
+                name: 'pages.mirage-image',
+                url: '/mirage-image',
+                icon: <LayersIcon/>,
+                element: <FramePage url="https://hubenchang0515.github.io/ai-misc/mirage-image.html" title="pages.mirage-image" description="description.mirage-image"/>,
+                keywords: ["picture", "image", "mirage", "phantom", "hide", "图片", "隐藏", "合成", "幻影"],
             },
 
             {

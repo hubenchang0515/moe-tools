@@ -114,7 +114,8 @@
         "schulte-table": "Schulte Table",
         "class-schedule": "Class Schedule",
         "compression-to-image": "Compression to Image",
-        "metronome": "Metronome"
+        "metronome": "Metronome",
+        "mirage-image": "Mirage Image"
     },
 
     "description": {
@@ -139,7 +140,8 @@
         "color-convert": "Color conversion tool, supports RGB, HSL, HSV, YUV, HEX conversion, and comes with commonly used color tables.",
         "schulte-table": "A common attention and visual search training tool, widely used in children's attention tests, adult cognitive ability tests, and brain health care for the elderly.",
         "compression-to-image": "Disguising a compressed package as an image.",
-        "metronome": "Metronome"
+        "metronome": "Metronome, supporting tempo adjustment and measure division.",
+        "mirage-image": "By using color level segmentation and diagonal pixel arrangement, the effect of hiding images against different backgrounds can be achieved."
     },
 
     "gis-tile-download": {
