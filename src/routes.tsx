@@ -21,6 +21,7 @@ import TestIcon from '@mui/icons-material/Speed';
 import Grid3x3Icon from '@mui/icons-material/Grid3x3';
 import SchoolIcon from '@mui/icons-material/School';
 import CompressIcon from '@mui/icons-material/Compress';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
 const FramePage = React.lazy(()=>import("./pages/FramePage"));
 const GisTileDownload = React.lazy(()=>import("./pages/GisTileDownload"));
@@ -261,6 +262,20 @@ const ROUTES: CategoryItem[] = [
                 element: <ColorConvert/>,
                 keywords: ["color", "colour", "format", "convert", "rgb", "rgba", "颜色", "转换"]
             }
+        ]
+    },
+
+    {
+        name: "menu.music",
+        icon: <MusicNoteIcon/>,
+        apps: [
+            {
+                name: 'pages.metronome',
+                url: '/metronome',
+                icon: <MusicNoteIcon/>,
+                element: <FramePage url="https://hubenchang0515.github.io/ai-misc/metronome.html" title="pages.metronome" description="description.metronome"/>,
+                keywords: ["music", "metronome", "音乐", "节拍器"],
+            },
         ]
     },
 

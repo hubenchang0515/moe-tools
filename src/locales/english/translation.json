@@ -34,6 +34,7 @@
         "info-query": "Info Query",
         "screen-detection": "Screen Detection",
         "image-and-color": "Image & Color",
+        "music": "Music",
         "test": "Test",
         "settings": "Settings"
     },
@@ -112,7 +113,8 @@
         "color-convert": "Color Convert",
         "schulte-table": "Schulte Table",
         "class-schedule": "Class Schedule",
-        "compression-to-image": "Compression to Image"
+        "compression-to-image": "Compression to Image",
+        "metronome": "Metronome"
     },
 
     "description": {
@@ -136,7 +138,8 @@
         "image-format-convert": "Image format conversion tool, supports png, jpeg, webp and icon formats.",
         "color-convert": "Color conversion tool, supports RGB, HSL, HSV, YUV, HEX conversion, and comes with commonly used color tables.",
         "schulte-table": "A common attention and visual search training tool, widely used in children's attention tests, adult cognitive ability tests, and brain health care for the elderly.",
-        "compression-to-image": "Disguising a compressed package as an image."
+        "compression-to-image": "Disguising a compressed package as an image.",
+        "metronome": "Metronome"
     },
 
     "gis-tile-download": {
