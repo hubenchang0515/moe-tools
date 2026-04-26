@@ -23,6 +23,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import CompressIcon from '@mui/icons-material/Compress';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import LayersIcon from '@mui/icons-material/Layers';
+import QrCodeIcon from '@mui/icons-material/QrCode';
 
 const FramePage = React.lazy(()=>import("./pages/FramePage"));
 const GisTileDownload = React.lazy(()=>import("./pages/GisTileDownload"));
@@ -75,6 +76,14 @@ const ROUTES: CategoryItem[] = [
                 icon: <SchoolIcon/>,
                 element: <FramePage url="https://misc.xplanc.org/drag-class" title="pages.class-schedule" description="description.class-schedule"/>,
                 keywords: ["class", "course", "schedule", "table", "list", "课程", "表"],
+            },
+
+            {
+                name: 'pages.qrcode',
+                url: '/qrcode',
+                icon: <QrCodeIcon/>,
+                element: <FramePage url="https://hubenchang0515.github.io/ai-misc/qrcode" title="pages.qrcode" description="description.qrcode"/>,
+                keywords: ["qr", "code", "generate", "parse", "encode", "decode", "二维", "码", "生成", "解析"],
             },
         ],
     },
@@ -270,6 +279,14 @@ const ROUTES: CategoryItem[] = [
                 icon: <PaletteIcon/>,
                 element: <ColorConvert/>,
                 keywords: ["color", "colour", "format", "convert", "rgb", "rgba", "颜色", "转换"]
+            },
+
+            {
+                name: 'pages.verification-code',
+                url: '/verification-code',
+                icon: <PaletteIcon/>,
+                element: <FramePage url="https://hubenchang0515.github.io/ai-misc/verification-code" title="pages.verification-code" description="description.verification-code"/>,
+                keywords: ["verification", "code", "generate", "验证码", "生成"]
             }
         ]
     },

@@ -117,7 +117,9 @@
         "class-schedule": "制作课程表",
         "compression-to-image": "压缩包伪装图片",
         "metronome": "节拍器",
-        "mirage-image": "幻影坦克"
+        "mirage-image": "幻影坦克",
+        "qrcode": "二维码生成和解析",
+        "verification-code": "验证码生成"
     },
 
     "description": {
@@ -143,7 +145,9 @@
         "schulte-table": "一种常见的注意力与视觉搜索训练工具，广泛应用于儿童专注力测试、成年人认知能力测试以及老年人大脑保健中",
         "compression-to-image": "将压缩包压缩包伪装成图片",
         "metronome": "节拍器，支持速率调节和小节划分",
-        "mirage-image": "利用色阶分割与对角线像素排列，实现不同背景下的隐藏图片效果"
+        "mirage-image": "利用色阶分割与对角线像素排列，实现不同背景下的隐藏图片效果",
+        "qrcode": "生成或解析二维码，支持上传图片或输入图片链接解析",
+        "verification-code": "生成随机或指定内容的验证码"
     },
 
     "gis-tile-download": {
