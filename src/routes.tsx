@@ -284,7 +284,7 @@ const ROUTES: CategoryItem[] = [
             {
                 name: 'pages.verification-code',
                 url: '/verification-code',
-                icon: <PaletteIcon/>,
+                icon: <ImageIcon/>,
                 element: <FramePage url="https://hubenchang0515.github.io/ai-misc/verification-code" title="pages.verification-code" description="description.verification-code"/>,
                 keywords: ["verification", "code", "generate", "验证码", "生成"]
             }
