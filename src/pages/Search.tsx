@@ -4,6 +4,7 @@ import AppCard from "../components/AppCard";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { longestCommonSubstring } from "../features/Text";
 
 
 export default function Search() {
@@ -36,7 +37,8 @@ export default function Search() {
         for (const app of CATEGORY.apps) {
             KEYWORD: for (const keyword of keywords) {
                 for (const appKeyword of app.keywords ?? []) {
-                    if (appKeyword.includes(keyword)) {
+                    console.log(keyword, appKeyword, longestCommonSubstring(keyword, appKeyword).length / keyword.length);
+                    if (appKeyword.includes(keyword) || keyword.includes(appKeyword) || (longestCommonSubstring(keyword, appKeyword).length / appKeyword.length) > 0.75) {
                         category.apps.push(app);
                         break KEYWORD;
                     }
