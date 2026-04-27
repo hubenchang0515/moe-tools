@@ -74,7 +74,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.class-schedule',
                 url: '/class-schedule',
                 icon: <SchoolIcon/>,
-                element: <FramePage url="https://misc.xplanc.org/drag-class" title="pages.class-schedule" description="description.class-schedule"/>,
+                element: <FramePage url="https://hubenchang0515.github.io/ai-misc/drag-class" title="pages.class-schedule" description="description.class-schedule"/>,
                 keywords: ["class", "course", "schedule", "table", "list", "课程", "表"],
             },
 
@@ -141,7 +141,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.pdf-split',
                 url: '/pdf-split',
                 icon: <PictureAsPdfIcon/>,
-                element: <FramePage url="https://misc.xplanc.org/pdf-split" title="pages.pdf-split" description="description.pdf-split"/>,
+                element: <FramePage url="https://hubenchang0515.github.io/ai-misc/pdf-split" title="pages.pdf-split" description="description.pdf-split"/>,
                 keywords: ["pdf", "doc", "split", "文档", "拆分"],
             },
 
@@ -149,7 +149,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.pdf-merge',
                 url: '/pdf-merge',
                 icon: <PictureAsPdfIcon/>,
-                element: <FramePage url="https://misc.xplanc.org/pdf-merge" title="pages.pdf-merge" description="description.pdf-merge"/>,
+                element: <FramePage url="https://hubenchang0515.github.io/ai-misc/pdf-merge" title="pages.pdf-merge" description="description.pdf-merge"/>,
                 keywords: ["pdf", "doc", "merge", "concat", "文档", "连接", "拼接", "合并"],
             },
 
@@ -157,7 +157,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.pdf-to-png',
                 url: '/pdf-to-png',
                 icon: <PictureAsPdfIcon/>,
-                element: <FramePage url="https://misc.xplanc.org/pdf-to-png" title="pages.pdf-to-png" description="description.pdf-to-png"/>,
+                element: <FramePage url="https://hubenchang0515.github.io/ai-misc/pdf-to-png" title="pages.pdf-to-png" description="description.pdf-to-png"/>,
                 keywords: ["pdf", "doc", "convert", "png", "文档", "拆分", "转换", "图片"],
             },
         ],
@@ -313,7 +313,7 @@ const ROUTES: CategoryItem[] = [
                 name: 'pages.schulte-table',
                 url: '/schulte-table',
                 icon: <Grid3x3Icon/>,
-                element: <FramePage url="https://misc.xplanc.org/schulte-grid" title="pages.schulte-table" description="description.schulte-table"/>,
+                element: <FramePage url="https://hubenchang0515.github.io/ai-misc/schulte-grid" title="pages.schulte-table" description="description.schulte-table"/>,
                 keywords: ["schulte", "table", "test", "舒尔特", "表格", "测试"],
             },
         ]

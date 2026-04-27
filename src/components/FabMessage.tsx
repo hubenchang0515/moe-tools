@@ -1,7 +1,7 @@
 
 import { Box, Fab, FabProps } from "@mui/material";
-import MessageIcon from '@mui/icons-material/Message';
 import MessageBox, { MessageBoxProps } from "./MessageBox";
+import PriorityHighSharpIcon from '@mui/icons-material/PriorityHighSharp';
 
 export interface FabMessageProps {
     open: boolean
@@ -24,8 +24,9 @@ export default function FabMessage(props:FabMessageProps) {
                 color={props.severity}
                 sx={props.fabSx}
                 onClick={props.onOpen}
+                size="small"
             >
-                { props.icon ?? <MessageIcon /> }
+                { props.icon ?? <PriorityHighSharpIcon fontSize="medium"/> }
             </Fab>
             <MessageBox 
                 title={props.title}
