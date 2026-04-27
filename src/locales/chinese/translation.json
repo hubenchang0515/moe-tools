@@ -119,7 +119,8 @@
         "metronome": "节拍器",
         "mirage-image": "幻影坦克",
         "qrcode": "二维码生成和解析",
-        "verification-code": "验证码生成"
+        "verification-code": "验证码生成",
+        "random": "随机数生成器"
     },
 
     "description": {
@@ -147,7 +148,8 @@
         "metronome": "节拍器，支持速率调节和小节划分",
         "mirage-image": "利用色阶分割与对角线像素排列，实现不同背景下的隐藏图片效果",
         "qrcode": "生成或解析二维码，支持上传图片或输入图片链接解析",
-        "verification-code": "生成随机或指定内容的验证码"
+        "verification-code": "生成随机或指定内容的验证码",
+        "random": "批量生成随机数值、字符串或 UUID"
     },
 
     "gis-tile-download": {

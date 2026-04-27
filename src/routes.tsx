@@ -122,6 +122,13 @@ const ROUTES: CategoryItem[] = [
                 keywords: ["calc", "calculator", "sci", "science", "计算", "计算器", "科学"],
             },
 
+            {
+                name: 'pages.random',
+                url: '/random',
+                icon: <CalculatorIcon/>,
+                element: <FramePage url="https://hubenchang0515.github.io/ai-misc/random" title="pages.random" description="description.random"/>,
+                keywords: ["random", "number", "generate", "随机", "数", "生成器"],
+            },
         ],
     },
 

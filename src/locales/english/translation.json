@@ -117,7 +117,8 @@
         "metronome": "Metronome",
         "mirage-image": "Mirage Image",
         "qrcode": "QR Code",
-        "verification-code": "Verification Code"
+        "verification-code": "Verification Code",
+        "random": "Random Generator"
     },
 
     "description": {
@@ -145,7 +146,8 @@
         "metronome": "Metronome, supporting tempo adjustment and measure division.",
         "mirage-image": "By using color level segmentation and diagonal pixel arrangement, the effect of hiding images against different backgrounds can be achieved.",
         "qrcode": "QR code generation and parsing.",
-        "verification-code": "Generate verification code images with random or specified content."
+        "verification-code": "Generate verification code images with random or specified content.",
+        "random": "Batch generate random numbers, strings, or UUIDs."
     },
 
     "gis-tile-download": {
