@@ -22,6 +22,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import '@fontsource/roboto/900.css';
 import GlobalSettings, { Language, SettingsManager, Theme } from "./settings";
+import { cyan } from "@mui/material/colors";
 
 const Home = React.lazy(()=>import("./pages/Home"));
 const NotFound = React.lazy(()=>import("./pages/NotFound"));
@@ -37,13 +38,13 @@ export default function App() {
     
     const [menuOpen, setMenuOpen] = useState<boolean>(true);
     const [menuExpand, setMenuExpand] = useState<boolean>(false);
-    const [themeMode, setThememMode] = useState(createTheme({palette:{mode:GlobalSettings.finalTheme() as PaletteMode}}));
+    const [themeMode, setThememMode] = useState(createTheme({palette:{mode:GlobalSettings.finalTheme() as PaletteMode, info: cyan}}));
     const [installPrompt, setInstallPrompt] = useState<any>(null);
 
     // 设置变更回调
     const settingsChanged = (m:SettingsManager) => {
         i18n.changeLanguage(m.finalLanguage());
-        setThememMode(createTheme({palette:{mode:m.finalTheme() as PaletteMode}}));
+        setThememMode(createTheme({palette:{mode:m.finalTheme() as PaletteMode, info: cyan}}));
 
         if (m.finalLanguage() === 'chinese') {
             document.querySelector("html")?.setAttribute("lang", "zh");

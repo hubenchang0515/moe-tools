@@ -1,6 +1,5 @@
 import { Card, CardContent, Grid2, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
-import { teal } from "@mui/material/colors";
 
 export interface AppCardProps {
     icon: JSX.Element;
@@ -25,9 +24,9 @@ export default function AppCard(props:AppCardProps) {
                 border: `1px solid ${theme.palette.divider}`,
                 color: theme.palette.text.secondary,
                 ':hover': {
-                    color: theme.palette.mode === 'light' ? teal['A700'] : teal['A400'],
-                    background: theme.palette.action.hover,
-                    boxShadow: 12,
+                    borderColor: theme.palette.info.main,
+                    color: theme.palette.info.main,
+                    boxShadow: `0 0 6px ${theme.palette.info.main}`,
                 }
             }}
             component={Link}
