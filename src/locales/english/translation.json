@@ -142,6 +142,7 @@
         "image-format-convert": "Image format conversion tool, supports png, jpeg, webp and icon formats.",
         "color-convert": "Color conversion tool, supports RGB, HSL, HSV, YUV, HEX conversion, and comes with commonly used color tables.",
         "schulte-table": "A common attention and visual search training tool, widely used in children's attention tests, adult cognitive ability tests, and brain health care for the elderly.",
+        "class-schedule": "Create a timetable, providing preset course names or allowing manual input, and supports printing.",
         "compression-to-image": "Disguising a compressed package as an image.",
         "metronome": "Metronome, supporting tempo adjustment and measure division.",
         "mirage-image": "By using color level segmentation and diagonal pixel arrangement, the effect of hiding images against different backgrounds can be achieved.",

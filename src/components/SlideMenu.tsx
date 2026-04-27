@@ -82,7 +82,7 @@ export default function SlideMenu(props:SlideMenuProps) {
                     borderRadius: 0,
                     zIndex:99,
                 }}
-                elevation={12}
+                elevation={1}
                 square
             >
                 <Collapse sx={{height: '100%'}} orientation="horizontal" in={props.open}>

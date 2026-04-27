@@ -9,7 +9,7 @@ export interface SearchInputProps {
 export default function SearchInput(props:SearchInputProps) {
     const [text, setText] = useState<string>("");
     return (
-        <Paper sx={{display: "flex", pl:2, flexShrink: 1}} elevation={0}>
+        <Paper sx={{display: "flex", pl:2, flexShrink:1}} elevation={0}>
             <InputBase 
                 sx={{ minWidth: 0,flexShrink: 1}}
                 value={text} 

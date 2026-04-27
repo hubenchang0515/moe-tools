@@ -15,7 +15,7 @@ export interface TitleBarProps {
 export function TitleBar(props:TitleBarProps, ref?:Ref<unknown>) {
     return (
         <Box ref={ref}>
-            <AppBar component="nav" color="primary" elevation={24}>
+            <AppBar component="nav" color="primary" elevation={0}>
                 <Toolbar>
                     <IconButton
                         size="large"

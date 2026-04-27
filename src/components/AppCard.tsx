@@ -1,42 +1,59 @@
-import { Box, Card, CardContent, CardMedia, IconButton, Typography } from "@mui/material";
-import LaunchIcon from '@mui/icons-material/Launch';
+import { Card, CardContent, Grid2, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
+import { teal } from "@mui/material/colors";
 
 export interface AppCardProps {
+    icon: JSX.Element;
     name: string;
+    desc: string;
     url: string;
-    image: string;
     onLaunch?: ()=>void;
 }
 
 export default function AppCard(props:AppCardProps) {
+    const theme = useTheme();
     return (
         <Card 
+            className="AppCard"
+            elevation={0}
             sx={{ 
-                display: 'flex', 
+                display: 'flex',
+                boxShadow: 'none',
+                flexDirection: 'column',
+                textDecoration: 'none',
+                borderRadius: 4,
+                border: `1px solid ${theme.palette.divider}`,
+                color: theme.palette.text.secondary,
                 ':hover': {
+                    color: theme.palette.mode === 'light' ? teal['A700'] : teal['A400'],
+                    background: theme.palette.action.hover,
                     boxShadow: 12,
                 }
             }}
+            component={Link}
+            to={props.url}
+            onClick={props.onLaunch}
         >
-            <CardMedia
-                component="img"
-                sx={{ width: '50%', aspectRatio:4/3, imageRendering:'pixelated', objectFit:'cover'}}
-                image={props.image}
-                alt="Live from space album cover"
-            />
-            <Box sx={{ flexGrow:1, display: 'flex', flexDirection: 'column' }}>
-                <CardContent sx={{ flex: '1 0 auto' }}>
-                <Typography component="div" variant="subtitle1">
-                    {props.name}
-                </Typography>
-                </CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent:'end', p: 1}}>
-                    <IconButton component={Link} to={props.url} onClick={props.onLaunch}>
-                        <LaunchIcon/>
-                    </IconButton>
-                </Box>
-            </Box>
+            <CardContent>
+                <Grid2 container spacing={1}>
+                    <Grid2 size={1} alignSelf='center' justifyItems='center'>
+                        <Typography sx={{display:'flex', alignItems:'center'}}>
+                            {props.icon}
+                        </Typography>
+                    </Grid2>
+                    <Grid2 size={11} alignSelf='center' >
+                        <Typography component="p" variant="h6" noWrap>
+                            {props.name}
+                        </Typography>
+                    </Grid2>
+                    {/* <Grid2 size={1}/> */}
+                    <Grid2 size={12}>
+                        <Typography component="div" variant="body2" sx={{lineHeight:1.1, height:'3.3em', overflow:'hidden'}}>
+                            {props.desc}
+                        </Typography>
+                    </Grid2>
+                </Grid2>
+            </CardContent>
         </Card>
     )
 }

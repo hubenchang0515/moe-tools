@@ -144,6 +144,7 @@
         "image-format-convert": "图片格式转换工具，支持 png，jpeg，webp 和 icon 格式。",
         "color-convert": "颜色转换工具，支持 RGB、HSL、HSV、YUV、HEX 转换，并附带常用颜色表。",
         "schulte-table": "一种常见的注意力与视觉搜索训练工具，广泛应用于儿童专注力测试、成年人认知能力测试以及老年人大脑保健中",
+        "class-schedule": "提供预设的课程名称，也可手动输入，并且支持打印。",
         "compression-to-image": "将压缩包压缩包伪装成图片",
         "metronome": "节拍器，支持速率调节和小节划分",
         "mirage-image": "利用色阶分割与对角线像素排列，实现不同背景下的隐藏图片效果",

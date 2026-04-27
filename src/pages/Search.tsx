@@ -51,7 +51,6 @@ export default function Search() {
         }
     }
 
-    let i = 0;
     return (
         <Container maxWidth="xl" sx={{marginY:2}}>
             <Stack spacing={2}>
@@ -75,28 +74,25 @@ export default function Search() {
                     routes.map((category, index) => {
                         return (
                             <Stack key={index} spacing={2}>
-                                <Typography variant="h6">
+                                <Typography variant="h5">
                                     {t(category.name)}
                                 </Typography>
-                                <Divider/>
                                 <Grid container spacing={2}>
                                     {
                                         category.apps.map((app, index) => {
                                             return (
                                                 <Grid size={{xs:12, md: 6, lg: 3}} key={index}>
-                                                    <AppCard name={t(app.name)} url={app.url} key={index} image={`https://www.dmoe.cc/random.php?key=${i++}`}/>
+                                                    <AppCard icon={app.icon} name={t(app.name)} desc={t(app.desc)} url={app.url} key={index}/>
                                                 </Grid>
                                             )
                                         })
                                     }
                                 </Grid>
+                                {index + 1 < routes.length && <Box py={2}><Divider/></Box>}
                             </Stack>
                         ) 
                     })
                 }
-                <Grid size={{xs:12, md: 6, lg: 3}} style={{visibility:'hidden'}}>
-                    <AppCard name="" url="" image=""/>
-                </Grid>
             </Stack>
         </Container>
     )
