@@ -15,10 +15,8 @@ export default function FramePage(props: FramePageProps) {
 
     // 同源检查,设置警示信息：告知跨域时 iframe 会有一些限制，建议访问源页面
     const url = new URL(props.url);
-    const severity = window.location.origin === url.origin ? "info" : "warning";
-    const openImmediately = () => ["warning", "error"].includes(severity);
-    const [messageOpen, setMessageOpen] = useState<boolean>(openImmediately());
-    // useEffect(()=>setMessageOpen(openImmediately()), [props.url, severity]);
+    const crossOrigin = window.location.origin !== url.origin;
+    const [messageOpen, setMessageOpen] = useState<boolean>(false);
 
     // SEO
     useEffect(() => {
@@ -33,13 +31,13 @@ export default function FramePage(props: FramePageProps) {
                 open={messageOpen} 
                 title={t("common.notice")}
                 content={t("frame.warning-message")}
-                severity={severity} 
+                severity="warning" 
                 variant="standard"
                 onOpen={()=>setMessageOpen(true)} 
-                fabSx={{position:'absolute', top: 32, right:32, zIndex:10}}
+                fabSx={{display: crossOrigin?'display':'none', position:'absolute', top: 32, right:32, zIndex:10}}
             >
                 <Box display="flex" gap={1} justifyContent='flex-end'>
-                    <Button variant="contained" color={severity} href={url.toString()} target="_blank">{t("frame.go-to-source-page")}</Button>
+                    <Button variant="contained" color="warning" href={url.toString()} target="_blank">{t("frame.go-to-source-page")}</Button>
                     <Button variant="text" color="inherit" onClick={()=>setMessageOpen(false)}>{t("common.close")}</Button>
                 </Box>
             </FabMessage>
