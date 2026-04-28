@@ -27,6 +27,7 @@
         "home": "Home",
         "apps": "Applications",
         "programming": "Programming",
+        "bash": "Bash",
         "math": "Math",
         "pdf": "PDF",
         "qt": "Qt",
@@ -118,27 +119,28 @@
         "mirage-image": "Mirage Image",
         "qrcode": "QR Code",
         "verification-code": "Verification Code",
-        "random": "Random Generator"
+        "random": "Random Generator",
+        "curl": "cURL Generator"
     },
 
     "description": {
         "base": "A versatile online toolset that provides Web front-end development resources, GIS development resources, Qt development resources, online code editing and image export functions, online Markdown editing and PDF export functions, information query functions, hardware detection tools, etc.",
         "gis-tile-download": "GIS Tile Download, Supports Google Maps, Amap, ArcGiS, Open Street Map, satellite images and custom links.",
-        "todo": "To-do list.",
+        "todo": "A task list for data security, using IndexedDB to store data locally and supporting cross-device synchronization via PeerJS.",
         "pdf-download": "A completely free PDF sharing site. You can download PDFs to your local device without any restrictions, or preview them online.",
         "pdf-split": "Online PDF splitting, purely browser-based processing, while also converting bookmarks and indexes before splitting into corresponding parts.",
         "pdf-merge": "Online PDF merging, purely browser-based processing, with bookmarks converted before merging.",
-        "pdf-to-png": "PDF split into pages and converted into PNG images",
+        "pdf-to-png": "PDF split into pages and converted into PNG images.",
         "qt-theme": "Qt theme, select, preview Qt themes and download resource package online.",
         "svg-icon": "Qt compatible Svg icon preview and download.",
-        "qt-standard-icon": "Qt Standard Icon",
+        "qt-standard-icon": "Qt standard icon preview and name copying.",
         "markdown-editor": "The online Markdown editor supports real-time preview, PDF export, and printing.",
         "code-editor": "The online code editor supports syntax highlighting in more than 100 languages such as C, C++, Python, TypeScript, and Lua, and supports exporting code as images.",
-        "code-interpreter": "Edit and run code script online",
+        "code-interpreter": "Edit and run code script online.",
         "ip-location": "IP location query supports querying the IP address of the machine and the location of any IP address.",
-        "bad-pixel-detection": "screen bad pixel detection",
-        "frame-rate-detection": "screen refresh rate detection",
-        "calculator": "Calculator supports sin, cos, tan, asin, acos, atan, lg, ln, abs, power, root, factorial, ceil, floor and round",
+        "bad-pixel-detection": "screen bad pixel detection.",
+        "frame-rate-detection": "screen refresh rate detection.",
+        "calculator": "Calculator supports sin, cos, tan, asin, acos, atan, lg, ln, abs, power, root, factorial, ceil, floor and round.",
         "image-format-convert": "Image format conversion tool, supports png, jpeg, webp and icon formats.",
         "color-convert": "Color conversion tool, supports RGB, HSL, HSV, YUV, HEX conversion, and comes with commonly used color tables.",
         "schulte-table": "A common attention and visual search training tool, widely used in children's attention tests, adult cognitive ability tests, and brain health care for the elderly.",
@@ -148,7 +150,8 @@
         "mirage-image": "By using color level segmentation and diagonal pixel arrangement, the effect of hiding images against different backgrounds can be achieved.",
         "qrcode": "QR code generation and parsing.",
         "verification-code": "Generate verification code images with random or specified content.",
-        "random": "Batch generate random numbers, strings, or UUIDs."
+        "random": "Batch generate random numbers, strings, or UUIDs.",
+        "curl": "A visual cURL command generator."
     },
 
     "gis-tile-download": {

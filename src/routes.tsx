@@ -25,6 +25,7 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import LayersIcon from '@mui/icons-material/Layers';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import ShuffleSharpIcon from '@mui/icons-material/ShuffleSharp';
+import KeyboardCommandKeyIcon from '@mui/icons-material/KeyboardCommandKey';
 
 const FramePage = React.lazy(()=>import("./pages/FramePage"));
 const GisTileDownload = React.lazy(()=>import("./pages/GisTileDownload"));
@@ -117,6 +118,23 @@ const ROUTES: CategoryItem[] = [
             },
         ]
     },
+
+    {
+        name: 'menu.bash',
+        icon: <KeyboardCommandKeyIcon/>,
+        apps: [
+
+            {
+                icon: <KeyboardCommandKeyIcon/>,
+                name: 'pages.curl',
+                desc: 'description.curl',
+                url: '/curl',
+                element: <FramePage url="https://hubenchang0515.github.io/ai-misc/curl" title="pages.curl" description="description.curl"/>,
+                keywords: ["linux", "unix", "shell", "bash", "curl", "generate", "命令", "生成"],
+            },
+        ]
+    },
+
 
     {
         name: "menu.math",

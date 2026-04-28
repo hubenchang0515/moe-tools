@@ -1,5 +1,6 @@
 import { Box, useTheme } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
+import GlobalSettings from "../settings";
 export interface FrameProps {
     url: string;
     children?: React.ReactNode;
@@ -11,6 +12,7 @@ export default function Frame(props:FrameProps) {
     const url = new URL(props.url);
     const theme = useTheme();
     url.searchParams.set('theme', theme.palette.mode);
+    url.searchParams.set('language', GlobalSettings.shortLanguage());
 
     // 转发 iframe 的点击事件
     // 跨域时 iframe?.contentWindow?.document 会产生 SecurityError

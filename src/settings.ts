@@ -117,6 +117,14 @@ export class SettingsManager {
         }
     }
 
+    shortLanguage(): string {
+        switch (this.m_settings.language) {
+            case "chinese": return "zh";
+            case "english": return "en";
+            case "auto": return navigator.language === 'zh-CN' ? 'zh' : 'en';
+        }
+    }
+
     finalLanguage(): string {
         switch (this.m_settings.language) {
             case "chinese": return "chinese";

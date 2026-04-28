@@ -25,7 +25,8 @@
 
     "menu": {
         "home": "主页",
-        "programming": "编程开发",
+        "programming": "编程",
+        "bash": "Bash",
         "apps": "应用",
         "math": "数学",
         "pdf": "PDF",
@@ -120,37 +121,39 @@
         "mirage-image": "幻影坦克",
         "qrcode": "二维码生成和解析",
         "verification-code": "验证码生成",
-        "random": "随机数生成器"
+        "random": "随机数生成器",
+        "curl": "cURL 命令生成"
     },
 
     "description": {
         "base": "一个多功能的在线工具集，提供 Web 前端开发资源，GIS 开发资源，Qt 开发资源，在线代码编辑和图片导出功能，在线 Markdown 编辑和 PDF 导出功能，信息查询功能，硬件检测工具等。",
         "gis-tile-download": "GIS 图块下载，支持 Google 地图、高德地图、ArcGiS、Open Street Map、卫星影像以及自定义链接。",
-        "todo": "待办事项。",
+        "todo": "数据安全的任务清单，使用 IndexedDB 在本地存储数据，并支持通过 PeerJS 进行跨设备同步。",
         "pdf-download": "完全免费的 PDF 分享站点，无条件下载到本地，也可以在线预览。",
         "pdf-split": "PDF 在线拆分，纯浏览器本地处理，同时将书签目录换算后拆分到对应的部分。",
         "pdf-merge": "PDF 在线合并，纯浏览器本地处理，同时将书签目录换算后进行合并。",
         "pdf-to-png": "PDF 按页拆分转换成 PNG 图片。",
         "qt-theme": "Qt 主题，在线选择、预览 Qt 主题和下载资源包。",
         "svg-icon": "Qt 兼容的 Svg 图标预览与下载。",
-        "qt-standard-icon": "Qt 标准图标",
+        "qt-standard-icon": "Qt 标准图标预览和名称复制。",
         "markdown-editor": "在线的 Markdown 编辑器，支持实时预览、复制 HTML、导出 PDF、打印等功能。",
         "code-editor": "在线代码编辑器，支持 C、C++、Python、TypeScript、Lua 等一百多种语言的语法高亮，支持将代码导出为图片。",
-        "code-interpreter": "在线编辑和运行代码脚本",
+        "code-interpreter": "在线编辑和运行代码脚本。",
         "ip-location": "IP 位置查询，支持查询本机的 IP 地址以及任意 IP 地址的属地。",
-        "bad-pixel-detection": "显示器坏点检测",
-        "frame-rate-detection": "显示器刷新率检测",
-        "calculator": "计算器，支持 sin, cos, tan, asin, acos, atan, lg, ln, abs, power, root, factorial, ceil, floor 和 round",
+        "bad-pixel-detection": "显示器坏点检测。",
+        "frame-rate-detection": "显示器刷新率检测。",
+        "calculator": "计算器，支持 sin, cos, tan, asin, acos, atan, lg, ln, abs, power, root, factorial, ceil, floor 和 round。",
         "image-format-convert": "图片格式转换工具，支持 png，jpeg，webp 和 icon 格式。",
         "color-convert": "颜色转换工具，支持 RGB、HSL、HSV、YUV、HEX 转换，并附带常用颜色表。",
-        "schulte-table": "一种常见的注意力与视觉搜索训练工具，广泛应用于儿童专注力测试、成年人认知能力测试以及老年人大脑保健中",
+        "schulte-table": "一种常见的注意力与视觉搜索训练工具，广泛应用于儿童专注力测试、成年人认知能力测试以及老年人大脑保健中。",
         "class-schedule": "提供预设的课程名称，也可手动输入，并且支持打印。",
-        "compression-to-image": "将压缩包压缩包伪装成图片",
-        "metronome": "节拍器，支持速率调节和小节划分",
-        "mirage-image": "利用色阶分割与对角线像素排列，实现不同背景下的隐藏图片效果",
-        "qrcode": "生成或解析二维码，支持上传图片或输入图片链接解析",
+        "compression-to-image": "将压缩包压缩包伪装成图片。",
+        "metronome": "节拍器，支持速率调节和小节划分。",
+        "mirage-image": "利用色阶分割与对角线像素排列，实现不同背景下的隐藏图片效果。",
+        "qrcode": "生成或解析二维码，支持上传图片或输入图片链接解析。",
         "verification-code": "生成随机或指定内容的验证码",
-        "random": "批量生成随机数值、字符串或 UUID"
+        "random": "批量生成随机数值、字符串或 UUID。",
+        "curl": "可视化的 cURL 命令生成器。"
     },
 
     "gis-tile-download": {
